@@ -1,0 +1,75 @@
+.navbar-nav li {
+    font-size: 12px;
+    padding-bottom: 0;
+    cursor: pointer;
+}
+
+.navbar {
+    border-bottom: 0.5px solid #bbccdd;
+}
+
+.a-tag {
+    text-decoration: none;
+    color: #4ac1f7;
+}
+
+
+.btn-outline-primary {
+    border-color: #3861fb;
+    color: #3861fb;
+    font-size: 12px;
+    font-family: "Helvetica Neue", sans-serif;
+    margin-right: 10px;
+    border-radius: 10px;
+}
+
+.btn-primary {
+    border-color: #3861fb;
+    font-size: 12px;
+    font-family: "Helvetica Neue", sans-serif;
+    border-radius: 10px;
+}
+
+.top-bar {
+    display: flex;
+    justify-content: space-between;
+    padding: 2%;
+    width: 100%;
+    border-bottom: 0.5px solid #bbccdd;
+    color: #0D1421;
+    letter-spacing: 0.5px;
+    font-weight: normal;
+}
+
+.top-bar-left {
+    display: flex;
+    width: 58%;
+    justify-content: space-between; /* This will add space between child elements */
+    font-size: 15px;
+    align-items: center;
+}
+
+
+.top-bar-right {
+    display: flex;
+    width: 40%;
+    align-items: center;
+}
+
+.top-bar-right div {
+    cursor: pointer;
+}
+
+.top-bar-left-hero {
+    font-weight: bolder;
+    font-size: 18px;
+}
+
+.top-bar-left span {
+    cursor: pointer;
+}
+
+.footer-container{
+    height: 600px;
+    background-color: red;
+}
