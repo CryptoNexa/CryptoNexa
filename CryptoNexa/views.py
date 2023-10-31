@@ -4,5 +4,5 @@ from django.shortcuts import get_object_or_404
 from django.shortcuts import render
 
 
-def home(request):
-    return render(request, 'CryptoNexa/home.html')
+def index(request):
+    return render(request, 'CryptoNexa/index.html')

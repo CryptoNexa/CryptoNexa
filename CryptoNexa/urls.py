@@ -20,6 +20,7 @@ from CryptoNexa import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', views.home, name='home'),
+    path('', views.index, name='index'),
+    path('crypto/', include('crypto.urls')),
     path('', include('core.urls')),
 ]
