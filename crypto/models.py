@@ -8,8 +8,8 @@ class Crypto(models.Model):
     price = models.FloatField(max_length=10)
     oneHourPrice = models.FloatField()
     oneHourFlag = models.FloatField()
-    TwentyFourHour = models.FloatField()
-    TwentyFourPrice = models.FloatField()
+    TwentyFourHourPrice = models.FloatField()
+    TwentyFourHourFlag = models.FloatField()
     MarketCap = models.IntegerField()
     Volume = models.IntegerField()
 
