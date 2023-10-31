@@ -68,3 +68,8 @@
 .top-bar-left span {
     cursor: pointer;
 }
+
+.footer-container{
+    height: 600px;
+    background-color: red;
+}
