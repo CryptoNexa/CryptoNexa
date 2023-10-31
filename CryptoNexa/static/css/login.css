@@ -1,0 +1,59 @@
+/* Style for the login form container */
+.form-container {
+    max-width: 600px;
+    width: 500px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f4f4f4;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+/* Style for the form labels */
+.form-group label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+/* Style for the input fields */
+.form-group input[type="text"],
+.form-group input[type="password"] {
+    width: 100%;
+    padding: 6px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+/* Style for the login button */
+button[type="submit"] {
+    background-color: #2d74cb;
+    color: white;
+    padding: 8px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button[type="submit"]:hover {
+    background-color: #2d74cb;
+}
+
+/* Style for the "Register" link */
+.register-link {
+    text-align: center;
+    margin-top: 10px;
+}
+
+.error-message
+{
+    color: red;
+    list-style: none;
+    padding: 0;
+    /*margin-top: -20px;*/
+}
