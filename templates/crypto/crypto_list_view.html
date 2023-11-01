@@ -1,5 +1,3 @@
-{#{% extends "CryptoNexa/index.html" %}#}
-
 {% block cryptoListView %}
   <div class="container">
     <table class="table table-striped">
@@ -19,9 +17,9 @@
           <tr>
             <td>{{ forloop.counter }}</td>  {# Index column #}
             <td>{{ crypto.name }}</td>
-            <td>${{ crypto.oneHourPrice }}</td>
-            <td class="{% if crypto.oneHourFlag == -1 %}text-danger{% elif crypto.oneHourFlag == 1 %}text-success{% else %}text-muted{% endif %}">{{ crypto.oneHourPrice }}</td>
-            <td class="{% if crypto.TwentyFourHourFlag == -1 %}text-danger{% elif crypto.TwentyFourHourFlag == 1 %}text-success{% else %}text-muted{% endif %}">{{ crypto.TwentyFourHourPrice }}</td>
+            <td>${{ crypto.Price }}</td>
+            <td class="{% if crypto.oneHourFlag == -1 %}text-danger{% elif crypto.oneHourFlag == 1 %}text-success{% else %}text-muted{% endif %}">{{ crypto.oneHour }}</td>
+            <td class="{% if crypto.TwentyFourHourFlag == -1 %}text-danger{% elif crypto.TwentyFourHourFlag == 1 %}text-success{% else %}text-muted{% endif %}">{{ crypto.TwentyFourHour }}</td>
             <td>${{ crypto.MarketCap }}</td>
             <td>${{ crypto.Volume }}</td>
           </tr>

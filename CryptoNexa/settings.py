@@ -37,7 +37,6 @@ INSTALLED_APPS = [
     'bootstrap5',
     'core',
     'CryptoNexa',
-    'crypto',
 ]
 # Application definition
 
