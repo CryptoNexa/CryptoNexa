@@ -1,0 +1,26 @@
+{% block cryptoListView %}
+    <div class="container">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>#</th>
+                <th>Name</th>
+                <th>Price</th>
+                <th>1h%</th>
+                <th>24h%</th>
+                <th>MarketCap</th>
+                <th>Volume</th>
+            </tr>
+            </thead>
+            <tbody> {% for crypto in cryptos %}
+                <tr>
+                    <td>{{ forloop.counter }}</td>
+                    <td>{{ crypto.name }}</td>
+                    <td>${{ crypto.Price }}</td>
+                    <td class="{% if crypto.oneHourFlag == -1 %}text-danger{% elif crypto.oneHourFlag == 1 %}text-success{% else %}text-muted{% endif %}">{{ crypto.oneHour }}</td>
+                    <td class="{% if crypto.TwentyFourHourFlag == -1 %}text-danger{% elif crypto.TwentyFourHourFlag == 1 %}text-success{% else %}text-muted{% endif %}">{{ crypto.TwentyFourHour }}</td>
+                    <td>${{ crypto.MarketCap }}</td>
+                    <td>${{ crypto.Volume }}</td>
+                </tr> {% endfor %} </tbody>
+        </table>
+    </div> {% endblock %}
