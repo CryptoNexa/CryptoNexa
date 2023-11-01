@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Welcome to CryptoNexa!{% endblock %}</title>
+    {% load bootstrap5 %}
+    {% bootstrap_css %}
+    {% bootstrap_javascript %}
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/base.css' %}">
+
+</head>
+<body>
+
+<nav class="navbar navbar-expand-sm navbar-light bg-light">
+    <div class="container-fluid">
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="navbar-nav">
+                    <a class="nav-link" href="#">Cryptos:</a>
+                </li>
+                <li class="navbar-nav">
+                    <span class="nav-link">Exchanges:</span>
+                </li>
+                <li class="navbar-nav">
+                    <span class="nav-link">Market Cap:</span>
+                </li>
+                <li class="navbar-nav">
+                    <span class="nav-link">24h Vol:</span>
+                </li>
+                <li class="navbar-nav">
+                    <span class="nav-link">Dominance</span>
+                </li>
+                <li class="navbar-nav">
+                    <span class="nav-link">Eth Gas:</span>
+                </li>
+            </ul>
+            <button type="button" class="btn btn-outline-primary">Log In</button>
+            <button type="button" class="btn btn-primary">Sign Up</button>
+        </div>
+    </div>
+</nav>
+<div class="top-bar ">
+    <div class="top-bar-left me-auto mb-2 mb-lg-0">
+        <div class="top-bar-left-hero"><span>CrytoNexa</span></div>
+        <div><span>Cryptocurrencies</span></div>
+        <div><span>Exchanges</span></div>
+        <div><span>Community</span></div>
+        <div><span>Products</span></div>
+        <div><span>Learn</span></div>
+    </div>
+    <div class="top-bar-right">
+    </div>
+</div>
+<div id="content">
+        {% block content %}
+        <!-- Specific page content goes here -->
+        {% endblock %}
+</div>
+
+<footer class="footer bg-light text-dark py-3" style="height: 200px">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <p>&copy;2023 CryptoNexa. All rights reserved</p>
+            </div>
+            <div class="col-md-6">
+                <div class="row text-md-right">
+                    <div class="col-md-3">
+                        <h6>Products</h6>
+                    </div>
+                    <div class="col-md-3">
+                        <h6>Company</h6>
+                    </div>
+                    <div class="col-md-3">
+                        <h6>Support</h6>
+                    </div>
+                    <div class="col-md-3">
+                        <h6>Socials</h6>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+
+</body>
+</html>
