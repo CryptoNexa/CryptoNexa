@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'bootstrap5',
     'core',
     'CryptoNexa',
+    'currencyExchange'
 ]
 # Application definition
 
