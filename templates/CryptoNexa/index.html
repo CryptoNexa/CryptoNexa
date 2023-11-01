@@ -1,1 +1,7 @@
-{% extends "base/../base/base.html" %}
+{% extends 'CryptoNexa/base.html' %}
+
+{% block content %}
+    {% block cryptoListView %}
+         {% include 'crypto/crypto_list_view.html' %}
+    {% endblock %}
+{% endblock %}

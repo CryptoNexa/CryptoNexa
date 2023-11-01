@@ -1,0 +1,47 @@
+{#{% extends 'CryptoNexa/base.html' %}#}
+{% load static %}
+
+{% block head %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/login.css' %}">
+{% endblock %}
+{% block body %}
+<div class="form-container">
+    <h2>Login</h2>
+    <form method="post">
+        {% csrf_token %}
+        <div class="form-group">
+            <label for="{{ form.username.id_for_label }}">Email:</label>
+            {{ form.username }}
+{#            {% for error in form.username.errors %}#}
+{#                <p class="error-message">{{ error }}</p>#}
+{#            {% endfor %}#}
+        </div>
+
+        <div class="form-group">
+            <label for="{{ form.password.id_for_label }}">Password:</label>
+            {{ form.password }}
+{#            {% for error in form.password.errors %}#}
+{#                <p class="error-message">{{ error }}</p>#}
+{#            {% endfor %}#}
+        </div>
+
+        {% if form.errors %}
+            {{ form.non_field_errors }}
+{#            {{ form.username.error_messages }}#}
+{#            {{ form.password.error_messages }}#}
+        {% endif %}
+        {% if next %}
+            {% if user.is_authenticated %}
+                <p>Your account doesn't have access to this page. To proceed,
+                please login with an account that has access.</p>
+            {% else %}
+                <p>Please login to see this page.</p>
+            {% endif %}
+        {% endif %}
+
+        <button type="submit">Login</button>
+        <input type="hidden" name="next" value="{{ next }}">
+    </form>
+    <p class="register-link">Don't have an account? <a href="{% url 'register' %}">Register</a></p>
+</div>
+{% endblock %}
