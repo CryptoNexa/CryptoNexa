@@ -8,8 +8,10 @@
     {% load bootstrap5 %}
     {% bootstrap_css %}
     {% bootstrap_javascript %}
+    {% csrf_token %}
     <link rel="stylesheet" type="text/css" href="{% static 'css/base.css' %}">
-
+{% block head %}
+{% endblock %}
 </head>
 <body>
 
@@ -61,6 +63,8 @@
     {% block content %}
         <!-- Specific page content goes here -->
     {% endblock %}
+{% block body %}
+{% endblock %}
 </div>
 
 <footer class="footer bg-light text-dark py-3" style="height: 200px">

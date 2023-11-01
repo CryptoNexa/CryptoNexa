@@ -13,7 +13,7 @@ def register(request):
         if form.is_valid():
             user = form.save()
             login(request, user)
-            return redirect('home')  # Redirect to a success page
+            return redirect('index')  # Redirect to a success page
     else:
         form = CustomUserForm()
     return render(request, 'CryptoNexa/register.html', {'form': form})
@@ -25,7 +25,7 @@ def user_login(request):
         if form.is_valid():
             user = form.get_user()
             login(request, user)
-            return redirect('home')  # Redirect to a success page
+            return redirect('index')  # Redirect to a success page
     else:
         form = AuthenticationForm()
     return render(request, 'CryptoNexa/login.html', {'form': form})
