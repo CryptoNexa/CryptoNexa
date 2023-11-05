@@ -38,12 +38,14 @@
                     <span class="nav-link">Eth Gas:</span>
                 </li>
             </ul>
-            <a href="{% url 'login' %}">
-                <button type="button" class="btn btn-outline-primary">Log In</button>
-            </a>
-            <a href="{% url 'register' %}">
-                <button type="button" class="btn btn-primary">Sign Up</button>
-            </a>
+             {% if not user.is_authenticated %}
+                <a href="{% url 'login' %}">
+                    <button type="button" class="btn btn-outline-primary">Log In</button>
+                </a>
+                <a href="{% url 'register' %}">
+                    <button type="button" class="btn btn-primary">Sign Up</button>
+                </a>
+            {% endif %}
         </div>
     </div>
 </nav>
@@ -57,6 +59,7 @@
         <div><span>Learn</span></div>
     </div>
     <div class="top-bar-right">
+         <div><span>Portfolio</span></div>
     </div>
 </div>
 <div id="content">
