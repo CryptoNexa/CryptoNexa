@@ -1,33 +1,40 @@
 {% extends 'CryptoNexa/index.html' %}
-
+{% load static %}
 {% block currencypopup %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/currency.css' %}">
+
     <script>
         document.addEventListener("DOMContentLoaded", function () {
-            var myModal = new bootstrap.Modal(document.getElementById("currencyModal"));
+            const myModal = new bootstrap.Modal(document.getElementById("currencyModal"));
             myModal.show();
         });
     </script>
-    <div class="modal" id="currencyModal" tabindex="-1" role="dialog">
+    <div class="modal fade" id="currencyModal" tabindex="-1" role="dialog" data-bs-keyboard="false"
+         data-bs-backdrop="static">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title">Select Currency</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
                     <!-- Your modal content goes here -->
-                    <p>Currencies</p>
                     <div>
-                        <div class="flex-container">
-                            {% for currency in currencies %}
-                                <span>{{ currency.name }}</span>
-                            {% endfor %}
-                        </div>
-
+                        <form method="post" action="{% url 'currency_exchange' %}">
+                            {% csrf_token %}
+                            <div class="currency-container">
+                                {% for choice in form.selected_option %}
+                                    <div class="custom-radio">
+                                        {{ choice.tag }}
+                                        <label class="currency-item"
+                                               for="{{ choice.id_for_label }}">
+                                            {{ choice.choice_label }}
+                                        </label>
+                                    </div>
+                                {% endfor %}
+                            </div>
+                            <button type="submit" class="btn btn-outline-primary">Save</button>
+                        </form>
                     </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                 </div>
             </div>
         </div>
