@@ -2,7 +2,7 @@ from django.contrib.auth.forms import AuthenticationForm
 from django.shortcuts import render
 
 # Create your views here.
-from django.contrib.auth import login, authenticate
+from django.contrib.auth import login, authenticate, logout
 from django.shortcuts import render, redirect
 from .forms import CustomUserForm
 
@@ -29,6 +29,11 @@ def user_login(request):
     else:
         form = AuthenticationForm()
     return render(request, 'CryptoNexa/login.html', {'form': form})
+
+
+def user_logout(request):
+    logout(request)
+    return redirect('index')
 
 
 def crypto_list_view(request):

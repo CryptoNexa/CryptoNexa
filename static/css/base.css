@@ -74,3 +74,9 @@
     height: 600px;
     background-color: red;
 }
+
+button.rounded-circle img {
+    width: 40px; /* Set the width and height according to your preference */
+    height: 40px;
+    border-radius: 50%; /* Make it a circle */
+}
