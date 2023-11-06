@@ -116,8 +116,7 @@ def user_edit_profile(request, id):
         form = UserProfileForm(request.POST, instance=user)
         if form.is_valid():
             form.save()
-            # return redirect('profile')
-            print(user)
+            return redirect('profile', id=user.id)
     else:
         form = UserProfileForm(
             initial={'first_name': user.first_name, 'last_name': user.last_name, 'email': user.email})
