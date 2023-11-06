@@ -71,9 +71,10 @@
                           {% elif field.label == "Quantity" %}
                               <div class="row align-items-center">
                                   <div class="col-auto">
-                                        <label class="form-label" for="{{ field.id_for_label }}">{{ field.label }}</label>
+
                                     </div>
-                                  <div class="col-md-9">
+                                  <div class="col-md-12">
+                                      <label class="form-label" for="{{ field.id_for_label }}">{{ field.label }}</label>
                                         <input onchange="total_spent_calc()" value="{{ field.value }}" type="number" class="form-control" id="{{ field.id_for_label }}" name="{{ field.name }}" >
                                   </div>
                               </div>

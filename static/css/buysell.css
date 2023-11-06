@@ -5,3 +5,16 @@
     width: 100%;
     z-index: 1000;
 }
+
+.form-select{
+    border-radius: 10px;
+    border: 2px solid grey;
+}
+.form-control {
+    border-radius: 10px;
+    border: 2px solid grey;
+}
+.input-group-text {
+    border-radius: 10px;
+    border: 2px solid grey;
+}
