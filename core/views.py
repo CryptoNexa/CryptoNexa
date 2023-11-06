@@ -1,10 +1,11 @@
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import AuthenticationForm
 from django.shortcuts import render
 
 # Create your views here.
 from django.contrib.auth import login, authenticate, logout
 from django.shortcuts import render, redirect
-from .forms import CustomUserForm
+from .forms import CustomUserForm, UserProfileForm
 from .models import User
 
 
@@ -37,14 +38,15 @@ def user_logout(request):
     return redirect('index')
 
 
+@login_required
 def user_profile(request, id):
     user = User.objects.get(id=id)
     return render(request, 'CryptoNexa/profile.html', {'user': user})
 
 
-def user_edit_profile(request, id):
-    user = User.objects.get(id=id)
-    return render(request, 'CryptoNexa/edit_profile.html', {'user': user})
+# def user_edit_profile(request, id):
+#     user = User.objects.get(id=id)
+#     return render(request, 'CryptoNexa/edit_profile.html', {'user': user})
 
 
 def crypto_list_view(request):
@@ -105,3 +107,19 @@ def crypto_list_view(request):
         "cryptos": cryptos
     }
     return render(request, 'crypto/crypto_list_view.html', context=context)
+
+
+@login_required
+def user_edit_profile(request, id):
+    user = User.objects.get(id=id)
+    if request.method == 'POST':
+        form = UserProfileForm(request.POST, instance=user)
+        if form.is_valid():
+            form.save()
+            # return redirect('profile')
+            print(user)
+    else:
+        form = UserProfileForm(
+            initial={'first_name': user.first_name, 'last_name': user.last_name, 'email': user.email})
+
+    return render(request, 'CryptoNexa/edit_profile.html', {'form': form})

@@ -4,5 +4,6 @@ document.getElementById('profile-image-input').addEventListener('change', functi
     if (selectedImage) {
         const imageUrl = URL.createObjectURL(selectedImage);
         profileImage.src = imageUrl;
+        profileImage.style.objectFit = 'cover';
     }
 });
