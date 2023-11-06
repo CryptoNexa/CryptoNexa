@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'bootstrap5',
     'core',
     'CryptoNexa',
+    'BuySell'
 ]
 # Application definition
 
@@ -126,3 +127,5 @@ STATICFILES_DIRS = [
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 AUTH_USER_MODEL = 'core.User'
+
+DATETIME_FORMAT = 'Y-m-d H:i:s'

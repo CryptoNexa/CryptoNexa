@@ -1,6 +1,7 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
 from .models import User
+from BuySell.models import Transaction
 
 
 class CustomUserAdmin(UserAdmin):
@@ -11,3 +12,4 @@ class CustomUserAdmin(UserAdmin):
 
 # Register the CustomUser model with the admin site
 admin.site.register(User, CustomUserAdmin)
+admin.site.register(Transaction)
