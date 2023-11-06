@@ -9,6 +9,7 @@
     {% bootstrap_javascript %}
     {% csrf_token %}
     <link rel="stylesheet" type="text/css" href="{% static 'css/base.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     {% block head %}
     {% endblock %}
 </head>
@@ -40,10 +41,27 @@
             {% if user.is_authenticated %}
                 <div class="dropdown">
                     <button class="btn btn-secondary" type="button" id="profileDropdown"
-                            data-bs-toggle="dropdown" aria-expanded="false" style="background-color: #f8f8f8; border:none">
-                        <img style="width: 30px; height: 30px; border-radius: 50%;" src="{% static 'images/profile.jpg' %}" alt="Profile image">
+                            data-bs-toggle="dropdown" aria-expanded="false"
+                            style="background-color: #f8f8f8; border:none">
+                        <img style="width: 30px; height: 30px; border-radius: 50%;"
+                             src="{% static 'images/profile.jpg' %}" alt="Profile image">
                     </button>
                     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="profileDropdown">
+                        <a href="{% url 'profile' user.id %}" style="text-decoration: none; color: #333">
+                            <li style="padding: 10px">
+                                <div class="d-flex align-items-center">
+                                    <img src="{% static 'images/profile.jpg' %}" alt="User Profile Image"
+                                         class="rounded-circle" style="width: 40px; height: 40px;">
+                                    <div class="ms-3">
+                                        <p class="fw-bold mb-0">{{ user.first_name }} {{ user.last_name }}</p>
+                                        <p class="text-muted mb-0">{{ user.email }}</p>
+                                    </div>
+                                </div>
+                            </li>
+                        </a>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
                         <li><a class="dropdown-item" href="#">Settings</a></li>
                         <li><a class="dropdown-item" href="#">Watchlist</a></li>
                         <li><a class="dropdown-item" href="#">Portfolio</a></li>
@@ -51,17 +69,17 @@
                     </ul>
                 </div>
             {% else %}
-                <a href="{% url 'login' %}">
-                    <button type="button" class="btn btn-outline-primary">Log In</button>
+                <a href="{% url 'login' %}" style="margin-right: 10px">
+                    <button type="button" class="btn btn-outline-dark">Log In</button>
                 </a>
                 <a href="{% url 'register' %}">
-                    <button type="button" class="btn btn-primary">Sign Up</button>
+                    <button type="button" class="btn btn-dark">Sign Up</button>
                 </a>
             {% endif %}
         </div>
     </div>
 </nav>
-<div class="top-bar ">
+<div class="top-bar">
     <div class="top-bar-left me-auto mb-2 mb-lg-0">
         <div class="top-bar-left-hero"><span>CrytoNexa</span></div>
         <div><span>Cryptocurrencies</span></div>

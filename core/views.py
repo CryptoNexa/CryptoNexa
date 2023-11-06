@@ -5,6 +5,7 @@ from django.shortcuts import render
 from django.contrib.auth import login, authenticate, logout
 from django.shortcuts import render, redirect
 from .forms import CustomUserForm
+from .models import User
 
 
 def register(request):
@@ -13,7 +14,7 @@ def register(request):
         if form.is_valid():
             user = form.save()
             login(request, user)
-            return redirect('index')  # Redirect to a success page
+            return redirect('index')
     else:
         form = CustomUserForm()
     return render(request, 'CryptoNexa/register.html', {'form': form})
@@ -25,7 +26,7 @@ def user_login(request):
         if form.is_valid():
             user = form.get_user()
             login(request, user)
-            return redirect('index')  # Redirect to a success page
+            return redirect('index')
     else:
         form = AuthenticationForm()
     return render(request, 'CryptoNexa/login.html', {'form': form})
@@ -34,6 +35,16 @@ def user_login(request):
 def user_logout(request):
     logout(request)
     return redirect('index')
+
+
+def user_profile(request, id):
+    user = User.objects.get(id=id)
+    return render(request, 'CryptoNexa/profile.html', {'user': user})
+
+
+def user_edit_profile(request, id):
+    user = User.objects.get(id=id)
+    return render(request, 'CryptoNexa/edit_profile.html', {'user': user})
 
 
 def crypto_list_view(request):

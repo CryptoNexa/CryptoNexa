@@ -52,7 +52,8 @@
 
 .top-bar-right {
     display: flex;
-    width: 40%;
+    width: 58%;
+    font-size: 15px;
     align-items: center;
     justify-content: flex-end;
 }
@@ -70,7 +71,11 @@
     cursor: pointer;
 }
 
-.footer-container{
+.top-bar-right span {
+    cursor: pointer;
+}
+
+.footer-container {
     height: 600px;
     background-color: red;
 }

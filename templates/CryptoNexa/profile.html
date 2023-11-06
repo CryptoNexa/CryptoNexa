@@ -1,0 +1,45 @@
+{% extends 'CryptoNexa/base.html' %}
+{% load static %}
+{% block head %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/profile.css' %}">
+{% endblock %}
+{% block content %}
+    <div class="container justify-content-center align-items-center">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="profile-image-container">
+                    <label for="profile-image-input" class="profile-image-label">
+                        <img id="profile-image" src="{% static 'images/getimg.png' %}" alt="Profile Image">
+                        <input type="file" id="profile-image-input" accept="image/*" style="display: none">
+                    </label>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-10">
+                <div class="user_detail_section" style="margin-left: 50px; margin-bottom: 30px">
+                    <div class="user_detail_section d-flex align-items-center">
+                        <div class="rounded-circle avatar"
+                             style="width: 120px; height: 120px; overflow: hidden; border: 3px solid #cccccc; margin-top: -30px; position: relative">
+                            <img src="{% static 'images/profile.jpg' %}" alt="User Avatar"
+                                 style="max-width: 100%; max-height: 100%;">
+                        </div>
+                        <div class="ms-3" style="margin-top: 20px">
+                            <h3>{{ user.first_name }}</h3>
+                            <p>{{ user.email }}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-1" style="margin-top: 20px; margin-left: 50px;">
+                <a href="{% url 'edit_profile' user.id %}">
+                    <button type="button" class="btn btn-outline-dark" style="width: 80px; height: 50px">
+                        <i class="fas fa-edit"></i> Edit
+                    </button>
+                </a>
+            </div>
+        </div>
+    </div>
+    <script src="{% static 'js/profile.js' %}"></script>
+{% endblock %}

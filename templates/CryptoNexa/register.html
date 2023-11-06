@@ -6,7 +6,7 @@
 {% block body %}
     <div class="form-container">
         <h2>Register</h2>
-         <form method="post">
+        <form method="post">
             {% csrf_token %}
             {{ form.non_field_errors | safe }}
             <div class="form-group">
@@ -34,17 +34,16 @@
                 {{ form.password2 }}
                 {{ form.password2.errors | safe }}
             </div>
-{% if next %}
-    {% if user.is_authenticated %}
-      <p>Your account doesn't have access to this page. To proceed,
-      please login with an account that has access.</p>
-    {% else %}
-      <p>Please login to see this page.</p>
-    {% endif %}
-  {% endif %}
-
-            <button type="submit">Signup</button>
-             <input type="hidden" name="next" value="{{ next }}">
+            {% if next %}
+                {% if user.is_authenticated %}
+                    <p>Your account doesn't have access to this page. To proceed,
+                        please login with an account that has access.</p>
+                {% else %}
+                    <p>Please login to see this page.</p>
+                {% endif %}
+            {% endif %}
+            <button type="submit" style="background-color: black">Signup</button>
+            <input type="hidden" name="next" value="{{ next }}">
         </form>
         <p class="login-link">Already have an account? <a href="{% url 'login' %}">Login</a></p>
     </div>
