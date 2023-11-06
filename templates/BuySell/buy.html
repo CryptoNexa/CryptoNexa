@@ -17,8 +17,9 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title">Add Transaction</h5>
-                    <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close">
-                    </button>
+                    <a href="{% url "currency" %}">
+                        <button  type="button" class="btn-close" ></button>
+                    </a>
                 </div>
                 <form class="modal-body" method="post" action="{% url "buysell" %}">
                     <!-- Your modal content goes here -->
@@ -143,7 +144,10 @@
                     </div>
                 <div class="modal-footer">
                     <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">Submit</button>
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal" >Close</button>
+{#                    <button type="button" class="btn btn-secondary" data-dismiss="modal" >Close</button>#}
+                    <a href="{% url "currency" %}">
+                        <button  type="button" class="btn btn-secondary" >Cancel</button>
+                    </a>
                 </div>
                 </form>
             </div>

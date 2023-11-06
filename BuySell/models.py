@@ -18,4 +18,5 @@ class Transaction(models.Model):
     # payment_details = models.ForeignKey(Payment, on_delete=models.CASCADE())
 
     def __str__(self):
+        # return f'{self.id}'
         return f'{self.type} - {self.coin} - {self.user}'
