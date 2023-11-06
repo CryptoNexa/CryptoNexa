@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="">
+<head>
+    <title>Buy cool new product</title>
+    <script src="https://js.stripe.com/v3/"></script>
+</head>
+<body>
+<section>
+    <div class="product">
+        <div class="description">
+            <h1>{{ user_transaction.coin }}</h1>
+            <h5>{{ user_transaction.currency }}: {{ user_transaction.total_spent }}</h5>
+        </div>
+    </div>
+    <form action="/create-checkout-session" method="POST">
+        {% csrf_token %}
+        <input type="hidden" name="user_transaction" value="{{ user_transaction.id }}">
+        <button type="submit" id="checkout-button">Proceed to Pay</button>
+    </form>
+</section>
+</body>
+</html>

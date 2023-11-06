@@ -5,6 +5,9 @@ from django.shortcuts import render
 
 
 def index(request):
+    currency = request.session.get('currency')
+    if request.session.get('currency') is None:
+        request.session['currency'] = "USD"
 
     cryptos = [
         {
@@ -63,4 +66,3 @@ def index(request):
         "cryptos": cryptos
     }
     return render(request, 'CryptoNexa/index.html', context=context)
-
