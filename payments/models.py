@@ -7,7 +7,7 @@ from django.db.models.signals import post_save
 class UserPayment(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     payment_bool = models.BooleanField(default=False)
-    stripe_checkout_id = models.CharField(max_length=500)
+    transaction_id = models.IntegerField(default=0, null=True, blank=True)
 
 
 @receiver(post_save, sender=User)

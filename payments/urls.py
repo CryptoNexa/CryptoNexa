@@ -19,7 +19,7 @@ from django.urls import path, include
 from payments import views
 
 urlpatterns = [
-    path('checkout/', views.payment_checkout, name='payment_checkout'),
+    path('checkout/<int:transaction_id>', views.payment_checkout, name='payment_checkout'),
     path('payment_successful', views.payment_successful, name='payment_successful'),
     path('payment_cancelled', views.payment_cancelled, name='payment_cancelled'),
     path('create-checkout-session', views.CreateCheckoutSession.as_view(), name='create-checkout-session'),

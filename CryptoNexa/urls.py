@@ -22,6 +22,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.index, name='index'),
     path('', include('core.urls')),
-    path('currencyExchange/',include('currencyExchange.urls')),
-    path('', include('payments.urls'))
+    path('currencyExchange/', include('currencyExchange.urls')),
+    path('', include('payments.urls')),
+    path('', include('BuySell.urls')),
 ]

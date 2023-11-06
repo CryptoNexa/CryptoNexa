@@ -2,21 +2,20 @@
 <html lang="">
 <head>
     <title>Buy cool new product</title>
-    <link rel="stylesheet" href="style.css">
     <script src="https://js.stripe.com/v3/"></script>
 </head>
 <body>
 <section>
     <div class="product">
-        <img src="https://i.imgur.com/EHyR2nP.png" alt="The cover of Stubborn Attachments"/>
         <div class="description">
-            <h3>Stubborn Attachments</h3>
-            <h5>$20.00</h5>
+            <h1>{{ user_transaction.coin }}</h1>
+            <h5>{{ user_transaction.currency }}: {{ user_transaction.total_spent }}</h5>
         </div>
     </div>
     <form action="/create-checkout-session" method="POST">
         {% csrf_token %}
-        <button type="submit" id="checkout-button">Checkout</button>
+        <input type="hidden" name="user_transaction" value="{{ user_transaction.id }}">
+        <button type="submit" id="checkout-button">Proceed to Pay</button>
     </form>
 </section>
 </body>
