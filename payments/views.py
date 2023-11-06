@@ -29,7 +29,8 @@ def payment_successful(request):
     user_id = request.user.id
     transaction_id = request.session.get('transaction_id')
     user_object = User.objects.get(pk=user_id)
-    user_payment = UserPayment.objects.create(user=user_object, payment_bool=True, transaction_id=transaction_id)
+    transaction_obj = Transaction.objects.get(id=transaction_id)
+    user_payment = UserPayment.objects.create(user=user_object, payment_bool=True, transaction_id=transaction_obj)
     if 'transaction_id' in request.session:
         del request.session['transaction_id']
     return render(request, 'paymentCheckout/payment_successful.html')
@@ -65,8 +66,8 @@ class CreateCheckoutSession(View):
                     }
                 ],
                 mode='payment',
-                success_url=YOUR_DOMAIN + '/payment_successful',
-                cancel_url=YOUR_DOMAIN + '/payment_cancelled',
+                success_url=YOUR_DOMAIN + 'payment_successful',
+                cancel_url=YOUR_DOMAIN + 'payment_cancelled',
             )
         except Exception as e:
             return str(e)

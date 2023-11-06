@@ -3,9 +3,10 @@ from django.http import HttpResponse
 from django.shortcuts import get_object_or_404
 from django.shortcuts import render
 
+from core.models import User
+
 
 def index(request):
-    currency = request.session.get('currency')
     if request.session.get('currency') is None:
         request.session['currency'] = "USD"
 
@@ -62,7 +63,16 @@ def index(request):
         }
     ]
 
-    context = {
-        "cryptos": cryptos
-    }
+    if request.user.id is None:
+        context = {
+            "cryptos": cryptos
+        }
+    else:
+        user_id = request.user.id
+        user = User.objects.get(id=user_id)
+        context = {
+            "user": user,
+            "cryptos": cryptos
+        }
+
     return render(request, 'CryptoNexa/index.html', context=context)
