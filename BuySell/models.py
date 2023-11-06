@@ -15,7 +15,7 @@ class Transaction(models.Model):
     transaction_fee = models.DecimalField(max_digits=10, decimal_places=2, default=0.00)
     notes = models.TextField(help_text="Please add your notes here")
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    # payment_details = models.ForeignKey(Payment, on_delete=models.CASCADE())
+    # payment_details = models.ForeignKey(UserPayment, on_delete=models.CASCADE)
 
     def __str__(self):
         # return f'{self.id}'
