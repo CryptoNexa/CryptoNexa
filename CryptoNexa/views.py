@@ -3,25 +3,38 @@ from django.shortcuts import render
 from core.apis.coinmarketcap.fetch_data import fetch_data, convert_usd_to_cad
 from core.models import Cryptocurrency, Quote
 
+from core.models import User
+
 
 def index(request):
+    context = {}
     error = ''
     fetched_data_from_api_USD = fetch_data('USD')
     # fetched_data_from_api_USD = data_usd
     fetched_status = fetched_data_from_api_USD.get('status')
     if fetched_status.get('error_code') != 0:
         error = 'An error occurred while fetching the data.'
-        context = {
-            "error_message": error
-        }
+        context['error_message'] = error
         return render(request, 'crypto/crypto_list_view.html', context=context)
 
+    if request.session.get('currency') is None:
+        request.session['currency'] = "USD"
     crypto_data = fetched_data_from_api_USD.get('data')
     update_crypto_details(crypto_data)
     cryptos = Cryptocurrency.objects.all()
-    context = {
-        "cryptos": cryptos
-    }
+    if request.user.id is None:
+        context = {
+            "cryptos": cryptos
+        }
+    else:
+        user_id = request.user.id
+        user = User.objects.get(id=user_id)
+        context = {
+            "user": user,
+            "cryptos": cryptos
+        }
+
+    context['cryptos'] = cryptos
 
     return render(request, 'CryptoNexa/index.html', context=context)
 
@@ -48,4 +61,3 @@ def update_crypto_details(crypto_data):
         crypto_obj.date_added = current_crypto.get('date_added')
         crypto_obj.last_updated = current_crypto.get('last_updated')
         crypto_obj.save()
-

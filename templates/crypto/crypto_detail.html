@@ -37,7 +37,7 @@
                             <li><strong>Last Updated:</strong> {{ cryptocurrency.quote.data.USD.last_updated }}</li>
                         </ul>
                     </div>
-                    <a href="#" class="btn btn-success">Buy</a>
+                    <a href="{% url 'buysell' name=cryptocurrency.name cad_price=cryptocurrency.quote.data.CAD.price usd_price=cryptocurrency.quote.data.USD.price %}" id="openModal" class="btn btn-success">Buy</a>
 {#                    <a href="{% url 'buy_crypto' %}" class="btn btn-success">Buy</a>#}
                 </div>
             </div>

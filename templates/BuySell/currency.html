@@ -1,0 +1,16 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <script src="{% static 'js/buysell.js' %}"></script>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+Hello
+<body>
+{#<a href="{% url 'buysell'  %}" id="openModal">Add Transaction</a>#}
+{% block buy_sell %}
+{% endblock %}
+</body>
+</html>
