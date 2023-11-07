@@ -62,8 +62,8 @@ class Quote(models.Model):
 class Cryptocurrency(models.Model):
     name = models.CharField(max_length=100)
     symbol = models.CharField(max_length=50)
-    slug = models.SlugField()
-    num_market_pairs = models.IntegerField()
+    slug = models.SlugField(unique=True)
+    num_market_pairs = models.IntegerField(null=True)
     circulating_supply = models.DecimalField(max_digits=20, decimal_places=2, null=True)
     total_supply = models.DecimalField(max_digits=20, decimal_places=2, null=True)
     max_supply = models.DecimalField(max_digits=20, decimal_places=2, null=True)

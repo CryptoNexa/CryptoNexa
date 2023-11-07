@@ -1,3 +1,4 @@
+from django.http import JsonResponse
 from requests import Request, Session
 from requests.exceptions import ConnectionError, Timeout, TooManyRedirects
 import json
@@ -29,3 +30,15 @@ def fetch_data(currency):
         return data
     except (ConnectionError, Timeout, TooManyRedirects) as e:
         print(e)
+
+
+def convert_usd_to_cad(quote, conversion_rate=0.7324):
+    cad_values = quote['USD'].copy()
+
+    cad_values['price'] = quote['USD']['price'] * conversion_rate
+    cad_values['market_cap'] = quote['USD']['market_cap'] * conversion_rate
+    cad_values['fully_diluted_market_cap'] = quote['USD']['fully_diluted_market_cap'] * conversion_rate
+
+    quote['CAD'] = cad_values
+
+    return quote

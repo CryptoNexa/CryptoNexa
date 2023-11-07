@@ -15,7 +15,7 @@
             <tbody> {% for crypto in cryptos %}
                 <tr>
                     <td>{{ forloop.counter }}</td>
-                    <td>{{ crypto.name }}</td>
+                    <td><a href="{% url 'core:crypto_detail' crypto.slug %}">{{ crypto.name }}</a></td>
                     <td>${{ crypto.quote.data.USD.price }}</td>
                     <td class="{% if crypto.quote.data.USD.percent_change_1h < 0 %}text-danger{% elif crypto.quote.data.USD.percent_change_1h > 0 %}text-success{% else %}text-muted{% endif %}">
                         {{ crypto.quote.data.USD.percent_change_1h }}
@@ -25,7 +25,43 @@
                     </td>
                     <td>${{ crypto.quote.data.USD.market_cap }}</td>
                     <td>${{ crypto.quote.data.USD.volume_24h }}</td>
-                </tr> {% endfor %}
+                </tr>
+            {% endfor %}
             </tbody>
         </table>
-    </div> {% endblock %}
+    </div>
+
+
+<script>
+    function updateCryptoData() {
+        $.ajax({
+            url: "{% url 'core:get_updated_crypto_data' %}",
+            method: 'GET',
+            dataType: 'json',
+            success: function (data) {
+                // Iterate through the updated data and update the page elements
+                $.each(data, function (index, crypto) {
+                    // Find the table row corresponding to the cryptocurrency by its name or another unique identifier
+                    var tableRow = $("tr:contains('" + crypto.fields.name + "')");
+
+                    if (tableRow.length > 0) {
+                        // Update the relevant fields with the new data
+                        tableRow.find(".price").text('$' + crypto.fields.quote.data.USD.price);
+                        tableRow.find(".percent_change_1h").text(crypto.fields.quote.data.USD.percent_change_1h + '%');
+                        tableRow.find(".percent_change_24h").text(crypto.fields.quote.data.USD.percent_change_24h + '%');
+                        tableRow.find(".market_cap").text('$' + crypto.fields.quote.data.USD.market_cap);
+                        tableRow.find(".volume_24h").text('$' + crypto.fields.quote.data.USD.volume_24h);
+                    }
+                });
+            },
+            error: function (error) {
+                console.error('Error updating cryptocurrency data: ', error);
+            }
+        });
+    }
+
+    // Make the initial update and set up the periodic update every 5 seconds
+    updateCryptoData();
+    setInterval(updateCryptoData, 5000);  // 5000 milliseconds = 5 seconds
+</script>
+{% endblock %}
