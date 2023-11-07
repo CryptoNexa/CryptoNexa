@@ -16,13 +16,11 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from CryptoNexa import views
+from payments import views
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('', views.index, name='index'),
-    path('', include('core.urls')),
-    path('currencyExchange/', include('currencyExchange.urls')),
-    path('', include('payments.urls')),
-    path('', include('BuySell.urls')),
+    path('checkout/<int:transaction_id>', views.payment_checkout, name='payment_checkout'),
+    path('payment_successful', views.payment_successful, name='payment_successful'),
+    path('payment_cancelled', views.payment_cancelled, name='payment_cancelled'),
+    path('create-checkout-session', views.CreateCheckoutSession.as_view(), name='create-checkout-session'),
 ]
