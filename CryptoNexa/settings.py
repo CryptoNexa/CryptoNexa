@@ -35,7 +35,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'bootstrap5',
-    'core',
+    'core', 'Newsletter',
     'CryptoNexa',
 ]
 # Application definition
@@ -114,7 +114,6 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
 STATIC_URL = '/static/'
-
 
 # Define the directories where Django will look for static files
 STATICFILES_DIRS = [
