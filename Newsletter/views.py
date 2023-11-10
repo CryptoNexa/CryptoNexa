@@ -3,7 +3,7 @@ from .models import News
 
 
 def news_list(request):
-    # news_articles = News.objects.all().order_by('-pub_date')
+    news_articles = News.objects.all().order_by('-pub_date')
     news = [
         {
             "Title": "Bitcoin",
@@ -16,6 +16,6 @@ def news_list(request):
             "Publish_date": "1/1/24"
         }]
     context = {
-        "news": news
+        "news": news_articles
     }
     return render(request, 'newsletter/news_list.html', context)
