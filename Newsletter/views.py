@@ -35,6 +35,7 @@ def subscribe(request):
             form.save()
             # return super().form_valid(form)
             return redirect(reverse('success'))
+
     else:
         form = Subscription()
 
