@@ -14,6 +14,7 @@ class TransactionForm(forms.ModelForm):
         ('bitcoin', "Bitcoin BTC"),
         ('ethereum', "Ethereum ETH"),
     ]
+    default_format = '%b. %d, %Y, %I:%M %p'
 
     type = forms.ChoiceField(choices=TRANSACTION_TYPES, widget=forms.RadioSelect(attrs={'class': 'btn-check'}), initial="buy")
     coin = forms.CharField(label="Coin")
@@ -21,7 +22,7 @@ class TransactionForm(forms.ModelForm):
     datetime = forms.DateTimeField(
         input_formats=['%b. %d, %Y, %I:%M %p'],  # Format used in your example
         widget=forms.TextInput(attrs={'id': 'id_datetime'}),  # Use the same ID as in your example
-        initial=datetime.now()
+        initial=datetime.now().strftime(default_format)
     )
     class Meta:
         model = Transaction

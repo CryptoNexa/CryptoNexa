@@ -1,10 +1,12 @@
 {% extends 'CryptoNexa/base.html' %}
 
 {% block content %}
+
     <div class="container mt-5">
         <h1 class="text-center">Cryptocurrency Details</h1>
 
         {% if cryptocurrency %}
+
             <div class="card mt-3">
                 <div class="card-body">
                     <h2>{{ cryptocurrency.name }}</h2>
@@ -37,14 +39,17 @@
                             <li><strong>Last Updated:</strong> {{ cryptocurrency.quote.data.USD.last_updated }}</li>
                         </ul>
                     </div>
-                    <a href="{% url 'buysell' name=cryptocurrency.name cad_price=cryptocurrency.quote.data.CAD.price usd_price=cryptocurrency.quote.data.USD.price %}" id="openModal" class="btn btn-success">Buy</a>
-{#                    <a href="{% url 'buy_crypto' %}" class="btn btn-success">Buy</a>#}
+                    <a href="{% url 'buysell' slug=cryptocurrency.slug name=cryptocurrency.name cad_price=cryptocurrency.quote.data.CAD.price usd_price=cryptocurrency.quote.data.USD.price %}" id="openModal" class="btn btn-success">Buy</a>
+{#                    <a href="{% url 'buy_crypto' %}" class="btn btn-success">Buy</a> #}
+
                 </div>
             </div>
+
         {% else %}
             <div class="alert alert-danger mt-3">
                 Cryptocurrency not found
             </div>
         {% endif %}
     </div>
+
 {% endblock %}

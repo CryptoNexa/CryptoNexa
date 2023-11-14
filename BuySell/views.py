@@ -5,9 +5,15 @@ from django.contrib.auth.decorators import login_required
 
 
 @login_required(login_url='/currency/')
-def buysell(request, name, cad_price, usd_price):
-
+def buysell(request, slug, name, cad_price, usd_price):
     current_currency = request.session['currency']
+
+    initial_data = {'coin': name}
+    if current_currency == 'CAD':
+        initial_data['price'] = round(float(cad_price), 2)
+    elif current_currency == 'USD':
+        initial_data['price'] = round(float(usd_price), 2)
+
     if request.method == 'POST':
         form = TransactionForm(request.POST)
         if form.is_valid():
@@ -22,19 +28,11 @@ def buysell(request, name, cad_price, usd_price):
             return redirect('payment_checkout', transaction_id)
     else:
 
-        initial_data = {}
-        initial = initial_data
-        # form.coin.initial = name
-        initial_data['coin'] = name
-        if (current_currency == 'CAD'):
-            initial_data['price'] = float(cad_price)
-        elif (current_currency == 'USD'):
-            initial_data['price'] = float(usd_price)
         form = TransactionForm(initial=initial_data)
 
-
     return render(request, 'BuySell/buy.html',
-                  {'form': form, 'currency': request.session['currency']})
+                  {'form': form, 'currency': current_currency, 'slug': slug, 'name': name, 'cad_price': cad_price,
+                   'usd_price': usd_price})
 
 
 def currency(request):
