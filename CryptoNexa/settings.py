@@ -41,7 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'bootstrap5',
-    'core',
+    'core', 'Newsletter', 'ContactUS',
     'CryptoNexa',
     'currencyExchange',
     'payments',
