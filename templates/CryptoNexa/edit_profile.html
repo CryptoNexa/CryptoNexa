@@ -5,7 +5,7 @@
 {% endblock %}
 {% block content %}
     <div class="container justify-content-center my-4">
-        <a href="{% url 'profile' user.id %}" style="text-decoration: none; color: black">
+        <a href="{% url 'core:profile' user.id %}" style="text-decoration: none; color: black">
             <div class="d-flex align-items-center">
                 <i class="fas fa-arrow-left"></i>
                 <h3 style="margin-left: 10px">Edit My Profile</h3>
