@@ -27,6 +27,12 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+STRIPE_PUBLIC_KEY = 'pk_test_51O9EaiGjXaaaEPM9f2Qdj6ssmBwbIMOX0eGy8RyoWiYRenA4Kvgf5AWlGTptVqowsAKGc5TIusM4FmvWY5X00vsB00oolzzsgv'
+STRIPE_PRIVATE_KEY = 'sk_test_51O9EaiGjXaaaEPM93KIg3BANDMgjbnMlNbYByDpT6Ww8lYbTsLHcFAFRFXWMtViDOMTmZFyjH1rXHVVTmm9jyxuT000ONUJgMy'
+
+DJSTRIPE_WEBHOOK_SECRET = 'whsec_c6094aba374462c23c29dff63210dfa00e7e90ed847b7619c63e66a0677d174a'
+DJSTRIPE_USE_NATIVE_JSONFIELD = True
+
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -37,6 +43,9 @@ INSTALLED_APPS = [
     'bootstrap5',
     'core', 'Newsletter', 'ContactUS',
     'CryptoNexa',
+    'currencyExchange',
+    'payments',
+    'BuySell'
 ]
 # Application definition
 
@@ -125,3 +134,5 @@ STATICFILES_DIRS = [
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 AUTH_USER_MODEL = 'core.User'
+
+DATETIME_FORMAT = 'Y-m-d H:i:s'

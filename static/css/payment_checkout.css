@@ -1,0 +1,72 @@
+.container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    height: 100vh;
+    font-family: "Helvetica Neue", serif;
+    background-color: whitesmoke;
+    width: 100%;
+}
+
+.center-div {
+    width: 40%;
+    text-align: center;
+    padding: 50px;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 5px 5px 10px 0 rgba(0, 0, 0, 0.2);
+}
+
+.order-header {
+    text-align: center;
+}
+
+.textLeft {
+    text-align: left !important;
+    justify-content: left !important;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    font-size: 18px;
+}
+
+.crypto-div {
+    background-color: whitesmoke;
+    padding: 13px;
+    text-align: left;
+    border-radius: 10px;
+    justify-content: space-between;
+    display: flex;
+    width: 100%;
+    align-items: center;
+}
+
+.title {
+    margin-bottom: 10px;
+}
+
+.total-spent {
+    background-color: whitesmoke;
+    padding: 12px;
+    text-align: left;
+    border-radius: 10px;
+    justify-content: center;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    align-items: center;
+}
+
+.transaction-fee {
+    font-size: 10px;
+}
+
+.crypto-details {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
