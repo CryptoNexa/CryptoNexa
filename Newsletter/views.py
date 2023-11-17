@@ -7,17 +7,6 @@ from django.urls import reverse
 
 def news_list(request):
     news_articles = News.objects.all().order_by('-pub_date')
-    news = [
-        {
-            "Title": "Bitcoin",
-            "Content": "Trending news for Bitcoin",
-            "Publish_date": "1/1/23"
-        },
-        {
-            "Title": "Crypto",
-            "Content": "Trending news for Crypto",
-            "Publish_date": "1/1/24"
-        }]
     context = {
         "news": news_articles
     }
