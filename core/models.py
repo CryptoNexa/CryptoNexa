@@ -48,3 +48,29 @@ class User(AbstractBaseUser, PermissionsMixin):
 
     def __str__(self):
         return self.email
+
+
+class Quote(models.Model):
+    currency_slug = models.SlugField()
+    currency_symbol = models.CharField(max_length=50)
+    data = models.JSONField(null=True)
+
+    def __str__(self):
+        return self.currency_slug
+
+
+class Cryptocurrency(models.Model):
+    name = models.CharField(max_length=100)
+    symbol = models.CharField(max_length=50)
+    slug = models.SlugField(unique=True)
+    num_market_pairs = models.IntegerField(null=True)
+    circulating_supply = models.DecimalField(max_digits=20, decimal_places=2, null=True)
+    total_supply = models.DecimalField(max_digits=20, decimal_places=2, null=True)
+    max_supply = models.DecimalField(max_digits=20, decimal_places=2, null=True)
+    infinite_supply = models.BooleanField(null=True)
+    last_updated = models.DateTimeField(null=True)
+    date_added = models.DateTimeField(null=True)
+    quote = models.ForeignKey(Quote, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.name
