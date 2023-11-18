@@ -1,66 +1,63 @@
-# Create your views here.
-from django.http import HttpResponse
-from django.shortcuts import get_object_or_404
+from django.core.exceptions import ObjectDoesNotExist
 from django.shortcuts import render
+from core.apis.coinmarketcap.fetch_data import fetch_data, convert_usd_to_cad
+from core.models import Cryptocurrency, Quote
+
+from core.models import User
 
 
 def index(request):
+    context = {}
+    error = ''
+    fetched_data_from_api_USD = fetch_data('USD')
+    # fetched_data_from_api_USD = data_usd
+    fetched_status = fetched_data_from_api_USD.get('status')
+    if fetched_status.get('error_code') != 0:
+        error = 'An error occurred while fetching the data.'
+        context['error_message'] = error
+        return render(request, 'crypto/crypto_list_view.html', context=context)
 
-    cryptos = [
-        {
-            "name": "Bitcoin",
-            "Price": 34500,
-            "oneHour": "0.27%",
-            "oneHourFlag": -1,
-            "TwentyFourHour": "0.67",
-            "TwentyFourHourFlag": -1,
-            "MarketCap": "673,506,667,886",
-            "Volume": "17,354,758,340"
-        },
-        {
-            "name": "Ethereum",
-            "Price": 2600,
-            "oneHour": "0.42%",
-            "oneHourFlag": 1,
-            "TwentyFourHour": "1.25%",
-            "TwentyFourHourFlag": 1,
-            "MarketCap": "300,456,789,123",
-            "Volume": "10,456,123,789"
-        },
-        {
-            "name": "Ripple",
-            "Price": 1.23,
-            "oneHour": "0.11%",
-            "oneHourFlag": -1,
-            "TwentyFourHour": "0.75%",
-            "TwentyFourHourFlag": -1,
-            "MarketCap": "56,789,123,456",
-            "Volume": "2,345,678,901"
-        },
-        {
-            "name": "Litecoin",
-            "Price": 155,
-            "oneHour": "0.33%",
-            "oneHourFlag": 1,
-            "TwentyFourHour": "0.85%",
-            "TwentyFourHourFlag": 1,
-            "MarketCap": "12,345,678,901",
-            "Volume": "567,890,123"
-        },
-        {
-            "name": "Cardano",
-            "Price": 2.45,
-            "oneHour": "0.28%",
-            "oneHourFlag": 1,
-            "TwentyFourHour": "0.92%",
-            "TwentyFourHourFlag": 1,
-            "MarketCap": "7,890,123,456",
-            "Volume": "345,678,901"
+    if request.session.get('currency') is None:
+        request.session['currency'] = "USD"
+    crypto_data = fetched_data_from_api_USD.get('data')
+    update_crypto_details(crypto_data)
+    cryptos = Cryptocurrency.objects.all()
+    if request.user.id is None:
+        context = {
+            "cryptos": cryptos
         }
-    ]
+    else:
+        user_id = request.user.id
+        user = User.objects.get(id=user_id)
+        context = {
+            "user": user,
+            "cryptos": cryptos
+        }
 
-    context = {
-        "cryptos": cryptos
-    }
+    context['cryptos'] = cryptos
+
     return render(request, 'CryptoNexa/index.html', context=context)
 
+
+def update_crypto_details(crypto_data):
+    for current_crypto in crypto_data:
+        quote_obj, created = Quote.objects.get_or_create(currency_slug=current_crypto.get('slug'))
+        quote_obj.currency_symbol = current_crypto.get('symbol')
+        quote_obj.data = convert_usd_to_cad(current_crypto.get('quote'))
+        quote_obj.save()
+
+        try:
+            crypto_obj = Cryptocurrency.objects.get(slug=current_crypto.get('slug'))
+            crypto_obj.quote = quote_obj
+        except ObjectDoesNotExist as e:
+            crypto_obj = Cryptocurrency.objects.create(slug=current_crypto.get('slug'), quote=quote_obj)
+        crypto_obj.name = current_crypto.get('name')
+        crypto_obj.symbol = current_crypto.get('symbol')
+        crypto_obj.num_market_pairs = current_crypto.get('num_market_pairs')
+        crypto_obj.circulating_supply = current_crypto.get('circulating_supply')
+        crypto_obj.total_supply = current_crypto.get('total_supply')
+        crypto_obj.max_supply = current_crypto.get('max_supply')
+        crypto_obj.infinite_supply = current_crypto.get('infinite_supply')
+        crypto_obj.date_added = current_crypto.get('date_added')
+        crypto_obj.last_updated = current_crypto.get('last_updated')
+        crypto_obj.save()

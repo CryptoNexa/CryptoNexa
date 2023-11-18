@@ -1,51 +1,54 @@
-{#{% extends 'CryptoNexa/base.html' %}#}
 {% load static %}
-{% block head %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Welcome to CryptoNexa!</title>
+    {% csrf_token %}
     <link rel="stylesheet" type="text/css" href="{% static 'css/register.css' %}">
-{% endblock %}
-{% block body %}
-    <div class="form-container">
-        <h2>Register</h2>
-         <form method="post">
-            {% csrf_token %}
-            {{ form.non_field_errors | safe }}
-            <div class="form-group">
-                <label for="{{ form.email.id_for_label }}">Email:</label>
-                {{ form.email }}
-                {{ form.email.errors | safe }}
-            </div>
-            <div class="form-group">
-                <label for="{{ form.first_name.id_for_label }}">First name:</label>
-                {{ form.first_name }}
-                {{ form.first_name.errors | safe }}
-            </div>
-            <div class="form-group">
-                <label for="{{ form.last_name.id_for_label }}">Last name:</label>
-                {{ form.last_name }}
-                {{ form.last_name.errors | safe }}
-            </div>
-            <div class="form-group">
-                <label for="{{ form.password1.id_for_label }}">Password:</label>
-                {{ form.password1 }}
-                {{ form.password1.errors | safe }}
-            </div>
-            <div class="form-group">
-                <label for="{{ form.password2.id_for_label }}">Confirm Password:</label>
-                {{ form.password2 }}
-                {{ form.password2.errors | safe }}
-            </div>
-{% if next %}
-    {% if user.is_authenticated %}
-      <p>Your account doesn't have access to this page. To proceed,
-      please login with an account that has access.</p>
-    {% else %}
-      <p>Please login to see this page.</p>
-    {% endif %}
-  {% endif %}
-
-            <button type="submit">Signup</button>
-             <input type="hidden" name="next" value="{{ next }}">
-        </form>
-        <p class="login-link">Already have an account? <a href="{% url 'login' %}">Login</a></p>
-    </div>
-{% endblock %}
+</head>
+<body>
+<div class="form-container">
+    <h2>Register</h2>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.non_field_errors | safe }}
+        <div class="form-group">
+            <label for="{{ form.email.id_for_label }}">Email:</label>
+            {{ form.email }}
+            {{ form.email.errors | safe }}
+        </div>
+        <div class="form-group">
+            <label for="{{ form.first_name.id_for_label }}">First name:</label>
+            {{ form.first_name }}
+            {{ form.first_name.errors | safe }}
+        </div>
+        <div class="form-group">
+            <label for="{{ form.last_name.id_for_label }}">Last name:</label>
+            {{ form.last_name }}
+            {{ form.last_name.errors | safe }}
+        </div>
+        <div class="form-group">
+            <label for="{{ form.password1.id_for_label }}">Password:</label>
+            {{ form.password1 }}
+            {{ form.password1.errors | safe }}
+        </div>
+        <div class="form-group">
+            <label for="{{ form.password2.id_for_label }}">Confirm Password:</label>
+            {{ form.password2 }}
+            {{ form.password2.errors | safe }}
+        </div>
+        {% if next %}
+            {% if user.is_authenticated %}
+                <p>Your account doesn't have access to this page. To proceed,
+                    please login with an account that has access.</p>
+            {% else %}
+                <p>Please login to see this page.</p>
+            {% endif %}
+        {% endif %}
+        <button type="submit" style="background-color: black">Signup</button>
+        <input type="hidden" name="next" value="{{ next }}">
+    </form>
+    <p class="login-link">Already have an account? <a href="{% url 'core:login' %}">Login</a></p>
+</div>
+</body>

@@ -1,0 +1,92 @@
+{#<!-- create a new file contact/templates/contact/contact_us.html -->#}
+{#<!DOCTYPE html>#}
+{#<html lang="en">#}
+{#<head>#}
+{#    <meta charset="UTF-8">#}
+{#    <meta name="viewport" content="width=device-width, initial-scale=1.0">#}
+{#    <title>Contact Us</title>#}
+{#</head>#}
+{#<body>#}
+{#    <h1>Contact Us</h1>#}
+{#    <form method="post" action="{% url 'contact-us' %}">#}
+{#        {% csrf_token %}#}
+{#        {{ form.as_p }}#}
+{#        <button type="submit">Submit</button>#}
+{#    </form>#}
+{#</body>#}
+{#</html>#}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #fff;
+            color: #000;
+        }
+        .header {
+            background-color: #000;
+            color: #fff;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        .contact-form {
+            border: 1px solid #000;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        .contact-form label {
+            font-weight: bold;
+        }
+        .contact-form input[type="text"],
+        .contact-form input[type="email"],
+        .contact-form textarea {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+        }
+        .contact-form button {
+            background-color: #000;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Contact Us</h1>
+        </div>
+        <div class="contact-form">
+            <form method="post" action="{% url 'contact-us' %}">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="id_name">Name:</label>
+                    {{ form.name }}
+                </div>
+                <div class="form-group">
+                    <label for="id_email">Email:</label>
+                    {{ form.email }}
+                </div>
+                <div class="form-group">
+                    <label for="id_message">Message:</label>
+                    {{ form.message }}
+                </div>
+                <button type="submit">Submit</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS and jQuery (optional but required for some Bootstrap features) -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
