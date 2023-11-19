@@ -5,6 +5,12 @@ from core.models import User
 
 
 class Transaction(models.Model):
+    STATUS_CHOICES = [
+        ('initiated', 'Initiated'),
+        ('success', 'Success'),
+        ('failed', 'Failed'),
+    ]
+
     type = models.CharField(max_length=4, default="buy")
     coin = models.CharField(max_length=30)
     currency = models.CharField(max_length=10)
@@ -15,6 +21,7 @@ class Transaction(models.Model):
     transaction_fee = models.DecimalField(max_digits=10, decimal_places=2, default=0.00)
     notes = models.TextField(help_text="Please add your notes here")
     user = models.ForeignKey(User, on_delete=models.CASCADE)
+    status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='initiated')
 
     def __str__(self):
         # return f'{self.id}'

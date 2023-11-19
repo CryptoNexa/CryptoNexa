@@ -13,7 +13,7 @@ from .forms import CustomUserForm
 from .models import Cryptocurrency, Quote
 from .forms import CustomUserForm, UserProfileForm
 from .models import User
-
+from BuySell.models import  Transaction
 
 def register(request):
     if request.method == 'POST':
@@ -89,3 +89,9 @@ def user_edit_profile(request, id):
             initial={'first_name': user.first_name, 'last_name': user.last_name, 'email': user.email})
 
     return render(request, 'CryptoNexa/edit_profile.html', {'form': form})
+
+def payment_history(request):
+    transactions = Transaction.objects.filter(user=request.user)
+    return render(request, 'CryptoNexa/payment_history.html', {
+        'transactions': transactions
+    })
