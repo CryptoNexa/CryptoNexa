@@ -1,9 +1,10 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
-from .models import User, Cryptocurrency, Quote
+from .models import User, Cryptocurrency, Quote, Watchlist
 from .models import User
 from BuySell.models import Transaction
 from payments.models import UserPayment
+
 
 
 class CustomUserAdmin(UserAdmin):
@@ -18,3 +19,4 @@ admin.site.register(Cryptocurrency)
 admin.site.register(Quote)
 admin.site.register(Transaction)
 admin.site.register(UserPayment)
+admin.site.register(Watchlist)

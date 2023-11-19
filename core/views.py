@@ -9,8 +9,8 @@ from django.contrib.auth import login, authenticate, logout
 from django.shortcuts import render, redirect
 from CryptoNexa.views import update_crypto_details
 from .apis.coinmarketcap.fetch_data import fetch_data
-from .forms import CustomUserForm
-from .models import Cryptocurrency, Quote
+from .forms import CustomUserForm, WatchlistForm
+from .models import Cryptocurrency, Quote, Watchlist
 from .forms import CustomUserForm, UserProfileForm
 from .models import User
 
@@ -75,7 +75,6 @@ def user_profile(request, id):
 #     return render(request, 'CryptoNexa/edit_profile.html', {'user': user})
 
 
-
 @login_required
 def user_edit_profile(request, id):
     user = User.objects.get(id=id)
@@ -89,3 +88,17 @@ def user_edit_profile(request, id):
             initial={'first_name': user.first_name, 'last_name': user.last_name, 'email': user.email})
 
     return render(request, 'CryptoNexa/edit_profile.html', {'form': form})
+
+
+@login_required
+def watchlist(request):
+    user_watchlist, created = Watchlist.objects.get_or_create(user=request.user)
+    if request.method == 'POST':
+        form = WatchlistForm(request.POST, instance=user_watchlist)
+        if form.is_valid():
+            form.save()
+            return redirect('core:watchlist')
+    else:
+        form = WatchlistForm(instance=user_watchlist)
+
+    return render(request, 'CryptoNexa/watchlist.html', {'form': form, 'user_watchlist': user_watchlist})

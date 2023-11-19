@@ -13,6 +13,6 @@ urlpatterns = [
     path('logout/', csrf_exempt(views.user_logout), name='logout'),
     path('profile/<int:id>', csrf_exempt(views.user_profile), name='profile'),
     path('edit_profile/<int:id>', csrf_exempt(views.user_edit_profile), name='edit_profile'),
-
+    path('watchlist/',csrf_exempt(views.watchlist), name='watchlist')
     # Add other URL patterns as needed for your application
 ]
