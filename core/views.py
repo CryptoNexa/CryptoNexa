@@ -8,7 +8,8 @@ from django.shortcuts import render
 from django.contrib.auth import login, authenticate, logout
 from django.shortcuts import render, redirect
 from CryptoNexa.views import update_crypto_details
-from .apis.coinmarketcap.fetch_data import fetch_data
+from .apis.coinmarketcap.fetch_data import fetch_data, get_dummy_data
+from .apis.helper_functions import process_crypto_data
 from .forms import CustomUserForm
 from .models import Cryptocurrency, Quote
 from .forms import CustomUserForm, UserProfileForm
@@ -39,11 +40,23 @@ def user_login(request):
     return render(request, 'CryptoNexa/login.html', {'form': form})
 
 
-def get_updated_crypto_data(request):
-    updated_data = fetch_data('USD')
-    update_crypto_details(updated_data)
-    data = serializers.serialize("json", Cryptocurrency.objects.all())
-    return JsonResponse(data)
+def get_updated_crypto_data(request, fetch_live_data):
+    if request.session.get('currency') is None:
+        request.session['currency'] = "USD"
+        session_cur = "USD"
+    else:
+        session_cur = request.session.get('currency')
+
+    if fetch_live_data:
+        fetched_data_from_api_session_cur = fetch_data(session_cur)
+    else:
+        fetched_data_from_api_session_cur = get_dummy_data(session_cur)
+
+    crypto_data = fetched_data_from_api_session_cur.get('data')
+    crypto_to_send = update_crypto_details(crypto_data, session_cur)
+    crypto_data = process_crypto_data(crypto_to_send, session_cur, many=True)
+    print("Updated price returned")
+    return JsonResponse(crypto_data, safe=False)
 
 
 def crypto_detail(request, slug):
@@ -73,7 +86,6 @@ def user_profile(request, id):
 # def user_edit_profile(request, id):
 #     user = User.objects.get(id=id)
 #     return render(request, 'CryptoNexa/edit_profile.html', {'user': user})
-
 
 
 @login_required

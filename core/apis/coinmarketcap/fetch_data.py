@@ -3,6 +3,18 @@ from requests import Request, Session
 from requests.exceptions import ConnectionError, Timeout, TooManyRedirects
 import json
 
+from core.apis.coinmarketcap.dummy_data.data_usd import data_usd
+from core.apis.coinmarketcap.dummy_data.data_cad import data_cad
+from core.apis.coinmarketcap.dummy_data.data_jpy import data_jpy
+from core.apis.coinmarketcap.dummy_data.data_inr import data_inr
+from core.apis.coinmarketcap.dummy_data.data_pkr import data_pkr
+from core.apis.coinmarketcap.dummy_data.data_rub import data_rub
+from core.apis.coinmarketcap.dummy_data.data_kwd import data_kwd
+from core.apis.coinmarketcap.dummy_data.data_eur import data_eur
+from core.apis.coinmarketcap.dummy_data.data_aud import data_aud
+from core.apis.coinmarketcap.dummy_data.data_nzd import data_nzd
+from core.apis.coinmarketcap.dummy_data.data_aed import data_aed
+from core.apis.coinmarketcap.dummy_data.data_cny import data_cny
 
 url = 'https://pro-api.coinmarketcap.com/v1/cryptocurrency/listings/latest'
 
@@ -42,3 +54,30 @@ def convert_usd_to_cad(quote, conversion_rate=0.7324):
     quote['CAD'] = cad_values
 
     return quote
+
+
+def get_dummy_data(currency):
+    if currency == "USD":
+        return data_usd
+    elif currency == "AUD":
+        return data_aud
+    elif currency == "CAD":
+        return data_cad
+    elif currency == "CNY":
+        return data_cny
+    elif currency == "EUR":
+        return data_eur
+    elif currency == "INR":
+        return data_inr
+    elif currency == "JPY":
+        return data_jpy
+    elif currency == "KWD":
+        return data_kwd
+    elif currency == "NZD":
+        return data_nzd
+    elif currency == "PKR":
+        return data_pkr
+    elif currency == "RUB":
+        return data_rub
+    elif currency == "AED":
+        return data_aed
