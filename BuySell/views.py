@@ -4,7 +4,7 @@ from .models import Transaction
 from django.contrib.auth.decorators import login_required
 
 
-@login_required(login_url='/currency/')
+@login_required(login_url='/login/')
 def buysell(request, slug, name, cad_price, usd_price):
     current_currency = request.session['currency']
 
