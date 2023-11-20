@@ -3,7 +3,8 @@ from django.contrib.auth.admin import UserAdmin
 from .models import User, Cryptocurrency, Quote
 from .forms import CustomUserForm, CustomUserChangeForm
 from BuySell.models import Transaction
-from payments.models import UserPayment
+from payments.models import UserPaymentBuy
+from payments.models import UserPaymentSell
 
 
 class CustomUserAdmin(UserAdmin):
@@ -36,4 +37,5 @@ admin.site.register(User, CustomUserAdmin)
 admin.site.register(Cryptocurrency)
 admin.site.register(Quote)
 admin.site.register(Transaction)
-admin.site.register(UserPayment)
+admin.site.register(UserPaymentSell)
+admin.site.register(UserPaymentBuy)
