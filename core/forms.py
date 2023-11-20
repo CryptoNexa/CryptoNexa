@@ -20,6 +20,7 @@ class UserProfileForm(forms.ModelForm):
         model = User  # Use the User model from Django's auth module
         fields = ['first_name', 'last_name', 'email']
 
+
 class WatchlistForm(forms.ModelForm):
     cryptocurrencies = forms.ModelMultipleChoiceField(
         queryset=Cryptocurrency.objects.all(),
@@ -30,4 +31,11 @@ class WatchlistForm(forms.ModelForm):
 
     class Meta:
         model = Watchlist
-        fields = ['cryptocurrencies']
+        fields = ['name', 'cryptocurrencies']
+        widgets = {
+            'name': forms.TextInput(attrs={'required': False}),
+        }
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['name'].required = False

@@ -77,7 +77,8 @@ class Cryptocurrency(models.Model):
 
 class Watchlist(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
+    name = models.CharField(max_length=255, default="My Watchlist")
     cryptocurrencies = models.ManyToManyField(Cryptocurrency, blank=True)
 
     def __str__(self):
-        return self.user.first_name
+        return f"{self.user}'s {self.name} Watchlist"
