@@ -10,70 +10,28 @@
         <h3>Find answers and contact support by selecting an option below.</h3>
 
         <div class="row mt-4">
-            <div class="col-md-3">
-                <a href="#" class="card-link" onclick="showSupportForm('Currency Exchange', this)">
-                    <div class="card text-center">
+            {% for issue_type, issue_icon in issue_types %}
+                <div class="col-md-3" style="margin-bottom: 10px">
+                    <div class="card text-center card-link {% if not user.is_authenticated %}not-clickable{% endif %}"
+                         style="cursor: {% if user.is_authenticated %}pointer{% else %}not-allowed{% endif %}"
+                         {% if user.is_authenticated %}onclick="showSupportForm('{{ issue_type }}', this)"{% endif %}>
                         <div class="card-body">
-                            <i class="fas fa-exchange-alt fa-2x mb-3"></i>
-                            <h5 class="card-title">Currency Exchange</h5>
+                            <i class="fas {{ issue_icon }} fa-2x mb-3"></i>
+                            <h5 class="card-title">{{ issue_type }}</h5>
                         </div>
                     </div>
-                </a>
-            </div>
-            <div class="col-md-3">
-                <a href="#" class="card-link" onclick="showSupportForm('Buy/Sell Orders', this)">
-                    <div class="card text-center">
-                        <div class="card-body">
-                            <i class="fas fa-money-check-alt fa-2x mb-3"></i>
-                            <h5 class="card-title">Buy/Sell Orders</h5>
-                        </div>
-                    </div>
-                </a>
-            </div>
-            <div class="col-md-3">
-                <a href="#" class="card-link" onclick="showSupportForm('Portfolio', this)">
-                    <div class="card text-center">
-                        <div class="card-body">
-                            <i class="fas fa-chart-pie fa-2x mb-3"></i>
-                            <h5 class="card-title">Portfolio</h5>
-                        </div>
-                    </div>
-                </a>
-            </div>
+                </div>
+            {% endfor %}
         </div>
 
-        <div class="row mt-4">
-            <div class="col-md-3">
-                <a href="#" class="card-link" onclick="showSupportForm('Purchase', this)">
-                    <div class="card text-center">
-                        <div class="card-body">
-                            <i class="fas fa-credit-card fa-2x mb-3"></i>
-                            <h5 class="card-title">Purchase</h5>
-                        </div>
-                    </div>
-                </a>
+        {% if not user.is_authenticated %}
+            <div class="row mt-4">
+                <div class="col-md-12">
+                    <p class="text-center">Please <a href="{% url 'core:login' %}">log in</a> to create a support
+                        ticket.</p>
+                </div>
             </div>
-            <div class="col-md-3">
-                <a href="#" class="card-link" onclick="showSupportForm('Unauthorized Charge', this)">
-                    <div class="card text-center">
-                        <div class="card-body">
-                            <i class="fas fa-exclamation-triangle fa-2x mb-3"></i>
-                            <h5 class="card-title">Unauthorized Charge</h5>
-                        </div>
-                    </div>
-                </a>
-            </div>
-            <div class="col-md-3">
-                <a href="#" class="card-link" onclick="showSupportForm('Refunds', this)">
-                    <div class="card text-center">
-                        <div class="card-body">
-                            <i class="fas fa-undo fa-2x mb-3"></i>
-                            <h5 class="card-title">Refunds</h5>
-                        </div>
-                    </div>
-                </a>
-            </div>
-        </div>
+        {% endif %}
 
         <!-- Support Form -->
         <div id="supportForm" class="mt-4 border p-4 rounded">
@@ -113,7 +71,7 @@
     </div>
 
     <script>
-        function showSupportForm(issueType) {
+        function showSupportForm(issueType, card) {
             // Set the issue type in the form
             const issueDescriptionField = document.getElementById('{{ form.issue_description.id_for_label }}');
             issueDescriptionField.placeholder = `Describe your ${issueType} issue`;
@@ -125,7 +83,6 @@
             cards.forEach(card => card.classList.remove('selected-card'));
 
             // Add the 'selected-card' class to the clicked card
-            const card = event.currentTarget;
             card.classList.add('selected-card');
         }
     </script>
