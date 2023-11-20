@@ -27,4 +27,5 @@ urlpatterns = [
     path('currencyExchange/', include('currencyExchange.urls')),
     path('', include('payments.urls')),
     path('', include('BuySell.urls')),
+    path('', include('portfolio.urls')),
 ]

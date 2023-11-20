@@ -1,0 +1,72 @@
+{#<!DOCTYPE HTML>#}
+{#<html>#}
+{#<body>#}
+{#<li>{{ user_object.first_name }}</li>#}
+{#<li>{{ user_object.last_name }}</li>#}
+{#<li>{{ user_object.email }}</li>#}
+{##}
+{#    {% for t in transaction_obj %}#}
+{#    <ul>#}
+{#        <li>{{ t.coin }}</li>#}
+{#        <li>{{ t.quantity }}</li>#}
+{#        <li>{{ t.currency }}</li>#}
+{#        <li>{{ t.total_spent }}</li>#}
+{#    </ul>#}
+{#    {% endfor %}#}
+{#<p>Total amount in wallet:</p>#}
+{#<li>{{ total }}</li>#}
+{#</body>#}
+{#<footer>#}
+{#    <a href="/">Back to Home Page</a>#}
+{#</footer>#}
+{#</html>#}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Portfolio</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+    <h1>Portfolio</h1>
+    <p><strong> Name:</strong> {{ user_object.first_name }} {{ user_object.last_name }}</p>
+
+
+    <h2>Transactions</h2>
+    <table>
+        <tr>
+            <th>Coin</th>
+            <th>Quantity</th>
+            <th>Currency</th>
+            <th>Total Spent</th>
+        </tr>
+        {% for transaction in transaction_obj %}
+        <tr>
+            <td>{{ transaction.coin }}</td>
+            <td>{{ transaction.quantity }}</td>
+            <td>{{ transaction.currency }}</td>
+            <td>{{ transaction.total_spent }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+
+    <h3>Total Balance:</h3>
+    <p>{{ total }}</p>
+
+    <footer>
+        <a href="/">Back to Home Page</a>
+    </footer>
+</body>
+</html>
