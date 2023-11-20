@@ -4,7 +4,7 @@ import time
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from django.conf import settings
-from .models import UserPayment
+from .models import UserPaymentBuy
 from django.views import View
 from BuySell.models import Transaction
 from django.shortcuts import get_object_or_404
@@ -28,15 +28,30 @@ def payment_checkout(request, transaction_id):
 def payment_successful(request):
     user_id = request.user.id
     transaction_id = request.session.get('transaction_id')
+    stripe_id = request.session.get('stripe_id')
     user_object = User.objects.get(pk=user_id)
     transaction_obj = Transaction.objects.get(id=transaction_id)
-    user_payment = UserPayment.objects.create(user=user_object, payment_bool=True, transaction_id=transaction_obj)
+    user_payment = UserPaymentBuy.objects.create(user=user_object, payment_status=True, transaction_id=transaction_obj,
+                                                 stripe_id=stripe_id)
+    transaction_obj.status = Transaction.STATUS_CHOICES[1]
+    transaction_obj.save()
     if 'transaction_id' in request.session:
         del request.session['transaction_id']
-    return render(request, 'paymentCheckout/payment_successful.html')
+
+    context = {
+        "user_payment": user_payment,
+        "user_object": user_object,
+        "transaction_obj": transaction_obj
+    }
+    return render(request, 'paymentCheckout/payment_successful.html', context)
 
 
 def payment_cancelled(request):
+    transaction_id = request.session.get('transaction_id')
+    transaction_obj = Transaction.objects.get(id=transaction_id)
+
+    transaction_obj.status = Transaction.STATUS_CHOICES[2]
+    transaction_obj.save()
     return render(request, 'paymentCheckout/payment_cancelled.html')
 
 
@@ -69,6 +84,8 @@ class CreateCheckoutSession(View):
                 success_url=YOUR_DOMAIN + 'payment_successful',
                 cancel_url=YOUR_DOMAIN + 'payment_cancelled',
             )
+            request.session['stripe_id'] = checkout_session.id
+            print("checkout_session :: => ::", checkout_session)
         except Exception as e:
             return str(e)
         return redirect(checkout_session.url, code=303)
