@@ -1,7 +1,8 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
+
 from .models import User, Cryptocurrency, Quote, Watchlist
-from .models import User
+from .forms import CustomUserForm, CustomUserChangeForm
 from BuySell.models import Transaction
 from payments.models import UserPayment
 
@@ -11,6 +12,25 @@ class CustomUserAdmin(UserAdmin):
     list_display = ('email', 'first_name', 'last_name', 'is_active', 'is_staff', 'date_joined')
     search_fields = ('email', 'first_name', 'last_name')
     ordering = ('date_joined',)
+
+    add_form = CustomUserForm
+    form = CustomUserChangeForm
+    model = User
+
+    fieldsets = (
+        (None, {'fields': ('email', 'password')}),
+        ('Personal Info', {'fields': ('first_name', 'last_name', 'date_joined', 'photo_id'), 'classes': ('collapse',)}),
+        ('Permissions', {'fields': ('is_active', 'is_staff', 'groups', 'user_permissions')}),
+    )
+
+    add_fieldsets = (
+        (None, {
+            'classes': ('wide',),
+            'fields': ('email', 'first_name', 'last_name', 'password1', 'password2'),
+        }),
+    )
+
+    readonly_fields = ('date_joined',)
 
 
 # Register the CustomUser model with the admin site
