@@ -2,6 +2,12 @@
 from django.db import models
 from core.models import User
 from BuySell.models import Transaction
+from django.utils import timezone
+
+
+def user_upload_path(instance, filename):
+    # Upload files to a user-specific subdirectory in support_files
+    return f'support_files/user_{instance.user.id}/{timezone.now().strftime("%Y/%m/%d")}/{filename}'
 
 
 class SupportIssue(models.Model):
@@ -14,7 +20,7 @@ class SupportIssue(models.Model):
     issue_title = models.CharField(max_length=255)
     issue_description = models.TextField()
     transaction_id = models.ForeignKey(Transaction, on_delete=models.SET_NULL, null=True, blank=True)
-    files = models.FileField(upload_to='support_files/', blank=True, null=True)
+    files = models.FileField(upload_to=user_upload_path, blank=True, null=True)
     status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='open')
 
     def __str__(self):
