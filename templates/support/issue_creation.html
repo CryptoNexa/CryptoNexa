@@ -1,0 +1,133 @@
+{% extends 'CryptoNexa/base.html' %}
+{% load static %}
+
+{% block head %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/issue_creation.css' %}">
+{% endblock %}
+
+{% block content %}
+    <div class="container my-4">
+        <h3>Find answers and contact support by selecting an option below.</h3>
+
+        <div class="row mt-4">
+            <div class="col-md-3">
+                <a href="#" class="card-link" onclick="showSupportForm('Currency Exchange', this)">
+                    <div class="card text-center">
+                        <div class="card-body">
+                            <i class="fas fa-exchange-alt fa-2x mb-3"></i>
+                            <h5 class="card-title">Currency Exchange</h5>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="col-md-3">
+                <a href="#" class="card-link" onclick="showSupportForm('Buy/Sell Orders', this)">
+                    <div class="card text-center">
+                        <div class="card-body">
+                            <i class="fas fa-money-check-alt fa-2x mb-3"></i>
+                            <h5 class="card-title">Buy/Sell Orders</h5>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="col-md-3">
+                <a href="#" class="card-link" onclick="showSupportForm('Portfolio', this)">
+                    <div class="card text-center">
+                        <div class="card-body">
+                            <i class="fas fa-chart-pie fa-2x mb-3"></i>
+                            <h5 class="card-title">Portfolio</h5>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+
+        <div class="row mt-4">
+            <div class="col-md-3">
+                <a href="#" class="card-link" onclick="showSupportForm('Purchase', this)">
+                    <div class="card text-center">
+                        <div class="card-body">
+                            <i class="fas fa-credit-card fa-2x mb-3"></i>
+                            <h5 class="card-title">Purchase</h5>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="col-md-3">
+                <a href="#" class="card-link" onclick="showSupportForm('Unauthorized Charge', this)">
+                    <div class="card text-center">
+                        <div class="card-body">
+                            <i class="fas fa-exclamation-triangle fa-2x mb-3"></i>
+                            <h5 class="card-title">Unauthorized Charge</h5>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="col-md-3">
+                <a href="#" class="card-link" onclick="showSupportForm('Refunds', this)">
+                    <div class="card text-center">
+                        <div class="card-body">
+                            <i class="fas fa-undo fa-2x mb-3"></i>
+                            <h5 class="card-title">Refunds</h5>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+
+        <!-- Support Form -->
+        <div id="supportForm" class="mt-4 border p-4 rounded">
+            <form method="post" enctype="multipart/form-data" style="max-width: 400px">
+                {% csrf_token %}
+                <h2 class="mb-4">Issue</h2>
+
+                {{ form.non_field_errors | safe }}
+
+                <div class="form-group">
+                    <label for="{{ form.issue_title.id_for_label }}">Issue Title:</label>
+                    {{ form.issue_title }}
+                    {{ form.issue_title.errors | safe }}
+                </div>
+
+                <div class="form-group">
+                    <label for="{{ form.issue_description.id_for_label }}">Issue Description:</label>
+                    {{ form.issue_description }}
+                    {{ form.issue_description.errors | safe }}
+                </div>
+
+                <div class="form-group">
+                    <label for="{{ form.transaction_id.id_for_label }}">Transaction ID:</label>
+                    {{ form.transaction_id }}
+                    {{ form.transaction_id.errors | safe }}
+                </div>
+
+                <div class="form-group">
+                    <label for="{{ form.files.id_for_label }}">Files:</label>
+                    {{ form.files }}
+                    {{ form.files.errors | safe }}
+                </div>
+
+                <button type="submit" class="btn btn-outline-dark">Submit</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        function showSupportForm(issueType) {
+            // Set the issue type in the form
+            const issueDescriptionField = document.getElementById('{{ form.issue_description.id_for_label }}');
+            issueDescriptionField.placeholder = `Describe your ${issueType} issue`;
+            // Show the support form
+            document.getElementById('supportForm').style.display = 'block';
+
+            // Remove the 'selected-card' class from all cards
+            const cards = document.querySelectorAll('.card-link');
+            cards.forEach(card => card.classList.remove('selected-card'));
+
+            // Add the 'selected-card' class to the clicked card
+            const card = event.currentTarget;
+            card.classList.add('selected-card');
+        }
+    </script>
+
+{% endblock %}

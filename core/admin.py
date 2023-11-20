@@ -1,5 +1,7 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
+
+from support.models import SupportIssue
 from .models import User, Cryptocurrency, Quote
 from .models import User
 from BuySell.models import Transaction
@@ -18,3 +20,4 @@ admin.site.register(Cryptocurrency)
 admin.site.register(Quote)
 admin.site.register(Transaction)
 admin.site.register(UserPayment)
+admin.site.register(SupportIssue)

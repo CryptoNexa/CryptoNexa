@@ -16,16 +16,11 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from CryptoNexa import views
+from support import views
+
+app_name = 'support'
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('', views.index, name='index'),
-    path('', include('core.urls')),
-    path('', include('Newsletter.urls')),
-    path('', include('ContactUS.urls')),
-    path('currencyExchange/', include('currencyExchange.urls')),
-    path('', include('payments.urls')),
-    path('', include('BuySell.urls')),
-    path('', include('support.urls')),
+    path('support/issue_creation/', views.issue_creation, name='issue_creation'),
+    path('support/list_issues/', views.list_issues, name='list_issues'),
 ]

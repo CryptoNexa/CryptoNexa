@@ -69,6 +69,7 @@
                         <li><a class="dropdown-item" href="#">Settings</a></li>
                         <li><a class="dropdown-item" href="#">Watchlist</a></li>
                         <li><a class="dropdown-item" href="#">Portfolio</a></li>
+                        <li><a class="dropdown-item" href="{% url 'support:list_issues' %}">Support Issues</a></li>
                         <li><a class="dropdown-item" href="{% url 'core:logout' %}">Logout</a></li>
                     </ul>
                 </div>
@@ -91,7 +92,8 @@
         <div><span>Community</span></div>
         <div><span>Products</span></div>
         <div><span>Learn</span></div>
-        <div><span><a href ="news/">Newsletter</a></span></div>
+        <div><span><a href ="news/" class="text-decoration-none text-dark">Newsletter</a></span></div>
+        <div><span><a href ="{% url 'support:issue_creation' %}" class="text-decoration-none text-dark">Support</a></span></div>
     </div>
     <div class="top-bar-right">
         <div><span>Portfolio</span></div>
