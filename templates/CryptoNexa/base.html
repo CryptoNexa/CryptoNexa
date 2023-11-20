@@ -85,13 +85,14 @@
 </nav>
 <div class="top-bar">
     <div class="top-bar-left me-auto mb-2 mb-lg-0">
-        <div class="top-bar-left-hero"><span><a href="{% url 'index' %}" class="text-decoration-none text-dark">CrytoNexa</a></span></div>
+        <div class="top-bar-left-hero"><span><a href="{% url 'index' %}" class="text-decoration-none text-dark">CrytoNexa</a></span>
+        </div>
         <div><span>Cryptocurrencies</span></div>
         <div><span>Exchanges</span></div>
         <div><span>Community</span></div>
         <div><span>Products</span></div>
         <div><span>Learn</span></div>
-        <div><span><a href ="news/">Newsletter</a></span></div>
+        <div><span><a href="news/">Newsletter</a></span></div>
     </div>
     <div class="top-bar-right">
         <div><span>Portfolio</span></div>
@@ -104,6 +105,8 @@
     {% block body %}
     {% endblock %}
     {% block currencypopup %}
+    {% endblock %}
+    {% block crypto_filter %}
     {% endblock %}
 </div>
 
@@ -127,10 +130,10 @@
                     <div class="col-md-3">
                         <h6><a href="Contact_us/">Contact Us</a></h6>
                     </div>
-                    </div>
                 </div>
             </div>
         </div>
+    </div>
     </div>
 </footer>
 

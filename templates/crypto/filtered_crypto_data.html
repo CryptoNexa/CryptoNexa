@@ -1,4 +1,4 @@
-{% block cryptoListView %}
+{% block filtered_crypto_block %}
     <div class="container">
         <a href="{% url 'filter_crypto_data' %}" id="openModal">
                 <button type="button" class="btn btn-outline-primary">Filter</button>
@@ -42,42 +42,5 @@
 
     </div>
 
-    {% if not error_message and update_values %}
-        <script>
-            function updateCryptoData() {
-                fetch('{% url 'core:get_updated_crypto_data' fetch_live_data=0 %}')
-                    .then(response => response.json())
-                    .then(data => {
-                        data.forEach(crypto => {
-                            const cryptoId = crypto.id;
-
-                            document.getElementById(`price-${cryptoId}`).innerText = `$${crypto.price}`;
-                            document.getElementById(`change-1h-${cryptoId}`).innerText = crypto.percent_change_1h;
-                            document.getElementById(`change-24h-${cryptoId}`).innerText = crypto.percent_change_24h;
-                            document.getElementById(`market-cap-${cryptoId}`).innerText = `$${crypto.market_cap}`;
-                            document.getElementById(`volume-24h-${cryptoId}`).innerText = `$${crypto.volume_24h}`;
-                            document.getElementById(`change-1h-${cryptoId}`).classList = calculateChangeClass(crypto.percent_change_1h);
-                            document.getElementById(`change-24h-${cryptoId}`).classList = calculateChangeClass(crypto.percent_change_24h);
-                        });
-                    })
-                    .catch(error => {
-                        console.error('Error fetching crypto data:', error);
-                    });
-            }
-
-            function calculateChangeClass(change) {
-                if (change < 0) {
-                    return 'text-danger';
-                } else if (change > 0) {
-                    return 'text-success';
-                } else {
-                    return 'text-muted';
-                }
-            }
-
-            setInterval(updateCryptoData, 10000); // Update crypto data every 10 seconds (10000 milliseconds)
-            updateCryptoData(); // Initially load the crypto data
-        </script>
-    {% endif %}
 
 {% endblock %}

@@ -27,4 +27,7 @@ urlpatterns = [
     path('currencyExchange/', include('currencyExchange.urls')),
     path('', include('payments.urls')),
     path('', include('BuySell.urls')),
+
+    # Crypto Related
+    path('filter_crypto_data', views.filter_crypto_data, name='filter_crypto_data')
 ]

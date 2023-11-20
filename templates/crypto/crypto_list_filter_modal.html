@@ -1,0 +1,46 @@
+{% extends 'CryptoNexa/index.html' %}
+{% load static %}
+{% block crypto_filter %}
+
+    <link rel="stylesheet" type="text/css" href="{% static 'css/crypto_filter.css' %}">
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const myModal = new bootstrap.Modal(document.getElementById("crypto-filter-modal"));
+            myModal.show();
+        });
+    </script>
+    <div class="modal fade" id="crypto-filter-modal" tabindex="-1" role="dialog" data-bs-keyboard="false"
+         data-bs-backdrop="static">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Choose your filters</h5>
+                </div>
+                <div class="modal-body">
+                    <!-- Your modal content goes here -->
+                    <div>
+                        <form method="POST" action="{% url 'filter_crypto_data' %}">
+                            {% csrf_token %}
+                            <div class="currency-container">
+                                {{ form.as_table }}
+{#                                {% for choice in form.selected_option %}#}
+{#                                    <div class="custom-radio">#}
+{#                                        {{ choice.tag }}#}
+{#                                        <label class="currency-item"#}
+{#                                               for="{{ choice.id_for_label }}">#}
+{#                                            {{ choice.choice_label }}#}
+{#                                        </label>#}
+{#                                    </div>#}
+{#                                {% endfor %}#}
+                            </div>
+                            <button type="submit" class="btn btn-outline-primary">Save</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+{% endblock %}

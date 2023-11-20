@@ -1,0 +1,82 @@
+.currency-container {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); /* Creates 4 equal-width columns */
+    gap: 20px; /* Adjust the gap between grid items as needed */
+}
+
+.currency-item {
+    /* Add styling for each grid item here */
+    padding: 10px;
+    text-align: center;
+    font-size: 10px;
+    margin-bottom: 15px;
+}
+
+.modal {
+    text-align: center;
+    padding: 0 !important;
+}
+
+.modal:before {
+    content: '';
+    display: inline-block;
+    height: 100%;
+    vertical-align: middle;
+    margin-right: -4px;
+}
+
+.modal-dialog {
+    display: inline-block;
+    text-align: left;
+    vertical-align: middle;
+    max-width: 1000px;
+    width: 750px;
+    max-height: 100vh;
+}
+
+.modal-content {
+    border-radius: 20px;
+    padding: 20px;
+}
+
+.modal-header {
+    margin-bottom: 10px;
+    font-weight: bolder;
+}
+
+/* styles.css */
+.custom-radio {
+    display: flex;
+    /*align-items: center;*/
+}
+
+.custom-radio input[type="radio"] {
+    display: none; /* Hide the radio input */
+}
+
+.custom-radio label {
+    border: 1px solid #ddd;
+    cursor: pointer;
+    border-radius: 10px;
+    flex: 1;
+}
+
+.custom-radio input[type="radio"]:checked + label {
+    border-color: #007bff; /* Change the color to your preference */
+}
+
+
+.custom-input {
+    /* Define width and height as needed */
+    width: 200px;
+    height: 30px;
+    /* Add other styles such as padding, border, etc. */
+    /* Example styles */
+    padding: 5px;
+    border: 1px solid #ccc;
+}
+
+.custom-input-radio {
+    /* Define width and height for radio buttons */
+    /* Adjust styles as needed */
+}
