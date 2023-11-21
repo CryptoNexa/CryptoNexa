@@ -7,7 +7,7 @@ from django.utils import timezone
 
 def user_upload_path(instance, filename):
     # Upload files to a user-specific subdirectory in support_files
-    return f'support_files/user_{instance.user.id}/{timezone.now().strftime("%Y/%m/%d")}/{filename}'
+    return f'support_files/user_{instance.user.id}/{timezone.now().strftime("%Y-%m-%d")}_{filename}'
 
 
 class SupportIssue(models.Model):

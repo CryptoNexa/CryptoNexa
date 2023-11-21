@@ -47,7 +47,6 @@ INSTALLED_APPS = [
     'payments',
     'BuySell',
     'support',
-    'multiupload',
 ]
 # Application definition
 
