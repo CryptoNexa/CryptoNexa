@@ -26,8 +26,21 @@ class CryptoFilterForm(forms.Form):
                                        widget=forms.RadioSelect(attrs={'class': 'custom-input-radio'}))
 
     """Quote Related"""
-    # price = forms.DecimalField(required=False, label='Price', max_digits=20, decimal_places=2,
-    #                            widget=forms.NumberInput(attrs={'class': 'custom-input'}))
+    price_min = forms.DecimalField(required=False, label='Min Price', max_digits=20, decimal_places=2,
+                               widget=forms.NumberInput(attrs={'class': 'custom-input'}))
+    price_max = forms.DecimalField(required=False, label='Max Price', max_digits=20, decimal_places=2,
+                               widget=forms.NumberInput(attrs={'class': 'custom-input'}))
+
+    def clean(self):
+        cleaned_data = super().clean()
+        price_min = cleaned_data.get('price_min')
+        price_max = cleaned_data.get('price_max')
+
+        if price_min is not None and price_max is not None and price_min > price_max:
+            raise forms.ValidationError('Min Price cannot be greater than Max Price.')
+
+        return cleaned_data
+
     # price_gt_or_lt = forms.ChoiceField(required=False, label='Price Greater Than or Less Than', choices=GT_LT_CHOICES,
     #                                    widget=forms.RadioSelect(attrs={'class': 'custom-input-radio'}))
     # percent_change_1h = forms.DecimalField(required=False, label='Percent Change (1h)', max_digits=20, decimal_places=2,

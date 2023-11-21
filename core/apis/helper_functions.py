@@ -2,6 +2,14 @@ from django.core.exceptions import ObjectDoesNotExist
 
 from core.models import Cryptocurrency, Quote
 
+def keep_two_chars_after_dot(input_string):
+    dot_index = input_string.find('.')
+    if dot_index != -1 and len(input_string) > dot_index + 2:
+        modified_string = input_string[:dot_index + 3]
+    else:
+        modified_string = input_string
+    return modified_string
+
 
 def process_crypto_data(objs, currency, many):
     if many:
@@ -24,7 +32,21 @@ def process_crypto_data(objs, currency, many):
             except Exception as e:
                 del(processed_data['id'])
         return data_list
-    pass
+    else:
+        processed_data = {}
+        processed_data['id'] = objs.pk
+        processed_data['name'] = objs.name
+        processed_data['symbol'] = objs.symbol
+        processed_data['price'] = objs.price
+        processed_data['percent_change_1h'] = objs.quote.data.get(currency).get('percent_change_1h')
+        processed_data['percent_change_24h'] = objs.quote.data.get(currency).get('percent_change_24h')
+        processed_data['market_cap'] = objs.quote.data.get(currency).get('market_cap')
+        processed_data['volume_24h'] = objs.quote.data.get(currency).get('volume_24h')
+
+        """Meta data for Backend"""
+        processed_data['currency'] = currency
+        processed_data['slug'] = objs.slug
+        return processed_data
 
 
 def update_crypto_details(crypto_data, session_cur, filters=None):

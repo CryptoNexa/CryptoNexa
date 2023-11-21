@@ -23,7 +23,7 @@
                         <button  type="button" class="btn-close" ></button>
                     </a>
                 </div>
-                <form class="modal-body" method="post" action="{% url 'buysell' slug=slug name=name cad_price=cad_price usd_price=usd_price %}">
+                <form class="modal-body" method="post" action="{% url 'buysell' slug=slug name=name price=price %}">
                     <!-- Your modal content goes here -->
                     {% for field in form %}
                         <div class="form-group mb-3 rounded-pill">

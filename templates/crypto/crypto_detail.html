@@ -18,28 +18,28 @@
                     <p><strong>Infinite Supply:</strong> {{ cryptocurrency.infinite_supply }}</p>
                     <p><strong>Last Updated:</strong> {{ cryptocurrency.last_updated }}</p>
                     <p><strong>Date Added:</strong> {{ cryptocurrency.date_added }}</p>
-                    <p><strong>Currency Symbol:</strong> {{ cryptocurrency.quote.currency_symbol }}</p>
+{#                    <p><strong>Currency Symbol:</strong> {{ cryptocurrency.quote.currency_symbol }}</p>#}
 
                     <div class="mt-4">
                         <h4>Quote Information</h4>
                         <ul>
-                            <li><strong>Price(USD):</strong> ${{ cryptocurrency.quote.data.USD.price }} | <strong>Price(CAD):</strong> ${{ cryptocurrency.quote.data.CAD.price }}</li>
-                            <li><strong>24h Volume:</strong> ${{ cryptocurrency.quote.data.USD.volume_24h }}</li>
-                            <li><strong>24h Volume Change:</strong> {{ cryptocurrency.quote.data.USD.volume_change_24h }}%</li>
-                            <li><strong>1h Change:</strong> {{ cryptocurrency.quote.data.USD.percent_change_1h }}%</li>
-                            <li><strong>24h Change:</strong> {{ cryptocurrency.quote.data.USD.percent_change_24h }}%</li>
-                            <li><strong>7d Change:</strong> {{ cryptocurrency.quote.data.USD.percent_change_7d }}%</li>
-                            <li><strong>30d Change:</strong> {{ cryptocurrency.quote.data.USD.percent_change_30d }}%</li>
-                            <li><strong>60d Change:</strong> {{ cryptocurrency.quote.data.USD.percent_change_60d }}%</li>
-                            <li><strong>90d Change:</strong> {{ cryptocurrency.quote.data.USD.percent_change_90d }}%</li>
-                            <li><strong>Market Cap:</strong> ${{ cryptocurrency.quote.data.USD.market_cap }}</li>
-                            <li><strong>Market Cap Dominance:</strong> {{ cryptocurrency.quote.data.USD.market_cap_dominance }}%</li>
-                            <li><strong>Fully Diluted Market Cap:</strong> ${{ cryptocurrency.quote.data.USD.fully_diluted_market_cap }}</li>
-                            <li><strong>Total Value Locked (TVL):</strong> N/A</li>
-                            <li><strong>Last Updated:</strong> {{ cryptocurrency.quote.data.USD.last_updated }}</li>
+                            <li><strong>Price {{ session_cur }}:</strong> ${{ cryptocurrency.price }} </li>
+                            <li><strong>24h Volume:</strong> ${{ cryptocurrency.volume_24h }}</li>
+                            <li><strong>24h Volume Change:</strong> {{ cryptocurrency.volume_change_24h }}%</li>
+                            <li><strong>1h Change:</strong> {{ cryptocurrency.percent_change_1h }}%</li>
+                            <li><strong>24h Change:</strong> {{ cryptocurrency.percent_change_24h }}%</li>
+{#                            <li><strong>7d Change:</strong> {{ cryptocurrency.percent_change_7d }}%</li>#}
+{#                            <li><strong>30d Change:</strong> {{ cryptocurrency.percent_change_30d }}%</li>#}
+{#                            <li><strong>60d Change:</strong> {{ cryptocurrency.quote.data.USD.percent_change_60d }}%</li>#}
+{#                            <li><strong>90d Change:</strong> {{ cryptocurrency.quote.data.USD.percent_change_90d }}%</li>#}
+{#                            <li><strong>Market Cap:</strong> ${{ cryptocurrency.quote.data.USD.market_cap }}</li>#}
+{#                            <li><strong>Market Cap Dominance:</strong> {{ cryptocurrency.quote.data.USD.market_cap_dominance }}%</li>#}
+{#                            <li><strong>Fully Diluted Market Cap:</strong> ${{ cryptocurrency.quote.data.USD.fully_diluted_market_cap }}</li>#}
+{#                            <li><strong>Total Value Locked (TVL):</strong> N/A</li>#}
+{#                            <li><strong>Last Updated:</strong> {{ cryptocurrency.quote.data.USD.last_updated }}</li>#}
                         </ul>
                     </div>
-                    <a href="{% url 'buysell' slug=cryptocurrency.slug name=cryptocurrency.name cad_price=cryptocurrency.quote.data.CAD.price usd_price=cryptocurrency.quote.data.USD.price %}" id="openModal" class="btn btn-success">Add Transaction</a>
+                    <a href="{% url 'buysell' slug=cryptocurrency.slug name=cryptocurrency.name price=cryptocurrency.price %}" id="openModal" class="btn btn-success">Add Transaction</a>
 {#                    <a href="{% url 'buy_crypto' %}" class="btn btn-success">Buy</a> #}
 
                 </div>

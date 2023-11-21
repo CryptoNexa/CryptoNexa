@@ -1,8 +1,10 @@
+import decimal
+
 from django.core.exceptions import ObjectDoesNotExist
 from django.shortcuts import render, redirect
 
 from CryptoNexa.forms import CryptoFilterForm
-from core.apis.helper_functions import process_crypto_data
+from core.apis.helper_functions import process_crypto_data, keep_two_chars_after_dot
 from core.apis.coinmarketcap.fetch_data import fetch_data, get_dummy_data
 from core.models import Cryptocurrency, Quote
 
@@ -61,10 +63,18 @@ def update_crypto_details(crypto_data, session_cur, filters=None):
         if filters.get('max_supply') is not None:
             filtered_crypto = filtered_crypto.filter(max_supply=filters.get('max_supply'))
 
+        if filters.get('price_min') is not None:
+            filtered_crypto = filtered_crypto.filter(price__gt=filters.get('price_min'))
+
+        if filters.get('price_max') is not None:
+            filtered_crypto = filtered_crypto.filter(price__lt=filters.get('price_max'))
+
+
         if filters.get('infinite_supply') == "True":
             filtered_crypto = filtered_crypto.filter(infinite_supply=True)
         elif filters.get('infinite_supply') == "False":
             filtered_crypto = filtered_crypto.filter(infinite_supply=False)
+
 
         return filtered_crypto
 
@@ -93,7 +103,9 @@ def update_crypto_details(crypto_data, session_cur, filters=None):
         crypto_obj.infinite_supply = current_crypto.get('infinite_supply')
         crypto_obj.date_added = current_crypto.get('date_added')
         crypto_obj.last_updated = current_crypto.get('last_updated')
-
+        price = float(current_crypto.get('quote').get(session_cur).get('price'))
+        price = "{:.2f}".format(price)
+        crypto_obj.price = price
         crypto_ids.append(crypto_obj.pk)
         crypto_obj.save()
 
@@ -109,7 +121,6 @@ def filter_crypto_data(request):
         session_cur = request.session.get('currency')
     context = {}
     if request.method == "POST":
-        print("Called")
         submitted_form = CryptoFilterForm(request.POST)
         if not submitted_form.is_valid():
             return render(request, 'crypto/crypto_list_filter_modal.html', {"form": submitted_form})

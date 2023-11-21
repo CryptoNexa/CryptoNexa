@@ -65,8 +65,17 @@ def crypto_detail(request, slug):
     except Cryptocurrency.DoesNotExist:
         cryptocurrency = None
 
+    if request.session.get('currency') is None:
+        request.session['currency'] = "USD"
+        session_cur = "USD"
+    else:
+        session_cur = request.session.get('currency')
+
+    data = process_crypto_data(cryptocurrency, session_cur, many=False)
+
     context = {
-        "cryptocurrency": cryptocurrency
+        "cryptocurrency": data,
+        "session_cur": session_cur
     }
 
     return render(request, 'crypto/crypto_detail.html', context=context)

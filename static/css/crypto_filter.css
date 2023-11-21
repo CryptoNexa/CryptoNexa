@@ -1,11 +1,11 @@
 .currency-container {
     display: grid;
-    grid-template-columns: repeat(4, 1fr); /* Creates 4 equal-width columns */
-    gap: 20px; /* Adjust the gap between grid items as needed */
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
 }
 
 .currency-item {
-    /* Add styling for each grid item here */
+
     padding: 10px;
     text-align: center;
     font-size: 10px;
@@ -30,7 +30,7 @@
     text-align: left;
     vertical-align: middle;
     max-width: 1000px;
-    width: 750px;
+    width: 1000px;
     max-height: 100vh;
 }
 
@@ -44,14 +44,18 @@
     font-weight: bolder;
 }
 
-/* styles.css */
+.modal-body{
+    padding: 200px;
+}
+
+
 .custom-radio {
     display: flex;
-    /*align-items: center;*/
+
 }
 
 .custom-radio input[type="radio"] {
-    display: none; /* Hide the radio input */
+    display: none;
 }
 
 .custom-radio label {
@@ -62,21 +66,33 @@
 }
 
 .custom-radio input[type="radio"]:checked + label {
-    border-color: #007bff; /* Change the color to your preference */
+    border-color: #007bff;
 }
 
 
 .custom-input {
-    /* Define width and height as needed */
-    width: 200px;
     height: 30px;
-    /* Add other styles such as padding, border, etc. */
-    /* Example styles */
-    padding: 5px;
     border: 1px solid #ccc;
+
+    width: 200px;
+    padding: 8px;
+    border-radius: 4px;
+    margin-bottom: 10px;
 }
 
-.custom-input-radio {
-    /* Define width and height for radio buttons */
-    /* Adjust styles as needed */
+
+.price-range-field {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.price-range-field input[type="number"] {
+    width: 100px;
+    padding: 5px;
+}
+
+.range-separator {
+    font-weight: bold;
+    margin: 0 5px;
 }
