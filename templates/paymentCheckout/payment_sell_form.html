@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Payment Sell</title>
+</head>
+<body>
+    <h2>Name on the Order: {{ request.user.first_name }} {{ request.user.last_name }} <br>
+        Transaction ID: {{ tran_id }}</h2>
+    <center>
+        <form method="post">
+            {% csrf_token %}
+            <table>
+                {{ form.as_table }}
+            </table>
+            <input type="submit" value="Sell">
+        </form>
+    </center>
+</body>
+</html>
