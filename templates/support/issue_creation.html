@@ -44,34 +44,35 @@
                 <div class="form-group">
                     <label for="{{ form.issue_type.id_for_label }}">Issue Type:</label>
                     {{ form.issue_type }}
-                    {{ form.issue_type.errors | safe }}
+                    <span class="invalid-feedback">{{ form.issue_type.errors }}</span>
                 </div>
 
                 <div class="form-group">
                     <label for="{{ form.issue_title.id_for_label }}">Issue Title:</label>
                     {{ form.issue_title }}
-                    {{ form.issue_title.errors | safe }}
+                    <span class="invalid-feedback">{{ form.issue_title.errors }}</span>
                 </div>
 
                 <div class="form-group">
                     <label for="{{ form.issue_description.id_for_label }}">Issue Description:</label>
                     {{ form.issue_description }}
-                    {{ form.issue_description.errors | safe }}
+                    <span class="invalid-feedback">{{ form.issue_description.errors }}</span>
                 </div>
 
                 <div class="form-group">
                     <label for="{{ form.transaction_id.id_for_label }}">Transaction ID:</label>
                     {{ form.transaction_id }}
-                    {{ form.transaction_id.errors | safe }}
+                    <span class="transaction-id-info">If applicable, please select a transaction ID.</span>
+                    <span class="invalid-feedback">{{ form.transaction_id.errors }}</span>
                 </div>
 
                 <div class="form-group">
                     <label for="{{ form.files.id_for_label }}">Files:</label>
                     {{ form.files }}
-                    {{ form.files.errors | safe }}
+                    <span class="invalid-feedback">{{ form.files.errors }}</span>
                 </div>
 
-                <button type="submit" class="btn btn-outline-dark">Submit</button>
+                <button type="submit" class="btn btn-outline-dark">Create Ticket</button>
             </form>
         </div>
     </div>
@@ -91,7 +92,11 @@
 
             // If the mappedIssueType is defined, set it as the value; otherwise, set 'custom'
             const issueTypeField = document.getElementById('{{ form.issue_type.id_for_label }}');
-            issueTypeField.value = mappedIssueType || 'other';
+            issueTypeField.value = mappedIssueType || 'custom';
+
+            // Set the required attribute for the transaction ID field based on the selected issue type
+            const transactionIdField = document.getElementById('{{ form.transaction_id.id_for_label }}');
+            transactionIdField.required = ['buy_sell_orders', 'purchase', 'refunds'].includes(mappedIssueType);
 
             const issueDescriptionField = document.getElementById('{{ form.issue_description.id_for_label }}');
             issueDescriptionField.placeholder = `Describe your ${issueType} issue`;

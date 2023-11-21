@@ -1,6 +1,5 @@
 # forms.py
 from django import forms
-from multiupload.fields import MultiFileField
 
 from BuySell.models import Transaction
 from .models import SupportIssue
@@ -25,10 +24,3 @@ class SupportForm(forms.ModelForm):
             choices += [(transaction.id, transaction.id) for transaction in transactions]
 
         self.fields['transaction_id'].choices = choices
-    #
-    # def clean_files(self):
-    #     # Ensure files are cleaned properly
-    #     files = self.cleaned_data.get('files')
-    #     if files:
-    #         return files
-    #     return None
