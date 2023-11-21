@@ -1,25 +1,4 @@
-{#<!DOCTYPE HTML>#}
-{#<html>#}
-{#<body>#}
-{#<li>{{ user_object.first_name }}</li>#}
-{#<li>{{ user_object.last_name }}</li>#}
-{#<li>{{ user_object.email }}</li>#}
-{##}
-{#    {% for t in transaction_obj %}#}
-{#    <ul>#}
-{#        <li>{{ t.coin }}</li>#}
-{#        <li>{{ t.quantity }}</li>#}
-{#        <li>{{ t.currency }}</li>#}
-{#        <li>{{ t.total_spent }}</li>#}
-{#    </ul>#}
-{#    {% endfor %}#}
-{#<p>Total amount in wallet:</p>#}
-{#<li>{{ total }}</li>#}
-{#</body>#}
-{#<footer>#}
-{#    <a href="/">Back to Home Page</a>#}
-{#</footer>#}
-{#</html>#}
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -50,20 +29,23 @@
             <th>Coin</th>
             <th>Quantity</th>
             <th>Currency</th>
-            <th>Total Spent</th>
+            <th>Total Amount</th>
         </tr>
         {% for transaction in transaction_obj %}
         <tr>
             <td>{{ transaction.coin }}</td>
             <td>{{ transaction.quantity }}</td>
             <td>{{ transaction.currency }}</td>
-            <td>{{ transaction.total_spent }}</td>
+            <td>{{ transaction.total_spent }} ({{ transaction.type }})</td>
+{#            <td>{{ transaction.type }}</td>#}
         </tr>
         {% endfor %}
     </table>
 
-    <h3>Total Balance:</h3>
-    <p>{{ total }}</p>
+    <h3>Total Balance: {{ total }}</h3>
+
+    <h3>You invested: {{ buy }} </h3>
+    <h3>You gained: {{ sell }} </h3>
 
     <footer>
         <a href="/">Back to Home Page</a>
