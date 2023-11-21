@@ -9,7 +9,7 @@ from .models import SupportIssue
 class SupportForm(forms.ModelForm):
     class Meta:
         model = SupportIssue
-        fields = ['issue_title', 'issue_description', 'transaction_id', 'files']
+        fields = ['issue_type', 'issue_title', 'issue_description', 'transaction_id', 'files']
 
     files = forms.FileField(widget=forms.FileInput, required=False)
     # files = MultiFileField(min_num=0, max_num=10, max_file_size=1024*1024*5)

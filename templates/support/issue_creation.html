@@ -37,9 +37,15 @@
         <div id="supportForm" class="mt-4 border p-4 rounded">
             <form method="post" enctype="multipart/form-data" style="max-width: 400px">
                 {% csrf_token %}
-                <h2 class="mb-4">Issue</h2>
+                <h2 class="mb-4">Create Issue Ticket</h2>
 
                 {{ form.non_field_errors | safe }}
+
+                <div class="form-group">
+                    <label for="{{ form.issue_type.id_for_label }}">Issue Type:</label>
+                    {{ form.issue_type }}
+                    {{ form.issue_type.errors | safe }}
+                </div>
 
                 <div class="form-group">
                     <label for="{{ form.issue_title.id_for_label }}">Issue Title:</label>
@@ -73,6 +79,20 @@
     <script>
         function showSupportForm(issueType, card) {
             // Set the issue type in the form
+            // Map the clicked issueType to the corresponding value in ISSUE_TYPES
+            const mappedIssueType = {
+                'Currency Exchange': 'currency_exchange',
+                'Buy/Sell Orders': 'buy_sell_orders',
+                'Portfolio': 'portfolio',
+                'Purchase': 'purchase',
+                'Unauthorized Charge': 'unauthorized_charge',
+                'Refunds': 'refunds'
+            }[issueType];
+
+            // If the mappedIssueType is defined, set it as the value; otherwise, set 'custom'
+            const issueTypeField = document.getElementById('{{ form.issue_type.id_for_label }}');
+            issueTypeField.value = mappedIssueType || 'other';
+
             const issueDescriptionField = document.getElementById('{{ form.issue_description.id_for_label }}');
             issueDescriptionField.placeholder = `Describe your ${issueType} issue`;
             // Show the support form
