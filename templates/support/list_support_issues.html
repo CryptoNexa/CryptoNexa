@@ -1,0 +1,43 @@
+{% extends 'CryptoNexa/base.html' %}
+{% load static %}
+
+{% block head %}
+{% endblock %}
+
+{% block content %}
+    <div class="container my-4">
+        <h3>Your Support Issues</h3>
+        {% if user_issues %}
+            <table class="table">
+                <thead>
+                <tr>
+                    <th scope="col">Issue Title</th>
+                    <th scope="col">Status</th>
+                    <th scope="col">Description</th>
+                    <th scope="col">Transaction ID</th>
+                    <th scope="col">Files</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for issue in user_issues %}
+                    <tr>
+                        <td>{{ issue.issue_title }}</td>
+                        <td>{{ issue.get_status_display }}</td>
+                        <td>{{ issue.issue_description }}</td>
+                        <td>{{ issue.transaction_id.id }}</td>
+                        <td>
+                            {% if issue.files %}
+                                <a href="{{ issue.files.url }}" download>Download Files</a>
+                            {% else %}
+                                No files
+                            {% endif %}
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        {% else %}
+            <p>No support issues found.</p>
+        {% endif %}
+    </div>
+{% endblock %}

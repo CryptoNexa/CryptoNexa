@@ -11,7 +11,7 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.CreateModel(
-            name="Currency",
+            name="ContactMessage",
             fields=[
                 (
                     "id",
@@ -22,8 +22,9 @@ class Migration(migrations.Migration):
                         verbose_name="ID",
                     ),
                 ),
-                ("code", models.CharField(max_length=3)),
-                ("name", models.CharField(max_length=50)),
+                ("name", models.CharField(max_length=100)),
+                ("email", models.EmailField(max_length=254)),
+                ("message", models.TextField()),
             ],
         ),
     ]
