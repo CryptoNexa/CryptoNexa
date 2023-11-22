@@ -30,7 +30,7 @@ def payment_successful(request):
     transaction_id = request.session.get('transaction_id')
     user_object = User.objects.get(pk=user_id)
     transaction_obj = Transaction.objects.get(id=transaction_id)
-    transaction_obj.status = Transaction.STATUS_CHOICES[1]
+    transaction_obj.status = Transaction.STATUS_CHOICES[1][0]
     transaction_obj.save()
     user_payment = UserPayment.objects.create(user=user_object, payment_bool=True, transaction_id=transaction_obj)
     if 'transaction_id' in request.session:
@@ -42,7 +42,7 @@ def payment_cancelled(request):
     transaction_id = request.session.get('transaction_id')
     transaction_obj = Transaction.objects.get(id=transaction_id)
 
-    transaction_obj.status = Transaction.STATUS_CHOICES[2]
+    transaction_obj.status = Transaction.STATUS_CHOICES[2][0]
     transaction_obj.save()
     return render(request, 'paymentCheckout/payment_cancelled.html')
 
