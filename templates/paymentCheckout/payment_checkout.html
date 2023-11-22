@@ -1,0 +1,45 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="">
+<head>
+    <title>Buy cool new product</title>
+    <script src="https://js.stripe.com/v3/"></script>
+    {% load bootstrap5 %}
+    {% bootstrap_css %}
+    {% bootstrap_javascript %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/payment_checkout.css' %}">
+
+</head>
+<body style="background-color: whitesmoke">
+<div class="container">
+    <div class="center-div">
+        <div class="order-header">
+            <h3>Order Summary</h3>
+            <h6>Here's what you've ordered. If you're all good, proceed to pay and complete your transaction.</h6>
+        </div>
+        <div class="crypto-details">
+            <div class="textLeft">
+                <div class="title">You Get</div>
+                <div class="crypto-div">
+                    <div>~{{ user_transaction.quantity }} &nbsp {{ user_transaction.coin }}</div>
+                </div>
+            </div>
+            <div class="textLeft">
+                <div class="title">You Spent</div>
+                <div class="total-spent">
+                    <div>{{ user_transaction.total_spent }} &nbsp{{ user_transaction.currency }}</div>
+                    <div class="transaction-fee">{{ user_transaction.transaction_fee }} {{ user_transaction.currency }}
+                        fee included
+                    </div>
+                </div>
+            </div>
+        </div>
+        <form action="/create-checkout-session" method="POST">
+            {% csrf_token %}
+            <input type="hidden" name="user_transaction" value="{{ user_transaction.id }}">
+            <button type="submit" id="checkout-button" class="btn btn-outline-primary">Proceed to Pay</button>
+        </form>
+    </div>
+</div>
+</body>
+</html>

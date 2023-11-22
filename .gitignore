@@ -31,8 +31,6 @@ share/python-wheels/
 *.egg
 MANIFEST
 
-migrations/
-**/migrations/
 # PyInstaller
 #  Usually these files are written by a python script from a template
 #  before PyInstaller builds the exe, so as to inject date/other infos into it.
@@ -66,6 +64,7 @@ cover/
 *.log
 local_settings.py
 db.sqlite3
+media/user_photos/*
 
 db.sqlite3-journal
 

@@ -52,8 +52,10 @@
 
 .top-bar-right {
     display: flex;
-    width: 40%;
+    width: 58%;
+    font-size: 15px;
     align-items: center;
+    justify-content: flex-end;
 }
 
 .top-bar-right div {
@@ -69,10 +71,14 @@
     cursor: pointer;
 }
 
-.my-footer{
+.my-footer {
     position: relative;
     bottom: 0;
     width: 100%;
+}
+
+.top-bar-right span {
+    cursor: pointer;
 
 }
 
