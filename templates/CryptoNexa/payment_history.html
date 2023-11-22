@@ -1,8 +1,5 @@
 {% extends 'CryptoNexa/base.html' %}
 {% load static %}
-{% block head %}
-    <link rel="stylesheet" type="text/css" href="{% static 'css/payment_history.css' %}">
-{% endblock %}
 {% block content %}
     <div class="container">
         <table class="table table-striped">
@@ -19,7 +16,6 @@
                 <th>Notes</th>
                 <th>Date</th>
                 <th>Status</th>
-                <th>Payment ID</th>
             </tr>
             </thead>
             <tbody>
@@ -36,7 +32,6 @@
                     <td>{{ transaction.notes }}</td>
                     <td>{{ transaction.datetime }}</td>
                     <td>{{ transaction.status }}</td>
-                    <td>rsdtf</td>
                 </tr>
             {% endfor %}
             </tbody>
