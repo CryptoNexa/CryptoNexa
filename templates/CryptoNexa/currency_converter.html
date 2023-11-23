@@ -1,10 +1,38 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-
-</body>
-</html>
+{% extends 'CryptoNexa/base.html' %}
+{% load static %}
+{% block content %}
+    <div style="display: flex; align-items: center; justify-content: center; flex-direction: column; margin: 0 0 48px;">
+        <div>
+            <h1 style="font-weight: 600; font-size: 25px; margin-top: 24px; margin-bottom: 24px">Cryptocurrency
+                Converter Calculator</h1>
+        </div>
+        <div style="padding: 24px; margin: 20px auto; background: #F8FAFD; width: 50%">
+            <form method="post" action="{% url 'currency_converter' %}" style="display: flex; flex-direction: column;">
+                {% csrf_token %}
+                <div style="width: calc(50% - 25px);">
+                    <input type="text" name="amount" class="form-control" id="amountToConvert" placeholder="Enter Amount"
+                           style="width:100% ">
+                </div>
+                <div style="display: flex; justify-content: space-between">
+                    <select name="base_currency" class="form-select" aria-label="Base Currency" style="width: calc(50% - 25px);">
+                        <option selected disabled>Select Base Currency</option>
+                        <option value="BTC">Bitcoin</option>
+                        <option value="ETH">Ethereum</option>
+                    </select>
+                    <button type="submit" class="btn btn-primary">
+                        <img src="{% static 'svg/arrows.svg' %}" style="height: 20px; width: 20px" alt="Your Icon">
+                    </button>
+                    <select name="convert_currency" class="form-select" aria-label="Convert To" style="width: calc(50% - 25px);">
+                        <option selected disabled>Select Convert To Currency</option>
+                        <option value="USD">US Dollar</option>
+                        <option value="EUR">Euro</option>
+                    </select>
+                </div>
+            </form>
+        </div>
+        {% if result %}
+            <h2>Conversion Result:</h2>
+            <p>{{ result | safe }}</p>
+        {% endif %}
+    </div>
+{% endblock %}

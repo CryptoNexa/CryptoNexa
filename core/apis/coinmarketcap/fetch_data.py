@@ -1,8 +1,8 @@
+import requests
 from django.http import JsonResponse
 from requests import Request, Session
 from requests.exceptions import ConnectionError, Timeout, TooManyRedirects
 import json
-
 
 url = 'https://pro-api.coinmarketcap.com/v1/cryptocurrency/listings/latest'
 
@@ -42,3 +42,22 @@ def convert_usd_to_cad(quote, conversion_rate=0.7324):
     quote['CAD'] = cad_values
 
     return quote
+
+
+def convert_prices(amount, id, convert_id):
+    price_conversion_url = 'https://pro-api.coinmarketcap.com/v2/tools/price-conversion'
+
+    session = Session()
+    session.headers.update(headers)
+    try:
+        response = session.get(price_conversion_url, params={
+            'amount': amount,
+            'id': id,
+            'convert_id': convert_id
+        })
+        data = json.loads(response.text)
+        # print(data)
+    except (ConnectionError, Timeout, TooManyRedirects) as e:
+        print(e)
+
+    return data

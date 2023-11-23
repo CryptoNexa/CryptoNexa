@@ -13,7 +13,8 @@ urlpatterns = [
     path('logout/', csrf_exempt(views.user_logout), name='logout'),
     path('profile/<int:id>', csrf_exempt(views.user_profile), name='profile'),
     path('edit_profile/<int:id>', csrf_exempt(views.user_edit_profile), name='edit_profile'),
-    path('payment_history/',csrf_exempt(views.payment_history),name='payment_history')
+    path('payment_history/',csrf_exempt(views.payment_history),name='payment_history'),
+    path('currency_converter/',csrf_exempt(views.currency_converter), name='currency_converter')
 
     # Add other URL patterns as needed for your application
 ]
