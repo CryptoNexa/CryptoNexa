@@ -14,19 +14,13 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
-from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path, include
-from CryptoNexa import views, settings
+from support import views
+
+app_name = 'support'
 
 urlpatterns = [
-  path('admin/', admin.site.urls),
-  path('', views.index, name='index'),
-  path('', include('core.urls')),
-  path('', include('Newsletter.urls')),
-  path('', include('ContactUS.urls')),
-  path('currencyExchange/', include('currencyExchange.urls')),
-  path('', include('payments.urls')),
-  path('', include('BuySell.urls')),
-  path('', include('support.urls')),
-] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+    path('support/issue_creation/', views.issue_creation, name='issue_creation'),
+    path('support/list_issues/', views.list_issues, name='list_issues'),
+]
