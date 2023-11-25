@@ -13,7 +13,8 @@ from .forms import CustomUserForm
 from .models import Cryptocurrency, Quote
 from .forms import CustomUserForm, UserProfileForm
 from .models import User
-from BuySell.models import  Transaction
+from BuySell.models import Transaction
+
 
 def register(request):
     if request.method == 'POST':
@@ -75,20 +76,24 @@ def user_profile(request, id):
 #     return render(request, 'CryptoNexa/edit_profile.html', {'user': user})
 
 
-
 @login_required
 def user_edit_profile(request, id):
     user = User.objects.get(id=id)
     if request.method == 'POST':
         form = UserProfileForm(request.POST, instance=user)
         if form.is_valid():
+            if 'photo_id' in form.changed_data:
+                # Handle the new photo_id separately if it's changed
+                user.photo_id.delete(save=False)  # Delete the old photo
             form.save()
             return redirect('core:profile', id=user.id)
     else:
         form = UserProfileForm(
-            initial={'first_name': user.first_name, 'last_name': user.last_name, 'email': user.email})
+            initial={'first_name': user.first_name, 'last_name': user.last_name, 'email': user.email,
+                     'photo_id': user.photo_id})
 
     return render(request, 'CryptoNexa/edit_profile.html', {'form': form})
+
 
 def payment_history(request):
     transactions = Transaction.objects.filter(user=request.user)

@@ -1,8 +1,20 @@
+.edit-profile-form-container {
+    background: white;
+    width: 100%;
+    margin: 3% auto auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+}
+
 .form-group label {
     display: block;
     font-weight: bold;
     margin-bottom: 5px;
-    margin-top: 20px;
+    font-size: 16px;
+    margin-top: 10px;
 }
 
 .form-group input[type="email"],
@@ -11,7 +23,7 @@
     padding: 6px;
     margin-bottom: 10px;
     border: 1px solid #ccc;
-    border-radius: 5px;
+    border-radius: 10px;
 }
 
 .form-group ul li
@@ -22,16 +34,10 @@
     margin-top: -10px;
 }
 
-button[type="submit"] {
-    background-color: #000;
-    color: white;
-    padding: 8px 15px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-weight: bold;
-}
-
-button[type="submit"]:hover {
-    background-color: #000;
+.button {
+    width: 100%;
+    text-align: center;
+    margin-top: 10px;
+    border-radius: 10px;
+    font-size: 16px;
 }
