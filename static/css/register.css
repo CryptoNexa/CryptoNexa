@@ -1,16 +1,23 @@
 /* Style for the login form container */
+.form-container-parent {
+    background-image: url("../images/loginsignupbg.jpg");
+    background-size: cover;
+    height: 100%;
+    margin: 0;
+    /*filter: blur(5px);*/
+}
+
 .form-container {
-    max-width: 600px;
+    background: white;
     width: 500px;
-    margin: 0 auto;
-    padding: 20px;
-    background-color: #f4f4f4;
+    margin: 3% auto auto;
+    padding: 15px 10px 10px 10px;
     border: 1px solid #ccc;
-    border-radius: 5px;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
 .form-group label {
@@ -26,20 +33,11 @@
     padding: 6px;
     margin-bottom: 10px;
     border: 1px solid #ccc;
-    border-radius: 5px;
+    border-radius: 10px;
 }
 
-button[type="submit"] {
-    background-color: #000;
-    color: white;
-    padding: 8px 15px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-}
-
-button[type="submit"]:hover {
-    background-color: #000;
+.form-group input:focus {
+    border: 1px solid #ccc;
 }
 
 .login-link {
@@ -47,10 +45,57 @@ button[type="submit"]:hover {
     margin-top: 10px;
 }
 
-.errorlist
-{
+.errorlist {
     color: red;
     list-style: none;
     padding: 0;
     margin-top: -10px;
 }
+
+.register-form {
+    width: 100%;
+    padding: 5px 40px 5px 40px;
+}
+
+.button {
+    width: 100%;
+    text-align: center;
+    border-radius: 10px;
+}
+
+/*.input_type_file {*/
+/*    display: inline-block;*/
+/*    padding: 6px 12px;*/
+/*    cursor: pointer;*/
+/*    border: 1px solid #ccc;*/
+/*    background-color: #f8f8f8;*/
+/*    border-radius: 4px;*/
+/*}*/
+
+/*!* Style for the container *!*/
+/*.file-input-container {*/
+/*    position: relative;*/
+/*    overflow: hidden;*/
+/*    display: inline-block;*/
+/*}*/
+
+/*!* Style for the label that acts as a button *!*/
+/*.custom-file-upload {*/
+/*    display: inline-block;*/
+/*    padding: 10px 20px;*/
+/*    cursor: pointer;*/
+/*    border: 1px solid #ccc;*/
+/*    color: #000;*/
+/*    background-color: #fff;*/
+/*    border-radius: 5px;*/
+/*}*/
+
+/*!* Style for the actual file input *!*/
+/*input[type="file"] {*/
+/*    position: absolute;*/
+/*    top: 0;*/
+/*    left: 0;*/
+/*    font-size: 100px; !* Increase font size to hide default button in some browsers *!*/
+/*    opacity: 0;*/
+/*    cursor: pointer;*/
+/*}*/

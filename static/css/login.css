@@ -1,16 +1,14 @@
 /* Style for the login form container */
 .form-container {
-    max-width: 600px;
     width: 500px;
-    margin: 0 auto;
-    padding: 20px;
-    background-color: #f4f4f4;
+    margin: auto;
+    padding: 15px 10px 10px 10px;
     border: 1px solid #ccc;
-    border-radius: 5px;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
 /* Style for the form labels */
@@ -27,21 +25,13 @@
     padding: 6px;
     margin-bottom: 10px;
     border: 1px solid #ccc;
-    border-radius: 5px;
+    border-radius: 10px;
 }
 
-/* Style for the login button */
-button[type="submit"] {
-    background-color: #000;
-    color: white;
-    padding: 8px 15px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-}
-
-button[type="submit"]:hover {
-    background-color: #2d74cb;
+.button {
+    width: 100%;
+    text-align: center;
+    border-radius: 10px;
 }
 
 /* Style for the "Register" link */
@@ -50,10 +40,14 @@ button[type="submit"]:hover {
     margin-top: 10px;
 }
 
-.error-message
-{
+.error-message {
     color: red;
     list-style: none;
     padding: 0;
     /*margin-top: -20px;*/
+}
+
+.login-form {
+    width: 100%;
+    padding: 5px 40px 5px 40px;
 }

@@ -75,11 +75,11 @@
                     </ul>
                 </div>
             {% else %}
-                <a href="{% url 'core:login' %}" style="margin-right: 10px">
-                    <button type="button" class="btn btn-outline-dark">Log In</button>
+                <a href="{% url 'core:login' %}">
+                    <button type="button" class="btn btn-outline-primary">Log In</button>
                 </a>
                 <a href="{% url 'core:register' %}">
-                    <button type="button" class="btn btn-dark">Sign Up</button>
+                    <button type="button" class="btn btn-primary">Sign Up</button>
                 </a>
             {% endif %}
         </div>
