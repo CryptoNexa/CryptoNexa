@@ -79,3 +79,7 @@
     height: 600px;
     background-color: red;
 }
+
+.dropdown:focus{
+    outline: none;
+}
