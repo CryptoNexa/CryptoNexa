@@ -1,23 +1,36 @@
-/* Style for the login form container */
-.form-container-parent {
-    background-image: url("../images/loginsignupbg.jpg");
-    background-size: cover;
-    height: 100%;
+/*.form-container {*/
+/*    background: white;*/
+/*    width: 500px;*/
+/*    margin: 3% auto auto;*/
+/*    padding: 15px 10px 10px 10px;*/
+/*    border: 1px solid #ccc;*/
+/*    border-radius: 10px;*/
+/*    display: flex;*/
+/*    flex-direction: column;*/
+/*    justify-content: center;*/
+/*    align-items: center;*/
+/*}*/
+body {
     margin: 0;
-    /*filter: blur(5px);*/
+    padding: 0;
+    background: url('../images/cryptocurrencyBg.jpg') center center fixed;
+    background-size: cover;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .form-container {
-    background: white;
-    width: 500px;
-    margin: 3% auto auto;
-    padding: 15px 10px 10px 10px;
-    border: 1px solid #ccc;
+    background-color: rgba(255, 255, 255, 0.8); /* Adjust the alpha value to control the background opacity */
+    padding: 10px;
     border-radius: 10px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+    width: 500px;
+    /*text-align: center;*/
+}
+
+.register-form {
+    margin-top: 20px;
 }
 
 .form-group label {
