@@ -45,7 +45,8 @@ INSTALLED_APPS = [
     'CryptoNexa',
     'currencyExchange',
     'payments',
-    'BuySell'
+    'BuySell',
+    'support',
 ]
 # Application definition
 

@@ -13,7 +13,7 @@ from .forms import CustomUserForm, WatchlistForm
 from .models import Cryptocurrency, Quote, Watchlist
 from .forms import CustomUserForm, UserProfileForm
 from .models import User
-
+from BuySell.models import  Transaction
 
 def register(request):
     if request.method == 'POST':
@@ -89,7 +89,6 @@ def user_edit_profile(request, id):
 
     return render(request, 'CryptoNexa/edit_profile.html', {'form': form})
 
-
 @login_required
 def watchlist(request, watchlist_id=None):
     user_watchlists = Watchlist.objects.filter(user=request.user)
@@ -147,3 +146,9 @@ def edit_watchlist_name(request, watchlist_id):
             print(form.errors)
 
     return redirect('core:watchlist', watchlist_id=watchlist_id)
+
+def payment_history(request):
+    transactions = Transaction.objects.filter(user=request.user)
+    return render(request, 'CryptoNexa/payment_history.html', {
+        'transactions': transactions
+    })
