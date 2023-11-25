@@ -86,17 +86,18 @@
     </div>
 </nav>
 <div class="top-bar">
-    <div class="top-bar-left me-auto mb-2 mb-lg-0">
+    <div class="top-bar-left me-auto mb-2 mb-lg-0" style="width: 70%">
         <div class="top-bar-left-hero"><span><a href="{% url 'index' %}" class="text-decoration-none text-dark">CrytoNexa</a></span></div>
         <div><span>Cryptocurrencies</span></div>
         <div><span>Exchanges</span></div>
         <div><span>Community</span></div>
         <div><span>Products</span></div>
+        <div><span><a href ="{% url 'core:currency_converter' %}" class="text-decoration-none text-dark">Converter</a></span></div>
         <div><span>Learn</span></div>
         <div><span><a href ="news/" class="text-decoration-none text-dark">Newsletter</a></span></div>
         <div><span><a href ="{% url 'support:issue_creation' %}" class="text-decoration-none text-dark">Support</a></span></div>
     </div>
-    <div class="top-bar-right">
+    <div class="top-bar-right" style="width: 30%">
         <div><span>Portfolio</span></div>
     </div>
 </div>
