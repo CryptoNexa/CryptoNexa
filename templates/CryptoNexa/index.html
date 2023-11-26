@@ -1,6 +1,7 @@
 {% extends 'CryptoNexa/base.html' %}
 
 {% block content %}
+    {% include 'crypto/highlights.html' %}
     {% block cryptoListView %}
          {% include 'crypto/crypto_list_view.html' %}
     {% endblock %}
