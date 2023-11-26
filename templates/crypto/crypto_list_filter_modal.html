@@ -1,0 +1,50 @@
+{% extends 'CryptoNexa/index.html' %}
+{% load static %}
+
+{% block crypto_filter %}
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const myModal = new bootstrap.Modal(document.getElementById("crypto-filter-modal"), {
+            backdrop: 'static',
+            keyboard: false
+        });
+        myModal.show();
+
+        const modalBackdrop = document.querySelector('.modal-backdrop');
+        modalBackdrop.addEventListener('click', function(event) {
+            event.stopPropagation();
+        });
+    });
+</script>
+
+<div class="modal fade" id="crypto-filter-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title text-center" id="exampleModalLabel">Choose your filters</h5>
+            </div>
+            <div class="modal-body">
+
+                <form method="POST" action="{% url 'filter_crypto_data' %}">
+                    {% csrf_token %}
+                    {% if form.errors %}
+                        <div class="alert alert-danger" role="alert">
+                            <strong>Error!</strong> Please correct the following errors:
+                            <ul>
+                                {% for field in form %}
+                                    {% for error in field.errors %}
+                                        <li>{{ error }}</li>
+                                    {% endfor %}
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    {% endif %}
+                    {{ form.as_p }}
+
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

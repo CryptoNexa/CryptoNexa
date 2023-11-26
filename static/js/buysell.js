@@ -1,7 +1,6 @@
-
 window.addEventListener("DOMContentLoaded", function () {
-            var myModal = new bootstrap.Modal(document.getElementById("currencyModal"));
-            myModal.show();
+    var myModal = new bootstrap.Modal(document.getElementById("buysellModal"));
+    myModal.show();
 });
 // config = {
 //         enableTime: true,
@@ -15,7 +14,7 @@ window.addEventListener("DOMContentLoaded", function () {
 //     document.getElementById('datetime').click();
 // }
 
-function printing(){
+function printing() {
     var selectedGender = document.querySelector('input[id="coin"]');
     if (selectedGender) {
         console.log("Selected gender: " + selectedGender.value);
@@ -24,7 +23,7 @@ function printing(){
     }
 }
 
-function hideAlert(idh){
+function hideAlert(idh) {
     var alert = document.getElementById(idh);
     alert.style.display = "none";
 }
@@ -38,5 +37,5 @@ function total_spent_calc() {
     var totalSpent = (qty * price) + tran_fee;
 
     // Round off to 2 decimal points
-    tot_spt.value = totalSpent.toFixed(2);
+    tot_spt.value = totalSpent.toFixed(4);
 }

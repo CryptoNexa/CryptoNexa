@@ -1,8 +1,24 @@
 {% extends 'CryptoNexa/base.html' %}
 
 {% block content %}
-    {% block cryptoListView %}
-         {% include 'crypto/crypto_list_view.html' %}
-    {% endblock %}
+    {% if filters_provided %}
+        {% if crypto_count != 0 %}
+            {% block filtered_crypto_block %}
+                {% include 'crypto/filtered_crypto_data.html' %}
+            {% endblock %}
+        {% else %}
+            <br/>
+            <br/>
+            <br/>
+            <h2 class="text-center">No data available for the provided filters.</h2>
+            <br/>
+            <br/>
+            <br/>
+        {% endif %}
+    {% else %}
+        {% block cryptoListView %}
+            {% include 'crypto/crypto_list_view.html' %}
+        {% endblock %}
+    {% endif %}
     <p></p>
 {% endblock %}

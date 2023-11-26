@@ -1,67 +1,117 @@
 {% block cryptoListView %}
+    {% load static %}
+
+    <link href="{% static 'css/crypto_table.css' %}" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <div class="container">
-        <table class="table table-striped">
-            <thead>
-            <tr>
-                <th>#</th>
-                <th>Name</th>
-                <th>Price USD</th>
-                <th>1h%</th>
-                <th>24h%</th>
-                <th>MarketCap</th>
-                <th>Volume (24h)</th>
-            </tr>
-            </thead>
-            <tbody> {% for crypto in cryptos %}
+        <br/>
+        <a href="{% url 'filter_crypto_data' %}" id="openModal" class="button-link">
+            <button style="float: right; width: 7%; height: 25%;" type="button" id="filter-button"
+                    class="btn btn-outline-primary">Filter
+            </button>
+        </a>
+        {% if error_message %}
+            <h1>{{ error_message }}</h1>
+        {% else %}
+            <table class="table table-striped fixed-table">
+                <thead>
                 <tr>
-                    <td>{{ forloop.counter }}</td>
-                    <td><a href="{% url 'core:crypto_detail' crypto.slug %}">{{ crypto.name }}</a></td>
-                    <td>${{ crypto.quote.data.USD.price }}</td>
-                    <td class="{% if crypto.quote.data.USD.percent_change_1h < 0 %}text-danger{% elif crypto.quote.data.USD.percent_change_1h > 0 %}text-success{% else %}text-muted{% endif %}">
-                        {{ crypto.quote.data.USD.percent_change_1h }}
-                    </td>
-                    <td class="{% if crypto.quote.data.USD.percent_change_24h < 0 %}text-danger{% elif crypto.quote.data.USD.percent_change_24h > 0 %}text-success{% else %}text-muted{% endif %}">
-                        {{ crypto.quote.data.USD.percent_change_24h }}
-                    </td>
-                    <td>${{ crypto.quote.data.USD.market_cap }}</td>
-                    <td>${{ crypto.quote.data.USD.volume_24h }}</td>
+                    <th>#</th>
+                    <th>Name</th>
+                    <th><i class="currency-icon"></i> Price {{ session_cur }}</th>
+                    <th>1h%</th>
+                    <th>24h%</th>
+                    <th><i class="currency-icon"></i> MarketCap</th>
+                    <th><i class="currency-icon"></i> Volume (24h)</th>
                 </tr>
-            {% endfor %}
-            </tbody>
-        </table>
+                </thead>
+                <tbody id="crypto-table-body">
+                {% for crypto in cryptos %}
+                    <tr>
+                        <td>{{ forloop.counter }}</td>
+                        <td><a href="{% url 'core:crypto_detail' crypto.slug %}">{{ crypto.name }}</a></td>
+                        <td>
+                            <div id="price-{{ crypto.id }}"><i class="currency-icon"></i><span class="price-class"> {{ crypto.price }}</span></div>
+                        </td>
+                        <td id="change-1h-{{ crypto.id }}"
+                            class="{% if crypto.percent_change_1h < 0 %}text-danger{% elif crypto.percent_change_1h > 0 %}text-success{% else %}text-muted{% endif %}">
+                            {{ crypto.percent_change_1h }}
+                        </td>
+                        <td id="change-24h-{{ crypto.id }}"
+                            class="{% if crypto.percent_change_24h < 0 %}text-danger{% elif crypto.percent_change_24h > 0 %}text-success{% else %}text-muted{% endif %}">
+                            {{ crypto.percent_change_24h }}
+                        </td>
+                        <td id="market-cap-{{ crypto.id }}"><i class="currency-icon"></i><span class="price-class"> {{ crypto.market_cap }}</span></td>
+                        <td id="volume-24h-{{ crypto.id }}"><i class="currency-icon"></i><span class="price-class"> {{ crypto.volume_24h }}</span></td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        {% endif %}
     </div>
 
+    {% if not error_message and update_values %}
+        <script>
+            const currencyIcons = {
+                'USD': 'fas fa-dollar-sign',
+                'AUD': 'fas fa-dollar-sign',
+                'CAD': 'fas fa-dollar-sign',
+                'CNY': 'fas fa-yen-sign',
+                'EUR': 'fas fa-euro-sign',
+                'INR': 'fas fa-rupee-sign',
+                'JPY': 'fas fa-yen-sign',
+                'KWD': 'fas fa-money-bill-wave',
+                'NZD': 'fas fa-dollar-sign',
+                'PKR': 'fas fa-rupee-sign',
+                'RUB': 'fas fa-ruble-sign',
+                'AED': 'fas fa-money-bill-wave'
+            };
 
-<script>
-    function updateCryptoData() {
-        $.ajax({
-            url: "{% url 'core:get_updated_crypto_data' %}",
-            method: 'GET',
-            dataType: 'json',
-            success: function (data) {
-                // Iterate through the updated data and update the page elements
-                $.each(data, function (index, crypto) {
-                    // Find the table row corresponding to the cryptocurrency by its name or another unique identifier
-                    var tableRow = $("tr:contains('" + crypto.fields.name + "')");
-
-                    if (tableRow.length > 0) {
-                        // Update the relevant fields with the new data
-                        tableRow.find(".price").text('$' + crypto.fields.quote.data.USD.price);
-                        tableRow.find(".percent_change_1h").text(crypto.fields.quote.data.USD.percent_change_1h + '%');
-                        tableRow.find(".percent_change_24h").text(crypto.fields.quote.data.USD.percent_change_24h + '%');
-                        tableRow.find(".market_cap").text('$' + crypto.fields.quote.data.USD.market_cap);
-                        tableRow.find(".volume_24h").text('$' + crypto.fields.quote.data.USD.volume_24h);
-                    }
-                });
-            },
-            error: function (error) {
-                console.error('Error updating cryptocurrency data: ', error);
+            function updateCurrencyIcon(currencyCode) {
+                const iconClass = currencyIcons[currencyCode];
+                if (iconClass) {
+                    const currencyElements = document.querySelectorAll('.currency-icon');
+                    currencyElements.forEach(element => {
+                        element.className = `currency-icon ${iconClass}`;
+                    });
+                }
             }
-        });
-    }
 
-    // Make the initial update and set up the periodic update every 5 seconds
-    updateCryptoData();
-    setInterval(updateCryptoData, 5000);  // 5000 milliseconds = 5 seconds
-</script>
+            updateCurrencyIcon('{{ session_cur }}');
+
+            function updateCryptoData() {
+                fetch('{% url 'core:get_updated_crypto_data' fetch_live_data=0 %}')
+                    .then(response => response.json())
+                    .then(data => {
+                        data.forEach(crypto => {
+                            const cryptoId = crypto.id;
+                            document.getElementById(`price-${cryptoId}`).querySelector('.price-class').innerText = ` ${crypto.price}`;
+                            document.getElementById(`change-1h-${cryptoId}`).innerText = crypto.percent_change_1h;
+                            document.getElementById(`change-24h-${cryptoId}`).innerText = crypto.percent_change_24h;
+                            document.getElementById(`market-cap-${cryptoId}`).querySelector('.price-class').innerText = ` ${crypto.market_cap}`;
+                            document.getElementById(`volume-24h-${cryptoId}`).querySelector('.price-class').innerText = ` ${crypto.volume_24h}`;
+                            document.getElementById(`change-1h-${cryptoId}`).classList = calculateChangeClass(crypto.percent_change_1h);
+                            document.getElementById(`change-24h-${cryptoId}`).classList = calculateChangeClass(crypto.percent_change_24h);
+                        });
+                    })
+                    .catch(error => {
+                        console.error('Error fetching crypto data:', error);
+                    });
+            }
+
+            function calculateChangeClass(change) {
+                if (change < 0) {
+                    return 'text-danger';
+                } else if (change > 0) {
+                    return 'text-success';
+                } else {
+                    return 'text-muted';
+                }
+            }
+
+            setInterval(updateCryptoData, 2000);
+            updateCryptoData();
+
+        </script>
+    {% endif %}
 {% endblock %}

@@ -20,6 +20,7 @@ from django.urls import path, include
 from CryptoNexa import views, settings
 
 urlpatterns = [
+
   path('admin/', admin.site.urls),
   path('', views.index, name='index'),
   path('', include('core.urls')),
@@ -29,4 +30,6 @@ urlpatterns = [
   path('', include('payments.urls')),
   path('', include('BuySell.urls')),
   path('', include('support.urls')),
+  path('filter_crypto_data', views.filter_crypto_data, name='filter_crypto_data'),
+
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
