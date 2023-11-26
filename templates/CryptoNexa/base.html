@@ -10,6 +10,7 @@
     {% csrf_token %}
     <link rel="stylesheet" type="text/css" href="{% static 'css/base.css' %}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link href="{% static 'css/crypto_detail.css' %}" rel="stylesheet">
     <script src="{% static 'js/buysell.js' %}"></script>
     {% block head %}
     {% endblock %}
@@ -87,7 +88,8 @@
 </nav>
 <div class="top-bar">
     <div class="top-bar-left me-auto mb-2 mb-lg-0">
-        <div class="top-bar-left-hero"><span><a href="{% url 'index' %}" class="text-decoration-none text-dark">CrytoNexa</a></span></div>
+        <div class="top-bar-left-hero"><span><a href="{% url 'index' %}" class="text-decoration-none text-dark">CrytoNexa</a></span>
+        </div>
         <div><span>Cryptocurrencies</span></div>
         <div><span>Exchanges</span></div>
         <div><span>Community</span></div>
@@ -107,6 +109,8 @@
     {% block body %}
     {% endblock %}
     {% block currencypopup %}
+    {% endblock %}
+    {% block crypto_filter %}
     {% endblock %}
 </div>
 
@@ -130,10 +134,10 @@
                     <div class="col-md-3">
                         <h6><a href="Contact_us/">Contact Us</a></h6>
                     </div>
-                    </div>
                 </div>
             </div>
         </div>
+    </div>
     </div>
 </footer>
 

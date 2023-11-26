@@ -1,48 +1,99 @@
 {% extends 'CryptoNexa/base.html' %}
+{% load static %}
 
 {% block content %}
-
+    <link href="{% static 'css/crypto_detail.css' %}" rel="stylesheet">
     <div class="container mt-5">
-        <h1 class="text-center">Cryptocurrency Details</h1>
 
         {% if cryptocurrency %}
+            <div class="row mt-4">
 
-            <div class="card mt-3">
-                <div class="card-body">
-                    <h2>{{ cryptocurrency.name }}</h2>
-                    <p><strong>Symbol:</strong> {{ cryptocurrency.symbol }}</p>
-                    <p><strong>Number of Market Pairs:</strong> {{ cryptocurrency.num_market_pairs }}</p>
-                    <p><strong>Circulating Supply:</strong> {{ cryptocurrency.circulating_supply }}</p>
-                    <p><strong>Total Supply:</strong> {{ cryptocurrency.total_supply }}</p>
-                    <p><strong>Max Supply:</strong> {{ cryptocurrency.max_supply }}</p>
-                    <p><strong>Infinite Supply:</strong> {{ cryptocurrency.infinite_supply }}</p>
-                    <p><strong>Last Updated:</strong> {{ cryptocurrency.last_updated }}</p>
-                    <p><strong>Date Added:</strong> {{ cryptocurrency.date_added }}</p>
-                    <p><strong>Currency Symbol:</strong> {{ cryptocurrency.quote.currency_symbol }}</p>
-
-                    <div class="mt-4">
-                        <h4>Quote Information</h4>
-                        <ul>
-                            <li><strong>Price(USD):</strong> ${{ cryptocurrency.quote.data.USD.price }} | <strong>Price(CAD):</strong> ${{ cryptocurrency.quote.data.CAD.price }}</li>
-                            <li><strong>24h Volume:</strong> ${{ cryptocurrency.quote.data.USD.volume_24h }}</li>
-                            <li><strong>24h Volume Change:</strong> {{ cryptocurrency.quote.data.USD.volume_change_24h }}%</li>
-                            <li><strong>1h Change:</strong> {{ cryptocurrency.quote.data.USD.percent_change_1h }}%</li>
-                            <li><strong>24h Change:</strong> {{ cryptocurrency.quote.data.USD.percent_change_24h }}%</li>
-                            <li><strong>7d Change:</strong> {{ cryptocurrency.quote.data.USD.percent_change_7d }}%</li>
-                            <li><strong>30d Change:</strong> {{ cryptocurrency.quote.data.USD.percent_change_30d }}%</li>
-                            <li><strong>60d Change:</strong> {{ cryptocurrency.quote.data.USD.percent_change_60d }}%</li>
-                            <li><strong>90d Change:</strong> {{ cryptocurrency.quote.data.USD.percent_change_90d }}%</li>
-                            <li><strong>Market Cap:</strong> ${{ cryptocurrency.quote.data.USD.market_cap }}</li>
-                            <li><strong>Market Cap Dominance:</strong> {{ cryptocurrency.quote.data.USD.market_cap_dominance }}%</li>
-                            <li><strong>Fully Diluted Market Cap:</strong> ${{ cryptocurrency.quote.data.USD.fully_diluted_market_cap }}</li>
-                            <li><strong>Total Value Locked (TVL):</strong> N/A</li>
-                            <li><strong>Last Updated:</strong> {{ cryptocurrency.quote.data.USD.last_updated }}</li>
-                        </ul>
+                <div class="col-lg-4">
+                    <div class="card">
+                        <div class="card-body" style="display: flex; flex-direction: column;">
+                            <div style="display: flex; align-items: center;">
+                                <img src="{{ cryptocurrency.logo }}" alt="{{ cryptocurrency.name }} Logo"
+                                     style="width: 50px; height: 50px; margin-right: 10px;"/>
+                                <h2>{{ cryptocurrency.name }}</h2>
+                            </div>
+                            <br />
+                            <p>{{ cryptocurrency.description }}</p>
+                            <a href="{{ cryptocurrency.website }}" target="_blank">Visit Website</a>
+                        </div>
                     </div>
-                    <a href="{% url 'buysell' slug=cryptocurrency.slug name=cryptocurrency.name cad_price=cryptocurrency.quote.data.CAD.price usd_price=cryptocurrency.quote.data.USD.price %}" id="openModal" class="btn btn-success">Buy</a>
-{#                    <a href="{% url 'buy_crypto' %}" class="btn btn-success">Buy</a> #}
-
+                    <div class="mt-3">
+                        <a href="{% url 'buysell' slug=cryptocurrency.slug name=cryptocurrency.name price=cryptocurrency.price %}"
+                           class="btn btn-add-transaction">Add Transaction</a>
+                    </div>
                 </div>
+
+                <div class="col-lg-8">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="card mb-3">
+                                <div class="card-body">
+                                    <h4>Quote Information</h4>
+                                    <table class="table table-striped">
+                                        <tbody>
+                                        <tr>
+                                            <td><strong>Price {{ session_cur }}:</strong></td>
+                                            <td><i class="currency-icon"> {{ cryptocurrency.price }}</i></td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>24h Volume:</strong></td>
+                                            <td><i class="currency-icon"> {{ cryptocurrency.volume_24h }}</i></td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>24h Volume Change:</strong></td>
+                                            <td>{{ cryptocurrency.volume_change_24h }}%</td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>1h Change:</strong></td>
+                                            <td>{{ cryptocurrency.percent_change_1h }}%</td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>24h Change:</strong></td>
+                                            <td>{{ cryptocurrency.percent_change_24h }}%</td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h4>Details</h4>
+                                    <table class="table table-striped">
+                                        <tbody>
+                                        <tr>
+                                            <td><strong>Number of Market Pairs:</strong></td>
+                                            <td>{{ cryptocurrency.num_market_pairs }}</td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>Circulating Supply:</strong></td>
+                                            <td>{{ cryptocurrency.circulating_supply }}</td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>Total Supply:</strong></td>
+                                            <td>{{ cryptocurrency.total_supply }}</td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>Max Supply:</strong></td>
+                                            <td>{{ cryptocurrency.max_supply }}</td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>Infinite Supply:</strong></td>
+                                            <td>{{ cryptocurrency.infinite_supply }}</td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
             </div>
 
         {% else %}
@@ -52,4 +103,33 @@
         {% endif %}
     </div>
 
+    <script>
+        // Your existing JavaScript for updating currency icons can remain unchanged
+        const currencyIcons = {
+            'USD': 'fas fa-dollar-sign',
+            'AUD': 'fas fa-dollar-sign',
+            'CAD': 'fas fa-dollar-sign',
+            'CNY': 'fas fa-yen-sign',
+            'EUR': 'fas fa-euro-sign',
+            'INR': 'fas fa-rupee-sign',
+            'JPY': 'fas fa-yen-sign',
+            'KWD': 'fas fa-money-bill-wave',
+            'NZD': 'fas fa-dollar-sign',
+            'PKR': 'fas fa-rupee-sign',
+            'RUB': 'fas fa-ruble-sign',
+            'AED': 'fas fa-money-bill-wave'
+        };
+
+        function updateCurrencyIcon(currencyCode) {
+            const iconClass = currencyIcons[currencyCode];
+            if (iconClass) {
+                const currencyElements = document.querySelectorAll('.currency-icon');
+                currencyElements.forEach(element => {
+                    element.className = `currency-icon ${iconClass}`;
+                });
+            }
+        }
+
+        updateCurrencyIcon('{{ session_cur }}');
+    </script>
 {% endblock %}

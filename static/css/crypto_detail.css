@@ -1,0 +1,23 @@
+/* crypto_detail.css */
+
+.btn-add-transaction {
+    background-color: #28a745;
+    color: #fff;
+    padding: 10px 20px;
+    margin-bottom: 20px;
+    border: none;
+    border-radius: 5px;
+    text-decoration: none;
+    transition: background-color 0.3s ease-in-out;
+}
+
+.btn-add-transaction:hover {
+    background-color: #218838;
+    color: #fff;
+}
+
+
+.card-body {
+    display: flex;
+    flex-direction: column;
+}

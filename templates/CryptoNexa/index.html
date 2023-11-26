@@ -1,8 +1,14 @@
 {% extends 'CryptoNexa/base.html' %}
 
 {% block content %}
+    {% if filters_provided %}
+        {% block filtered_crypto_block %}
+            {% include 'crypto/filtered_crypto_data.html' %}
+        {% endblock %}
+    {% else %}
     {% block cryptoListView %}
          {% include 'crypto/crypto_list_view.html' %}
     {% endblock %}
+    {% endif %}
     <p></p>
 {% endblock %}

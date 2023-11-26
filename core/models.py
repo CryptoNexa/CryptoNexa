@@ -72,6 +72,7 @@ class Cryptocurrency(models.Model):
     last_updated = models.DateTimeField(null=True)
     date_added = models.DateTimeField(null=True)
     quote = models.ForeignKey(Quote, on_delete=models.CASCADE)
+    price = models.DecimalField(max_digits=18, decimal_places=2, default=0.0)
 
     def __str__(self):
         return self.name

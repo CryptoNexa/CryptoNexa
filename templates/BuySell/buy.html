@@ -22,7 +22,7 @@
                         <button  type="button" class="btn-close" ></button>
                     </a>
                 </div>
-                <form class="modal-body" method="post" action="{% url 'buysell' slug=slug name=name cad_price=cad_price usd_price=usd_price %}">
+                <form class="modal-body" method="post" action="{% url 'buysell' slug=slug name=name price=price %}">
                     <!-- Your modal content goes here -->
                     <center>
                         <div class="display-6">
@@ -47,7 +47,7 @@
                               <div class="row align-items-center marginLeft">
                                   <div class="col-md-11">
                                          {{ field.label }}
-                                        <input  step="0.01" onchange="total_spent_calc()" value="{{ field.value }}" type="number" class="form-control" id="{{ field.id_for_label }}" name="{{ field.name }}" >
+                                        <input  step="0.0001" onchange="total_spent_calc()" value="{{ field.value }}" type="number" class="form-control" id="{{ field.id_for_label }}" name="{{ field.name }}" >
                                   </div>
                               </div>
                           {% elif field.label == "Price" %}
@@ -103,11 +103,7 @@
                                             <div class="col-md-11">
                                                     <div class="input-group">
                                                         <span class="input-group-text display-6">
-                                                            {% if currency == "CAD" %}
-                                                                $CAD
-                                                            {% else %}
-                                                                $
-                                                            {% endif %}
+                                                            <div class="input-group-addon currency-icon"></div>
                                                         </span>
                                                         <input step="0.0001" type="number" class="form-control" name="{{ field.name }}" id="{{ field.id_for_label }}" style="font-size: 30px; font-weight: bold;" value="{{ field.value }}" >
                                                     </div>

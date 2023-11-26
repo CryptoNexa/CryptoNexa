@@ -5,16 +5,15 @@ from django.contrib.auth.decorators import login_required
 
 
 @login_required(login_url='/login/')
-def buysell(request, slug, name, cad_price, usd_price):
-    current_currency = request.session['currency']
+def buysell(request, slug, name, price):
 
-    price = 1235.3564
+    current_currency = request.session['currency']
 
     initial_data = {'coin': name}
     initial_data['price'] = round(float(price), 4)
-
     # Adding 3% Transaction Fee
     initial_data['transaction_fee'] = round(float(initial_data['price'])*0.03, 4)
+
 
     if request.method == 'POST':
         form = TransactionForm(request.POST)
@@ -33,8 +32,7 @@ def buysell(request, slug, name, cad_price, usd_price):
         form = TransactionForm(initial=initial_data)
 
     return render(request, 'BuySell/buy.html',
-                  {'form': form, 'currency': current_currency, 'slug': slug, 'name': name, 'cad_price': cad_price,
-                   'usd_price': usd_price})
+                  {'form': form, 'currency': current_currency, 'slug': slug, 'name': name, 'price': price})
 
 
 def currency(request):
