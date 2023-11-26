@@ -2,7 +2,7 @@ from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
 
 from support.models import SupportIssue
-from .models import User, Cryptocurrency, Quote
+from .models import User, Cryptocurrency, Quote, FooterList
 from .forms import CustomUserForm, CustomUserChangeForm
 from BuySell.models import Transaction
 from payments.models import UserPaymentBuy
@@ -42,3 +42,4 @@ admin.site.register(Transaction)
 admin.site.register(SupportIssue)
 admin.site.register(UserPaymentSell)
 admin.site.register(UserPaymentBuy)
+admin.site.register(FooterList)

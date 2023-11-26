@@ -20,11 +20,15 @@
         box-sizing: border-box;
     }
 
+    a {
+        text-decoration: none;
+        color: inherit;
+    }
+
     li:hover {
         color: #0C5ED7;
         cursor: pointer;
     }
-
 
 </style>
 {% block footer %}
@@ -48,109 +52,132 @@
                     <p>&copy;2023 CryptoNexa. All rights reserved</p>
                 </div>
                 <div class="col-md-6">
-                    <div class="row text-md-right">
-                        <div class="col-md-3">
-                            <h6>Products</h6>
-                            <div>
-                                <ul class="footer-ul">
-                                    <li>
-                                        ChatGPT Plugin
-                                    </li>
-                                    <li>
-                                        Blockchain Explorer
-                                    </li>
-                                    <li>
-                                        Crypto API
-                                    </li>
-                                    <li>
-                                        Crypto Indices
-                                    </li>
-                                    <li>
-                                        Doodles
-                                    </li>
-                                    <li>
-                                        Sitemap
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="col-md-3">
-                            <h6>Company</h6>
-                            <div>
-                                <ul class="footer-ul">
-                                    <li>
-                                        About Us
-                                    </li>
-                                    <li>
-                                        Terms of Use
-                                    </li>
-                                    <li>
-                                        Privacy Policy
-                                    </li>
-                                    <li>
-                                        Cookie Preferences
-                                    </li>
-                                    <li>
-                                        Community Rules
-                                    </li>
-                                    <li>
-                                        Disclaimer
-                                    </li>
-                                    <li>
-                                        Methodology
-                                    </li>
-                                    <li>
-                                        Careers
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="col-md-3">
-                            <h6>Support</h6>
-                            <div>
-                                <ul class="footer-ul">
-                                    <li>
-                                        Request Form
-                                    </li>
-                                    <li>
-                                        <a href="{% url 'contact-us' %}" style="text-decoration: none; color: inherit">Contact
-                                            Us</a>
-                                    </li>
-                                    <li>
-                                        FAQ
-                                    </li>
-                                    <li>
-                                        Glossary
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="col-md-3">
-                            <h6>Socials</h6>
-                            <div>
-                                <ul class="footer-ul">
-                                    <li>
-                                        Twitter
-                                    </li>
-                                    <li>
-                                        Community
-                                    </li>
-                                    <li>
-                                        Telegram
-                                    </li>
-                                    <li>
-                                        Instagram
-                                    </li>
-                                    <li>
-                                        Facebook
-                                    </li>
-                                    <li>
-                                        LinkedIn
-                                    </li>
+                    <div class="row text-md-right footer-column">
+                        {% if footer_items %}
+                            {% regroup footer_items by category as category_list %}
 
-                                </ul>
+                            {% for category in category_list %}
+                                <div class="col-md-3">
+                                    <h6>{{ category.grouper }}</h6>
+                                    <ul class="footer-ul">
+                                        {% for item in category.list %}
+                                            {% if item.link %}
+                                                <li><a href="
+                                                        {% url item.link %}">{{ item.name }}</a>
+                                                </li>
+                                            {% else %}
+                                                <li>{{ item.name }}</li>
+                                            {% endif %}
+                                        {% endfor %}
+                                    </ul>
+                                </div>
+                            {% endfor %}
+                        {% else %}
+
+                            <div class="col-md-3">
+                                <h6>Products</h6>
+                                <div>
+                                    <ul class="footer-ul">
+                                        <li>
+                                            ChatGPT Plugin
+                                        </li>
+                                        <li>
+                                            Blockchain Explorer
+                                        </li>
+                                        <li>
+                                            Crypto API
+                                        </li>
+                                        <li>
+                                            Crypto Indices
+                                        </li>
+                                        <li>
+                                            Doodles
+                                        </li>
+                                        <li>
+                                            Sitemap
+                                        </li>
+                                    </ul>
+                                </div>
                             </div>
-                        </div>
+                            <div class="col-md-3">
+                                <h6>Company</h6>
+                                <div>
+                                    <ul class="footer-ul">
+                                        <li>
+                                            About Us
+                                        </li>
+                                        <li>
+                                            Terms of Use
+                                        </li>
+                                        <li>
+                                            Privacy Policy
+                                        </li>
+                                        <li>
+                                            Cookie Preferences
+                                        </li>
+                                        <li>
+                                            Community Rules
+                                        </li>
+                                        <li>
+                                            Disclaimer
+                                        </li>
+                                        <li>
+                                            Methodology
+                                        </li>
+                                        <li>
+                                            Careers
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <h6>Support</h6>
+                                <div>
+                                    <ul class="footer-ul">
+                                        <li>
+                                            Request Form
+                                        </li>
+                                        <li>
+                                            <a href="{% url 'contact-us' %}"
+                                               style="text-decoration: none; color: inherit">Contact
+                                                Us</a>
+                                        </li>
+                                        <li>
+                                            FAQ
+                                        </li>
+                                        <li>
+                                            Glossary
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <h6>Socials</h6>
+                                <div>
+                                    <ul class="footer-ul">
+                                        <li>
+                                            Twitter
+                                        </li>
+                                        <li>
+                                            Community
+                                        </li>
+                                        <li>
+                                            Telegram
+                                        </li>
+                                        <li>
+                                            Instagram
+                                        </li>
+                                        <li>
+                                            Facebook
+                                        </li>
+                                        <li>
+                                            LinkedIn
+                                        </li>
+
+                                    </ul>
+                                </div>
+                            </div>
+                        {% endif %}
                     </div>
                 </div>
             </div>

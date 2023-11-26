@@ -114,6 +114,8 @@
     {% block currencypopup %}
     {% endblock %}
 </div>
-{% include 'CryptoNexa/footer.html' %}
+{% if footer_items %}
+    {% include 'CryptoNexa/footer.html' with footer_items=footer_items %}
+{% endif %}
 </body>
 </html>

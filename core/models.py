@@ -75,3 +75,10 @@ class Cryptocurrency(models.Model):
 
     def __str__(self):
         return self.name
+
+class FooterList(models.Model):
+    category = models.CharField(max_length=50)
+    name = models.CharField(max_length=100)
+    link = models.TextField(max_length=512, null=True, blank=True)
+    def __str__(self):
+        return f"{self.category} - {self.name} - {self.link}"

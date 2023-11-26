@@ -1,7 +1,7 @@
 from django.core.exceptions import ObjectDoesNotExist
 from django.shortcuts import render
 from core.apis.coinmarketcap.fetch_data import fetch_data, convert_usd_to_cad
-from core.models import Cryptocurrency, Quote
+from core.models import Cryptocurrency, Quote, FooterList
 
 from core.models import User
 
@@ -35,6 +35,8 @@ def index(request):
         }
 
     context['cryptos'] = cryptos
+    footer_items = FooterList.objects.all()
+    context['footer_items'] = footer_items
 
     return render(request, 'CryptoNexa/index.html', context=context)
 
