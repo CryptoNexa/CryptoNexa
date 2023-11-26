@@ -15,6 +15,18 @@ from core.apis.coinmarketcap.dummy_data.data_aud import data_aud
 from core.apis.coinmarketcap.dummy_data.data_nzd import data_nzd
 from core.apis.coinmarketcap.dummy_data.data_aed import data_aed
 from core.apis.coinmarketcap.dummy_data.data_cny import data_cny
+from core.apis.coinmarketcap.dummy_data.data_v2.data_aed_2 import data_aed_2
+from core.apis.coinmarketcap.dummy_data.data_v2.data_aud_2 import data_aud_2
+from core.apis.coinmarketcap.dummy_data.data_v2.data_cad_2 import data_cad_2
+from core.apis.coinmarketcap.dummy_data.data_v2.data_cny_2 import data_cny_2
+from core.apis.coinmarketcap.dummy_data.data_v2.data_eur_2 import data_eur_2
+from core.apis.coinmarketcap.dummy_data.data_v2.data_inr_2 import data_inr_2
+from core.apis.coinmarketcap.dummy_data.data_v2.data_jpy_2 import data_jpy_2
+from core.apis.coinmarketcap.dummy_data.data_v2.data_kwd_2 import data_kwd_2
+from core.apis.coinmarketcap.dummy_data.data_v2.data_nzd_2 import data_nzd_2
+from core.apis.coinmarketcap.dummy_data.data_v2.data_pkr_2 import data_pkr_2
+from core.apis.coinmarketcap.dummy_data.data_v2.data_rub_2 import data_rub_2
+from core.apis.coinmarketcap.dummy_data.data_v2.data_usd_2 import data_usd_2
 
 url = 'https://pro-api.coinmarketcap.com/v1/cryptocurrency/listings/latest'
 
@@ -81,3 +93,54 @@ def get_dummy_data(currency):
         return data_rub
     elif currency == "AED":
         return data_aed
+
+
+def get_dummy_data_2(currency):
+    if currency == "USD":
+        return data_usd_2
+    elif currency == "AUD":
+        return data_aud_2
+    elif currency == "CAD":
+        return data_cad_2
+    elif currency == "CNY":
+        return data_cny_2
+    elif currency == "EUR":
+        return data_eur_2
+    elif currency == "INR":
+        return data_inr_2
+    elif currency == "JPY":
+        return data_jpy_2
+    elif currency == "KWD":
+        return data_kwd_2
+    elif currency == "NZD":
+        return data_nzd_2
+    elif currency == "PKR":
+        return data_pkr_2
+    elif currency == "RUB":
+        return data_rub_2
+    elif currency == "AED":
+        return data_aed_2
+
+
+def fetch_crypto_meta_data(symbol):
+    url = 'https://pro-api.coinmarketcap.com/v2/cryptocurrency/info'
+
+    headers = {
+        'Accepts': 'application/json',
+        'X-CMC_PRO_API_KEY': 'dd538bfb-5c46-4f03-836d-08a33c7c5e51',
+    }
+
+    session = Session()
+    session.headers.update(headers)
+
+    parameters = {
+        'symbol': symbol
+    }
+
+    try:
+        print("Fetching Meta Data")
+        response = session.get(url, params=parameters)
+        data = json.loads(response.text)
+        return data
+    except (ConnectionError, Timeout, TooManyRedirects) as e:
+        print(e)

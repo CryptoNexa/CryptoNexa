@@ -49,7 +49,7 @@ def update_crypto_details(crypto_data, session_cur, filters=None):
         filtered_crypto = Cryptocurrency.objects.all()
 
         if filters.get('name') is not None and filters.get('name') != "":
-            filtered_crypto = filtered_crypto.filter(slug=filters.get('name').lower())
+            filtered_crypto = filtered_crypto.filter(slug__contains=filters.get('name').lower())
 
         if filters.get('num_market_pairs') is not None:
             filtered_crypto = filtered_crypto.filter(slug=filters.get('num_market_pairs'))
@@ -139,6 +139,7 @@ def filter_crypto_data(request):
         context['update_values'] = False
         context['cryptos'] = cryptos
         context['filters_provided'] = True
+        context['session_cur'] = session_cur
         return render(request, 'CryptoNexa/index.html', context=context)
 
     else:

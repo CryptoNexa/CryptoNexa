@@ -1,6 +1,8 @@
 from django.core.exceptions import ObjectDoesNotExist
 
+from core.apis.coinmarketcap.fetch_data import fetch_crypto_meta_data
 from core.models import Cryptocurrency, Quote
+
 
 def keep_two_chars_after_dot(input_string):
     dot_index = input_string.find('.')
@@ -30,7 +32,7 @@ def process_crypto_data(objs, currency, many):
                 processed_data['slug'] = current_obj.slug
                 data_list.append(processed_data)
             except Exception as e:
-                del(processed_data['id'])
+                del (processed_data['id'])
         return data_list
     else:
         processed_data = {}
@@ -42,6 +44,18 @@ def process_crypto_data(objs, currency, many):
         processed_data['percent_change_24h'] = objs.quote.data.get(currency).get('percent_change_24h')
         processed_data['market_cap'] = objs.quote.data.get(currency).get('market_cap')
         processed_data['volume_24h'] = objs.quote.data.get(currency).get('volume_24h')
+        processed_data['volume_change_24h'] = objs.quote.data.get(currency).get('volume_change_24h')
+
+        processed_data['num_market_pairs'] = objs.num_market_pairs
+        processed_data['circulating_supply'] = objs.circulating_supply
+        processed_data['total_supply'] = objs.total_supply
+        processed_data['max_supply'] = objs.max_supply
+        processed_data['infinite_supply'] = objs.infinite_supply
+
+        meta_data = fetch_crypto_meta_data(objs.symbol)
+        processed_data['logo'] = meta_data.get('data').get(objs.symbol)[0].get('logo')
+        processed_data['description'] = meta_data.get('data').get(objs.symbol)[0].get('description')
+        processed_data['website'] = meta_data.get('data').get((objs.symbol))[0].get('urls').get('website')[0]
 
         """Meta data for Backend"""
         processed_data['currency'] = currency
@@ -50,7 +64,6 @@ def process_crypto_data(objs, currency, many):
 
 
 def update_crypto_details(crypto_data, session_cur, filters=None):
-    print(filters)
     if filters:
         filtered_quote = Quote.objects.none()
         filtered_crypto = Cryptocurrency.objects.none()

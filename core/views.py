@@ -8,7 +8,7 @@ from django.shortcuts import render
 from django.contrib.auth import login, authenticate, logout
 from django.shortcuts import render, redirect
 from CryptoNexa.views import update_crypto_details
-from .apis.coinmarketcap.fetch_data import fetch_data, get_dummy_data
+from .apis.coinmarketcap.fetch_data import fetch_data, get_dummy_data, get_dummy_data_2
 from .apis.helper_functions import process_crypto_data
 from .forms import CustomUserForm
 from .models import Cryptocurrency, Quote
@@ -41,6 +41,11 @@ def user_login(request):
 
 
 def get_updated_crypto_data(request, fetch_live_data):
+    switch = request.session.get('switch')
+    if switch is None:
+        request.session['switch'] = 0
+        switch = 0
+
     if request.session.get('currency') is None:
         request.session['currency'] = "USD"
         session_cur = "USD"
@@ -50,7 +55,13 @@ def get_updated_crypto_data(request, fetch_live_data):
     if fetch_live_data:
         fetched_data_from_api_session_cur = fetch_data(session_cur)
     else:
-        fetched_data_from_api_session_cur = get_dummy_data(session_cur)
+        if int(switch) == 0:
+            request.session['switch'] = 1
+
+            fetched_data_from_api_session_cur = get_dummy_data_2(session_cur)
+        else:
+            request.session['switch'] = 0
+            fetched_data_from_api_session_cur = get_dummy_data(session_cur)
 
     crypto_data = fetched_data_from_api_session_cur.get('data')
     crypto_to_send = update_crypto_details(crypto_data, session_cur)
