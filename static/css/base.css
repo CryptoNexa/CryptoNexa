@@ -71,8 +71,15 @@
     cursor: pointer;
 }
 
+.my-footer {
+    position: relative;
+    bottom: 0;
+    width: 100%;
+}
+
 .top-bar-right span {
     cursor: pointer;
+
 }
 
 .footer-container {
@@ -82,4 +89,17 @@
 
 .dropdown:focus{
     outline: none;
+}
+.footer-ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+.footer-ul li {
+    line-height: 35px;
+    position: relative;
+    color: #0D1421;
+    font-size: 15px;
+    box-sizing: border-box;
 }

@@ -7,6 +7,9 @@ from CryptoNexa.forms import CryptoFilterForm
 from core.apis.helper_functions import process_crypto_data, keep_two_chars_after_dot
 from core.apis.coinmarketcap.fetch_data import fetch_data, get_dummy_data
 from core.models import Cryptocurrency, Quote
+from django.shortcuts import render
+from core.apis.coinmarketcap.fetch_data import fetch_data, convert_usd_to_cad
+from core.models import Cryptocurrency, Quote, FooterList
 
 from core.models import User
 
@@ -41,6 +44,9 @@ def index(request):
     context['cryptos'] = cryptos
     context['update_values'] = True
     context['filters_provided'] = False
+    footer_items = FooterList.objects.all()
+    context['footer_items'] = footer_items
+
     return render(request, 'CryptoNexa/index.html', context=context)
 
 

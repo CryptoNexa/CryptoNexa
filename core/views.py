@@ -14,6 +14,14 @@ from .apis.helper_functions import process_crypto_data
 from .models import Cryptocurrency, Watchlist
 from .forms import CustomUserForm, UserProfileForm, WatchlistForm
 from .models import User
+from core.apis.coinmarketcap.fetch_data import convert_prices, read_currency_json
+
+from django.contrib.auth import login, logout
+from django.shortcuts import render, redirect
+from CryptoNexa.views import update_crypto_details
+from .apis.coinmarketcap.fetch_data import fetch_data
+from .forms import CurrencyConverterForm, CustomUserForm, UserProfileForm
+from .models import Cryptocurrency, User
 from BuySell.models import Transaction
 
 
@@ -102,6 +110,11 @@ def user_logout(request):
 def user_profile(request, id):
     user = User.objects.get(id=id)
     return render(request, 'CryptoNexa/profile.html', {'user': user})
+
+
+# def user_edit_profile(request, id):
+#     user = User.objects.get(id=id)
+#     return render(request, 'CryptoNexa/edit_profile.html', {'user': user})
 
 
 @login_required
@@ -213,3 +226,38 @@ def payment_history(request):
     return render(request, 'CryptoNexa/payment_history.html', {
         'transactions': transactions
     })
+
+
+def currency_converter(request):
+    resulted_price = 0
+    has_error = False
+    error_msg = ""
+    currency_data = read_currency_json()
+
+    if request.method == 'POST':
+        form = CurrencyConverterForm(request.POST)
+        if form.is_valid():
+            amount = form.cleaned_data['amount']
+            base_currency = form.cleaned_data['base_currency']
+            convert_currency = form.cleaned_data['convert_currency']
+            from_id = currency_data.get(base_currency, {}).get('ConvertID')
+            to_id = currency_data.get(convert_currency, {}).get('ConvertID')
+            if from_id and to_id:
+                result = convert_prices(amount, from_id, to_id)
+                if result["data"]:
+                    resulted_price = result["data"]["quote"][str(to_id)]["price"]
+                else:
+                    has_error = True
+                    error_msg = result["status"]["error_message"]
+    else:
+        form = CurrencyConverterForm()
+
+    form_data = {
+        'amount': request.POST.get('amount', form['amount'].value() or 1),
+        'base_currency': request.POST.get('base_currency', form['base_currency'].value()),
+        'convert_currency': request.POST.get('convert_currency', form['convert_currency'].value())
+    }
+
+    return render(request, "CryptoNexa/currency_converter.html",
+                  {'form': form, 'resulted_price': resulted_price, 'currency_data': currency_data,
+                   'form_data': form_data, 'error_msg': error_msg, 'hasError': has_error})

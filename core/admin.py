@@ -2,11 +2,12 @@ from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
 
 from support.models import SupportIssue
-from .models import User, Cryptocurrency, Quote, Watchlist
+from .models import User, Cryptocurrency, Quote, Watchlist, FooterList
 from .forms import CustomUserForm, CustomUserChangeForm
 from BuySell.models import Transaction
 from payments.models import UserPaymentBuy
 from payments.models import UserPaymentSell
+
 
 class CustomUserAdmin(UserAdmin):
     list_display = ('email', 'first_name', 'last_name', 'is_active', 'is_staff', 'date_joined')
@@ -42,3 +43,4 @@ admin.site.register(Watchlist)
 admin.site.register(SupportIssue)
 admin.site.register(UserPaymentSell)
 admin.site.register(UserPaymentBuy)
+admin.site.register(FooterList)

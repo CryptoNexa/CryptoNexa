@@ -1,8 +1,8 @@
+import requests
 from django.http import JsonResponse
 from requests import Request, Session
 from requests.exceptions import ConnectionError, Timeout, TooManyRedirects
 import json
-
 from core.apis.coinmarketcap.dummy_data.data_usd import data_usd
 from core.apis.coinmarketcap.dummy_data.data_cad import data_cad
 from core.apis.coinmarketcap.dummy_data.data_jpy import data_jpy
@@ -27,6 +27,7 @@ from core.apis.coinmarketcap.dummy_data.data_v2.data_nzd_2 import data_nzd_2
 from core.apis.coinmarketcap.dummy_data.data_v2.data_pkr_2 import data_pkr_2
 from core.apis.coinmarketcap.dummy_data.data_v2.data_rub_2 import data_rub_2
 from core.apis.coinmarketcap.dummy_data.data_v2.data_usd_2 import data_usd_2
+import os
 
 url = 'https://pro-api.coinmarketcap.com/v1/cryptocurrency/listings/latest'
 
@@ -144,3 +145,30 @@ def fetch_crypto_meta_data(symbol):
         return data
     except (ConnectionError, Timeout, TooManyRedirects) as e:
         print(e)
+
+
+def read_currency_json():
+    current_dir = os.path.dirname(os.path.realpath(__file__))
+    json_file_path = os.path.join(current_dir, 'currency_id.json')
+    with open(json_file_path, 'r') as file:
+        currency_data = json.load(file)
+    return currency_data
+
+
+def convert_prices(amount, from_id, to_id):
+    price_conversion_url = 'https://pro-api.coinmarketcap.com/v2/tools/price-conversion'
+
+    session = Session()
+    session.headers.update(headers)
+    try:
+        response = session.get(price_conversion_url, params={
+            'amount': amount,
+            'id': from_id,
+            'convert_id': to_id
+        })
+        data = json.loads(response.text)
+        # print(data)
+    except (ConnectionError, Timeout, TooManyRedirects) as e:
+        print(e)
+
+    return data

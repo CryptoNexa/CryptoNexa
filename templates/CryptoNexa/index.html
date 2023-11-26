@@ -1,6 +1,8 @@
 {% extends 'CryptoNexa/base.html' %}
 
 {% block content %}
+    {% include 'crypto/highlights.html' %}
+
     {% if filters_provided %}
         {% if crypto_count != 0 %}
             {% block filtered_crypto_block %}

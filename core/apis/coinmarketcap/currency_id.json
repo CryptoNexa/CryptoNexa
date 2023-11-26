@@ -1,0 +1,426 @@
+{
+  "Ethereum": {
+    "Currency_Code": "ETH",
+    "ConvertID": 1027
+  },
+  "Dogecoin": {
+    "Currency_Code": "DOGE",
+    "ConvertID": 74
+  },
+  "Tether USDt": {
+    "Currency_Code": "USDT",
+    "ConvertID": 825
+  },
+  "BNB": {
+    "Currency_Code": "BNB",
+    "ConvertID": 1839
+  },
+  "XRP": {
+    "Currency_Code": "XRP",
+    "ConvertID": 52
+  },
+  "USDC": {
+    "Currency_Code": "USDC",
+    "ConvertID": 3408
+  },
+  "Solana": {
+    "Currency_Code": "SOL",
+    "ConvertID": 5426
+  },
+  "Cardano": {
+    "Currency_Code": "ADA",
+    "ConvertID": 2010
+  },
+  "TRON": {
+    "Currency_Code": "TRX",
+    "ConvertID": 1958
+  },
+  "Silver Troy Ounce": {
+    "Currency_Code": "XAG",
+    "ConvertID": 3574
+  },
+  "Gold Troy Ounce": {
+    "Currency_Code": "XAU",
+    "ConvertID": 3575
+  },
+  "Platinum Ounce": {
+    "Currency_Code": "XPT",
+    "ConvertID": 3577
+  },
+  "Palladium Ounce": {
+    "Currency_Code": "XPD",
+    "ConvertID": 3576
+  },
+  "United States Dollar": {
+    "Currency_Code": "USD",
+    "ConvertID": 2781
+  },
+  "Albanian Lek": {
+    "Currency_Code": "ALL",
+    "ConvertID": 3526
+  },
+  "Algerian Dinar": {
+    "Currency_Code": "DZD",
+    "ConvertID": 3537
+  },
+  "Argentine Peso": {
+    "Currency_Code": "ARS",
+    "ConvertID": 2821
+  },
+  "Armenian Dram": {
+    "Currency_Code": "AMD",
+    "ConvertID": 3527
+  },
+  "Australian Dollar": {
+    "Currency_Code": "AUD",
+    "ConvertID": 2782
+  },
+  "Azerbaijani Manat ": {
+    "Currency_Code": "AZN",
+    "ConvertID": 3528
+  },
+  "Bahraini Dinar": {
+    "Currency_Code": "BHD",
+    "ConvertID": 3531
+  },
+  "Bangladeshi Taka": {
+    "Currency_Code": "BDT",
+    "ConvertID": 3530
+  },
+  "Belarusian Ruble": {
+    "Currency_Code": "BYN",
+    "ConvertID": 3533
+  },
+  "Bermudan Dollar": {
+    "Currency_Code": "BMD",
+    "ConvertID": 3532
+  },
+  "Bolivian Boliviano": {
+    "Currency_Code": "BOB",
+    "ConvertID": 2832
+  },
+  "Bosnia-Herzegovina Convertible Mark": {
+    "Currency_Code": "BAM",
+    "ConvertID": 3529
+  },
+  "Brazilian Real": {
+    "Currency_Code": "BRL",
+    "ConvertID": 2783
+  },
+  "Bulgarian Lev": {
+    "Currency_Code": "BGN",
+    "ConvertID": 2814
+  },
+  "Cambodian Riel": {
+    "Currency_Code": "KHR",
+    "ConvertID": 3549
+  },
+  "Canadian Dollar": {
+    "Currency_Code": "CAD",
+    "ConvertID": 2784
+  },
+  "Chilean Peso": {
+    "Currency_Code": "CLP",
+    "ConvertID": 2786
+  },
+  "Chinese Yuan": {
+    "Currency_Code": "CNY",
+    "ConvertID": 2787
+  },
+  "Colombian Peso": {
+    "Currency_Code": "COP",
+    "ConvertID": 2820
+  },
+  "Costa Rican Colón": {
+    "Currency_Code": "CRC",
+    "ConvertID": 3534
+  },
+  "Croatian Kuna": {
+    "Currency_Code": "HRK",
+    "ConvertID": 2815
+  },
+  "Cuban Peso": {
+    "Currency_Code": "CUP",
+    "ConvertID": 3535
+  },
+  "Czech Koruna": {
+    "Currency_Code": "CZK",
+    "ConvertID": 2788
+  },
+  "Danish Krone": {
+    "Currency_Code": "DKK",
+    "ConvertID": 2789
+  },
+  "Dominican Peso": {
+    "Currency_Code": "DOP",
+    "ConvertID": 3536
+  },
+  "Egyptian Pound": {
+    "Currency_Code": "EGP",
+    "ConvertID": 3538
+  },
+  "Euro": {
+    "Currency_Code": "EUR",
+    "ConvertID": 2790
+  },
+  "Georgian Lari": {
+    "Currency_Code": "GEL",
+    "ConvertID": 3539
+  },
+  "Ghanaian Cedi": {
+    "Currency_Code": "GHS",
+    "ConvertID": 3540
+  },
+  "Guatemalan Quetzal": {
+    "Currency_Code": "GTQ",
+    "ConvertID": 3541
+  },
+  "Honduran Lempira": {
+    "Currency_Code": "HNL",
+    "ConvertID": 3542
+  },
+  "Hong Kong Dollar": {
+    "Currency_Code": "HKD",
+    "ConvertID": 2792
+  },
+  "Hungarian Forint": {
+    "Currency_Code": "HUF",
+    "ConvertID": 2793
+  },
+  "Icelandic Króna": {
+    "Currency_Code": "ISK",
+    "ConvertID": 2818
+  },
+  "Indian Rupee": {
+    "Currency_Code": "INR",
+    "ConvertID": 2796
+  },
+  "Indonesian Rupiah": {
+    "Currency_Code": "IDR",
+    "ConvertID": 2794
+  },
+  "Iranian Rial": {
+    "Currency_Code": "IRR",
+    "ConvertID": 3544
+  },
+  "Iraqi Dinar": {
+    "Currency_Code": "IQD",
+    "ConvertID": 3543
+  },
+  "Israeli New Shekel": {
+    "Currency_Code": "ILS",
+    "ConvertID": 2795
+  },
+  "Jamaican Dollar": {
+    "Currency_Code": "JMD",
+    "ConvertID": 3545
+  },
+  "Japanese Yen": {
+    "Currency_Code": "JPY",
+    "ConvertID": 2797
+  },
+  "Jordanian Dinar": {
+    "Currency_Code": "JOD",
+    "ConvertID": 3546
+  },
+  "Kazakhstani Tenge": {
+    "Currency_Code": "KZT",
+    "ConvertID": 3551
+  },
+  "Kenyan Shilling": {
+    "Currency_Code": "KES",
+    "ConvertID": 3547
+  },
+  "Kuwaiti Dinar": {
+    "Currency_Code": "KWD",
+    "ConvertID": 3550
+  },
+  "Kyrgystani Som": {
+    "Currency_Code": "KGS",
+    "ConvertID": 3548
+  },
+  "Lebanese Pound": {
+    "Currency_Code": "LBP",
+    "ConvertID": 3552
+  },
+  "Macedonian Denar": {
+    "Currency_Code": "MKD",
+    "ConvertID": 3556
+  },
+  "Malaysian Ringgit": {
+    "Currency_Code": "MYR",
+    "ConvertID": 2800
+  },
+  "Mauritian Rupee": {
+    "Currency_Code": "MUR",
+    "ConvertID": 2816
+  },
+  "Mexican Peso": {
+    "Currency_Code": "MXN",
+    "ConvertID": 2799
+  },
+  "Moldovan Leu": {
+    "Currency_Code": "MDL",
+    "ConvertID": 3555
+  },
+  "Mongolian Tugrik": {
+    "Currency_Code": "MNT",
+    "ConvertID": 3558
+  },
+  "Moroccan Dirham": {
+    "Currency_Code": "MAD",
+    "ConvertID": 3554
+  },
+  "Myanma Kyat": {
+    "Currency_Code": "MMK",
+    "ConvertID": 3557
+  },
+  "Namibian Dollar": {
+    "Currency_Code": "NAD",
+    "ConvertID": 3559
+  },
+  "Nepalese Rupee": {
+    "Currency_Code": "NPR",
+    "ConvertID": 3561
+  },
+  "New Taiwan Dollar": {
+    "Currency_Code": "TWD",
+    "ConvertID": 2811
+  },
+  "New Zealand Dollar": {
+    "Currency_Code": "NZD",
+    "ConvertID": 2802
+  },
+  "Nicaraguan Córdoba": {
+    "Currency_Code": "NIO",
+    "ConvertID": 3560
+  },
+  "Nigerian Naira": {
+    "Currency_Code": "NGN",
+    "ConvertID": 2819
+  },
+  "Norwegian Krone": {
+    "Currency_Code": "NOK",
+    "ConvertID": 2801
+  },
+  "Omani Rial": {
+    "Currency_Code": "OMR",
+    "ConvertID": 3562
+  },
+  "Pakistani Rupee": {
+    "Currency_Code": "PKR",
+    "ConvertID": 2804
+  },
+  "Panamanian Balboa": {
+    "Currency_Code": "PAB",
+    "ConvertID": 3563
+  },
+  "Peruvian Sol": {
+    "Currency_Code": "PEN",
+    "ConvertID": 2822
+  },
+  "Philippine Peso": {
+    "Currency_Code": "PHP",
+    "ConvertID": 2803
+  },
+  "Polish Złoty": {
+    "Currency_Code": "PLN",
+    "ConvertID": 2805
+  },
+  "Pound Sterling": {
+    "Currency_Code": "GBP",
+    "ConvertID": 2791
+  },
+  "Qatari Rial": {
+    "Currency_Code": "QAR",
+    "ConvertID": 3564
+  },
+  "Romanian Leu": {
+    "Currency_Code": "RON",
+    "ConvertID": 2817
+  },
+  "Russian Ruble": {
+    "Currency_Code": "RUB",
+    "ConvertID": 2806
+  },
+  "Saudi Riyal": {
+    "Currency_Code": "SAR",
+    "ConvertID": 3566
+  },
+  "Serbian Dinar": {
+    "Currency_Code": "RSD",
+    "ConvertID": 3565
+  },
+  "Singapore Dollar": {
+    "Currency_Code": "SGD",
+    "ConvertID": 2808
+  },
+  "South African Rand": {
+    "Currency_Code": "ZAR",
+    "ConvertID": 2812
+  },
+  "South Korean Won": {
+    "Currency_Code": "KRW",
+    "ConvertID": 2798
+  },
+  "South Sudanese Pound": {
+    "Currency_Code": "SSP",
+    "ConvertID": 3567
+  },
+  "Sovereign Bolivar": {
+    "Currency_Code": "VES",
+    "ConvertID": 3573
+  },
+  "Sri Lankan Rupee": {
+    "Currency_Code": "LKR",
+    "ConvertID": 3553
+  },
+  "Swedish Krona": {
+    "Currency_Code": "SEK",
+    "ConvertID": 2807
+  },
+  "Swiss Franc": {
+    "Currency_Code": "CHF",
+    "ConvertID": 2785
+  },
+  "Thai Baht": {
+    "Currency_Code": "THB",
+    "ConvertID": 2809
+  },
+  "Trinidad and Tobago Dollar": {
+    "Currency_Code": "TTD",
+    "ConvertID": 3569
+  },
+  "Tunisian Dinar": {
+    "Currency_Code": "TND",
+    "ConvertID": 3568
+  },
+  "Turkish Lira": {
+    "Currency_Code": "TRY",
+    "ConvertID": 2810
+  },
+  "Ugandan Shilling": {
+    "Currency_Code": "UGX",
+    "ConvertID": 3570
+  },
+  "Ukrainian Hryvnia": {
+    "Currency_Code": "UAH",
+    "ConvertID": 2824
+  },
+  "United Arab Emirates Dirham": {
+    "Currency_Code": "AED",
+    "ConvertID": 2813
+  },
+  "Uruguayan Peso": {
+    "Currency_Code": "UYU",
+    "ConvertID": 3571
+  },
+  "Uzbekistan Som": {
+    "Currency_Code": "UZS",
+    "ConvertID": 3572
+  },
+  "Vietnamese Dong": {
+    "Currency_Code": "VND",
+    "ConvertID": 2823
+  }
+}

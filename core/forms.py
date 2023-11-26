@@ -39,3 +39,11 @@ class WatchlistForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.fields['name'].required = False
+        model = User  # Use the User model from Django's auth module
+        fields = ['first_name', 'last_name', 'email']
+
+
+class CurrencyConverterForm(forms.Form):
+    amount = forms.DecimalField(label='Amount', min_value=1e-8, max_value=1000000000000, initial=1)
+    base_currency = forms.CharField(label='Base Currency', max_length=100)
+    convert_currency = forms.CharField(label='Convert To', max_length=100)
