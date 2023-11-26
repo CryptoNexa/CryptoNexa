@@ -41,6 +41,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     is_staff = models.BooleanField(default=True)
     date_joined = models.DateTimeField(auto_now_add=True)
     photo_id = models.ImageField(upload_to='user_photos/', blank=True, null=True)
+    cover_photo = models.ImageField(upload_to='cover_photos/', blank=True, null=True)
 
     objects = CustomUserManager()
 
