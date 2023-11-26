@@ -2,5 +2,22 @@
 
 {% block content %}
     <h1>Successfully Subscribed!</h1>
-    <a href ="/">Go to Home Page</a>
+{#    <a href ="/">Go to Home Page</a>#}
+    <style>
+     .explore-btn {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #2ecc71;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .explore-btn:hover {
+            background-color: #27ae60;
+        }
+    </style>
+     <button class="explore-btn" onclick="window.location.href = '/'">Home</button>
 {% endblock %}

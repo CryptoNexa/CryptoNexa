@@ -1,0 +1,36 @@
+/* custom-styles.css */
+
+body {
+    background-color: #fff;
+    color: #000;
+}
+.header {
+    background-color: #000;
+    color: #fff;
+    padding: 20px;
+    margin-bottom: 20px;
+}
+.contact-form {
+    border: 1px solid #000;
+    padding: 20px;
+    margin-bottom: 20px;
+}
+.contact-form label {
+    font-weight: bold;
+}
+.contact-form input[type="text"],
+.contact-form input[type="email"],
+.contact-form textarea {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 10px;
+}
+.contact-form button {
+    background-color: #000;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+}
+
+
