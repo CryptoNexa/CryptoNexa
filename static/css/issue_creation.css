@@ -39,6 +39,10 @@
     border-radius: 10px;
 }
 
+.form-group textarea{
+    height: 150px;
+}
+
 .form-group input:focus {
     border: 1px solid #ccc;
 }

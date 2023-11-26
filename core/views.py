@@ -1,8 +1,8 @@
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import AuthenticationForm
 from django.core import serializers
-from django.http import JsonResponse
-from django.shortcuts import render
+from django.http import JsonResponse, HttpResponseBadRequest
+from django.shortcuts import render, get_object_or_404
 
 # Create your views here.
 from django.contrib.auth import login, authenticate, logout
@@ -78,15 +78,18 @@ def user_profile(request, id):
 
 @login_required
 def user_edit_profile(request, id):
-    user = User.objects.get(id=id)
+    user = get_object_or_404(User, id=id)
+
     if request.method == 'POST':
-        form = UserProfileForm(request.POST, instance=user)
+        form = UserProfileForm(request.POST, request.FILES, instance=user)
+
         if form.is_valid():
-            if 'photo_id' in form.changed_data:
-                # Handle the new photo_id separately if it's changed
-                user.photo_id.delete(save=False)  # Delete the old photo
+            # Save the form data
             form.save()
-            return redirect('core:profile', id=user.id)
+
+            return redirect('index')
+        else:
+            return HttpResponseBadRequest("Invalid form submission. Please check the form data.")
     else:
         form = UserProfileForm(
             initial={'first_name': user.first_name, 'last_name': user.last_name, 'email': user.email,

@@ -51,7 +51,7 @@
                              src="{% static 'images/profile.jpg' %}" alt="Profile image">
                     </button>
                     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="profileDropdown">
-                        <a href="{% url 'core:profile' user.id %}" style="text-decoration: none; color: #333">
+                        <a href="{% url 'core:edit_profile' user.id %}" style="text-decoration: none; color: #333">
                             <li style="padding: 10px">
                                 <div class="d-flex align-items-center">
                                     <img src="{% static 'images/profile.jpg' %}" alt="User Profile Image"
