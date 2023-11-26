@@ -44,25 +44,19 @@
         <form method="POST">
             {% csrf_token %}
         <div class="container-sell">
-            <table>
                 {% for field in form %}
                     {% if field.name == "amount" %}
-                        <tr>
                         <div class="form-floating mb-2">
                         <input class="form-control" name="amount" id="id_amount" value="{{ field.value }}" readonly>
                             <label for="id_amount">{{ field.label }}</label>
                         </div>
-                        </tr>
                      {% else %}
-                        <tr>
                             <div class="form-floating mb-2">
                                 {{ field }}
                                 <label for="{{ field.id_for_label }}">{{ field.label }}</label>
                             </div>
-                        </tr>
                     {% endif %}
                 {% endfor %}
-            </table>
         </div>
             <input type="submit" id="checkout-button" class="btn btn-dark" value="Sell">
         </form>
