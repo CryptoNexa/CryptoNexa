@@ -20,4 +20,4 @@ class UserPaymentSell(models.Model):
     account_number = models.CharField(max_length=30)
     transit_number = models.CharField(max_length=9, blank=True)  # Canada
     routing_number = models.CharField(max_length=9, blank=True)  # USA
-    amount = models.DecimalField(max_digits=10, decimal_places=2)
+    amount = models.DecimalField(max_digits=10, decimal_places=4)

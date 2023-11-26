@@ -8,11 +8,13 @@ from django.contrib.auth.decorators import login_required
 def buysell(request, slug, name, cad_price, usd_price):
     current_currency = request.session['currency']
 
+    price = 1235.3564
+
     initial_data = {'coin': name}
-    if current_currency == 'CAD':
-        initial_data['price'] = round(float(cad_price), 2)
-    elif current_currency == 'USD':
-        initial_data['price'] = round(float(usd_price), 2)
+    initial_data['price'] = round(float(price), 4)
+
+    # Adding 3% Transaction Fee
+    initial_data['transaction_fee'] = round(float(initial_data['price'])*0.03, 4)
 
     if request.method == 'POST':
         form = TransactionForm(request.POST)

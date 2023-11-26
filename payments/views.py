@@ -17,7 +17,7 @@ import stripe
 stripe.api_key = settings.STRIPE_PRIVATE_KEY
 
 
-@login_required(login_url='login')
+@login_required(login_url='/login/')
 def payment_checkout(request, transaction_id):
     user_transaction = get_object_or_404(Transaction, id=transaction_id)
     if user_transaction.type == "buy":
@@ -34,7 +34,7 @@ def payment_checkout(request, transaction_id):
         }
         return redirect("payment_sell", tran_id=transaction_id)
 
-
+@login_required(login_url='/login/')
 def payment_successful(request):
     user_id = request.user.id
     transaction_id = request.session.get('transaction_id')
@@ -55,7 +55,7 @@ def payment_successful(request):
     }
     return render(request, 'paymentCheckout/payment_successful.html', context)
 
-
+@login_required(login_url='/login/')
 def payment_cancelled(request):
     user_id = request.user.id
     transaction_id = request.session.get('transaction_id')
@@ -109,10 +109,10 @@ class CreateCheckoutSession(View):
             return str(e)
         return redirect(checkout_session.url, code=303)
 
-
+@login_required(login_url='/login/')
 def payment_sell(request, tran_id):
     user_transaction = get_object_or_404(Transaction, id=tran_id)
-    initial_data= {"amount": user_transaction.total_spent}
+    initial_data = {"amount": user_transaction.total_spent, "account_holder_name": ""}
 
     if request.method == "POST":
         user_id = request.user.id
