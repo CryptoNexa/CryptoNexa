@@ -67,7 +67,7 @@
                             <hr class="dropdown-divider">
                         </li>
                         <li><a class="dropdown-item" href="#">Settings</a></li>
-                        <li><a class="dropdown-item" href="#">Watchlist</a></li>
+                        <li><a class="dropdown-item" href="{% url 'core:watchlist' %}">Watchlist</a></li>
                         <li><a class="dropdown-item" href="#">Portfolio</a></li>
                         <li><a class="dropdown-item" href="{% url 'support:list_issues' %}">Support Issues</a></li>
                         <li><a class="dropdown-item" href="{% url 'core:payment_history' %}">Payment History</a></li>
@@ -94,8 +94,9 @@
         <div><span>Community</span></div>
         <div><span>Products</span></div>
         <div><span>Learn</span></div>
-        <div><span><a href ="news/" class="text-decoration-none text-dark">Newsletter</a></span></div>
-        <div><span><a href ="{% url 'support:issue_creation' %}" class="text-decoration-none text-dark">Support</a></span></div>
+        <div><span><a href="news/" class="text-decoration-none text-dark">Newsletter</a></span></div>
+        <div><span><a href="{% url 'support:issue_creation' %}"
+                      class="text-decoration-none text-dark">Support</a></span></div>
     </div>
     <div class="top-bar-right">
         <div style="margin-right: 15px;"><span><a href="{% url 'core:watchlist' %}"
@@ -114,7 +115,7 @@
     {% endblock %}
 </div>
 <div>
-    {% include 'CryptoNexa/footer.html' %}
+    {#    {% include 'CryptoNexa/footer.html' %}#}
 </div>
 </body>
 </html>
