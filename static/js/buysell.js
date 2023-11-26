@@ -1,6 +1,6 @@
 
 window.addEventListener("DOMContentLoaded", function () {
-            var myModal = new bootstrap.Modal(document.getElementById("currencyModal"));
+            var myModal = new bootstrap.Modal(document.getElementById("buysellModal"));
             myModal.show();
 });
 // config = {
