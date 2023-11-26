@@ -1,105 +1,43 @@
+{% extends 'CryptoNexa/base.html' %}
+{% load static %}
+{% block head %}
+       <link rel="stylesheet" type="text/css" href="{% static 'css/portfolio.css' %}">
+{% endblock %}
+{% block content %}
+    <div class="container my-4">
+        <h4>Your Transactions</h4>
+        {% if data %}
+            <div class="table-responsive-xl">
+                <table class="table table-hover">
+                    <thead class="thead-light">
+                    <tr>
+                        <th scope="col">Index</th>
+                        <th scope="col">Coin</th>
+                        <th scope="col">Quantity</th>
+                        <th scope="col">Type</th>
+                        <th scope="col">Currency</th>
+                        <th scope="col">Total Amount</th>
+                        <th scope="col">Your investment</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for transaction in data %}
+                        <tr>
+                            <td>{{ forloop.counter }} </td>
+                            <td>{{ transaction.coin }}</td>
+                            <td>{{ transaction.quantity }}</td>
+                            <td>{{ transaction.transaction_type }}</td>
+                            <td>{{ transaction.currency }}</td>
+                            <td>{{ transaction.total_spent }}</td>
+                            <td>{{ transaction.profit_or_loss_price }}  </td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        {% else %}
+            <p>No Transactions</p>
+        {% endif %}
 
-<!DOCTYPE html>
-<html>
-<head>
-      <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
-            color: #333;
-            margin: 0;
-            padding: 0;
-        }
-
-        h1 {
-            text-align: center;
-            background-color: #333;
-            color: #fff;
-            padding: 20px 0;
-            margin: 0;
-        }
-
-        h2 {
-            background-color: #333;
-            color: white;
-            padding: 10px;
-        }
-
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 20px;
-        }
-
-        th, td {
-            border: 1px solid #ddd;
-            padding: 8px;
-            text-align: left;
-        }
-
-        th {
-            background-color: #f2f2f2;
-        }
-
-        tr:nth-child(even) {
-            background-color: #f9f9f9;
-        }
-
-        footer {
-            background-color: #333;
-            color: #fff;
-            padding: 20px;
-            text-align: center;
-            position: absolute;
-            bottom: 0;
-            width: 100%;
-        }
-
-        footer a {
-            color: #fff;
-            text-decoration: none;
-            transition: color 0.3s ease;
-        }
-
-        footer a:hover {
-            color: #2ecc71;
-        }
-    </style>
-
-
-</head>
-<body>
-    <h1>Portfolio</h1>
-    <p><strong> Name:</strong> {{ user_object.first_name }} {{ user_object.last_name }}</p>
-
-
-    <h2>Transactions</h2>
-    <table>
-        <tr>
-            <th>Coin</th>
-            <th>Quantity</th>
-            <th>Currency</th>
-            <th>Total Amount</th>
-            <th>Current Price</th>
-        </tr>
-        {% for transaction in transaction_obj %}
-        <tr>
-            <td>{{ transaction.coin }}</td>
-            <td>{{ transaction.quantity }}</td>
-            <td>{{ transaction.currency }}</td>
-            <td>{{ transaction.total_spent }} {{ transaction.type }} </td>
-            <td>{{ c_price }}  </td>
-        </tr>
-        {% endfor %}
-    </table>
-
-    <h3>Total Balance: {{ total }}</h3>
-
-    <h3>You invested: {{ buy }} </h3>
-    <h3>You gained: {{ sell }} </h3>
-
-    <footer>
-        <a href="/">Back to Home Page</a>
-    </footer>
-</body>
-</html>
+    </div>
+{% endblock %}

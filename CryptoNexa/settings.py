@@ -46,7 +46,8 @@ INSTALLED_APPS = [
     'currencyExchange',
     'payments',
     'BuySell',
-    'portfolio'
+    'portfolio',
+    'support',
 ]
 # Application definition
 
@@ -137,3 +138,6 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 AUTH_USER_MODEL = 'core.User'
 
 DATETIME_FORMAT = 'Y-m-d H:i:s'
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')

@@ -1,0 +1,57 @@
+.newsletter-form-container {
+    background: white;
+    width: 600px;
+    margin: 3% auto auto;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    display: flex;
+    padding: 15px;
+    flex-direction: column;
+}
+
+.subscribe {
+    border: 1px solid #808080;
+    width: 600px;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    flex-direction: column;
+}
+
+.body {
+    background-color: #fff;
+    color: #000;
+}
+
+.header {
+    color: #fff;
+    padding: 10px;
+    /*margin-bottom: 20px;*/
+    border-radius: 10px;
+}
+
+.form-group label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.form-group input[type="email"] {
+    width: 100%;
+    padding: 6px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+}
+
+.form-group input:focus {
+    border: 1px solid #ccc;
+}
+
+.button {
+    width: 100%;
+    text-align: center;
+    margin-top: 10px;
+    border-radius: 10px;
+    font-size: 16px;
+}

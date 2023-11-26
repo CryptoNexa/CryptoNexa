@@ -1,79 +1,16 @@
-{#{% extends base.html %}#}
-{##}
-{#{% block content %}#}
-{#    <h1>Your message has been sent. Thank you.</h1>#}
-{#    <footer><a href="/">Go to home page</a> </footer>#}
-{#{% endblock %}#}
-{##}
-{#<!-- message_sent.html -->#}
-{##}
-{#{% extends 'base.html' %}#}
-{##}
-{#{% block content %}#}
-{#    <div class="success-message">#}
-{#        <h1>Your message has been sent!</h1>#}
-{#        <p>Thank you for reaching out. We appreciate your interest.</p>#}
-{#        <p>We'll review your message and get back to you shortly.</p>#}
-{#        <p>Meanwhile, why not explore more about our services or products?</p>#}
-{#        <button onclick="window.location.href = '/'">Home</button>#}
-{#        <!-- You can customize the button text and style as needed -->#}
-{#    </div>#}
-{#{% endblock %}#}
-
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Success Message</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
-            color: #333;
-            margin: 0;
-            padding: 0;
-        }
-
-        .success-message {
-            text-align: center;
-            margin-top: 50px;
-        }
-
-        .success-message h1 {
-            font-size: 32px;
-            color: black; /* Changed from green */
-        }
-
-        .success-message p {
-            font-size: 18px;
-            margin-bottom: 15px;
-        }
-
-        .explore-btn {
-            padding: 10px 20px;
-            font-size: 16px;
-            background-color: #2ecc71;
-            color: #fff;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-        }
-
-        .explore-btn:hover {
-            background-color: #27ae60;
-        }
-    </style>
-</head>
-<body>
-    <div class="success-message">
-        <h1>Your message has been sent!</h1>
-        <p>Thank you for reaching out. We appreciate your interest.</p>
-        <p>We'll review your message and get back to you shortly.</p>
-        <p>Meanwhile, why not again to explore cryptocurrencies?</p>
-        <!-- Updated the text and link -->
-        <button class="explore-btn" onclick="window.location.href = '/'">Explore Now</button>
+{% extends 'CryptoNexa/base.html' %}
+{% load static %}
+{% block head %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/success.css' %}">
+{% endblock %}
+{% block content %}
+    <div class="container my-4">
+        <div class="success-message">
+            <h1>Your message has been sent!</h1>
+            <p>Thank you for reaching out. We appreciate your interest.
+                We'll review your message and get back to you shortly.
+            Meanwhile, why not again to explore cryptocurrencies?</p>
+            <button class="btn btn-primary" onclick="window.location.href = '/'">Explore Now</button>
+        </div>
     </div>
-</body>
-</html>
+{% endblock %}

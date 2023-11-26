@@ -8,7 +8,7 @@ def contact_us_view(request):
         form = ContactForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect(reverse('ContactUs/success'))
+            return redirect(reverse('contact-success'))
     else:
         form = ContactForm()
     return render(request, 'ContactUs/Contact_us.html', {'form': form})

@@ -1,0 +1,24 @@
+#supportForm {
+    display: none;
+}
+
+.card-link {
+    text-decoration: none; /* Remove underline */
+    color: inherit; /* Inherit the color from the parent */
+}
+
+.form-group {
+    margin-bottom: 15px; /* Add space between form groups */
+}
+
+label {
+    margin-right: 10px; /* Add space to the right of labels */
+}
+
+button {
+    margin-top: 15px; /* Add space above the button */
+}
+
+.selected-card {
+    border: 2px solid black; /* Change the border color as desired */
+}

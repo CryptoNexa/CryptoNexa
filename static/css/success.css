@@ -1,0 +1,9 @@
+.success-message {
+    background: white;
+    width: 600px;
+    margin: 3% auto auto;
+    display: flex;
+    padding: 10px;
+    flex-direction: column;
+}
+

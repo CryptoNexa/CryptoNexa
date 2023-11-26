@@ -8,16 +8,17 @@ from django.shortcuts import render
 from django.contrib.auth import login, authenticate, logout
 from django.shortcuts import render, redirect
 from CryptoNexa.views import update_crypto_details
-from .apis.coinmarketcap.fetch_data import fetch_data
+from .apis.coinmarketcap.fetch_data import fetch_data, get_dummy_data, get_dummy_data_2
+from .apis.helper_functions import process_crypto_data
 from .forms import CustomUserForm
 from .models import Cryptocurrency, Quote
 from .forms import CustomUserForm, UserProfileForm
 from .models import User
-
+from BuySell.models import  Transaction
 
 def register(request):
     if request.method == 'POST':
-        form = CustomUserForm(request.POST)
+        form = CustomUserForm(request.POST, request.FILES)
         if form.is_valid():
             user = form.save()
             login(request, user)
@@ -39,11 +40,34 @@ def user_login(request):
     return render(request, 'CryptoNexa/login.html', {'form': form})
 
 
-def get_updated_crypto_data(request):
-    updated_data = fetch_data('USD')
-    update_crypto_details(updated_data)
-    data = serializers.serialize("json", Cryptocurrency.objects.all())
-    return JsonResponse(data)
+def get_updated_crypto_data(request, fetch_live_data):
+    switch = request.session.get('switch')
+    if switch is None:
+        request.session['switch'] = 0
+        switch = 0
+
+    if request.session.get('currency') is None:
+        request.session['currency'] = "USD"
+        session_cur = "USD"
+    else:
+        session_cur = request.session.get('currency')
+
+    if fetch_live_data:
+        fetched_data_from_api_session_cur = fetch_data(session_cur)
+    else:
+        if int(switch) == 0:
+            request.session['switch'] = 1
+
+            fetched_data_from_api_session_cur = get_dummy_data_2(session_cur)
+        else:
+            request.session['switch'] = 0
+            fetched_data_from_api_session_cur = get_dummy_data(session_cur)
+
+    crypto_data = fetched_data_from_api_session_cur.get('data')
+    crypto_to_send = update_crypto_details(crypto_data, session_cur)
+    crypto_data = process_crypto_data(crypto_to_send, session_cur, many=True)
+    print("Updated price returned")
+    return JsonResponse(crypto_data, safe=False)
 
 
 def crypto_detail(request, slug):
@@ -52,8 +76,17 @@ def crypto_detail(request, slug):
     except Cryptocurrency.DoesNotExist:
         cryptocurrency = None
 
+    if request.session.get('currency') is None:
+        request.session['currency'] = "USD"
+        session_cur = "USD"
+    else:
+        session_cur = request.session.get('currency')
+
+    data = process_crypto_data(cryptocurrency, session_cur, many=False)
+
     context = {
-        "cryptocurrency": cryptocurrency
+        "cryptocurrency": data,
+        "session_cur": session_cur
     }
 
     return render(request, 'crypto/crypto_detail.html', context=context)
@@ -75,7 +108,6 @@ def user_profile(request, id):
 #     return render(request, 'CryptoNexa/edit_profile.html', {'user': user})
 
 
-
 @login_required
 def user_edit_profile(request, id):
     user = User.objects.get(id=id)
@@ -89,3 +121,9 @@ def user_edit_profile(request, id):
             initial={'first_name': user.first_name, 'last_name': user.last_name, 'email': user.email})
 
     return render(request, 'CryptoNexa/edit_profile.html', {'form': form})
+
+def payment_history(request):
+    transactions = Transaction.objects.filter(user=request.user)
+    return render(request, 'CryptoNexa/payment_history.html', {
+        'transactions': transactions
+    })

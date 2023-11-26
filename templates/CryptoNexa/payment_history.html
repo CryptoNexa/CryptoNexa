@@ -1,0 +1,43 @@
+{% extends 'CryptoNexa/base.html' %}
+{% load static %}
+{% block head %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/payment_history.css' %}">
+{% endblock %}
+{% block content %}
+    <div class="container">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>#</th>
+                <th>Type</th>
+                <th>Coin</th>
+                <th>Currency</th>
+                <th>Quantity</th>
+                <th>Price</th>
+                <th>Total Spent</th>
+                <th>Transaction Fee</th>
+                <th>Notes</th>
+                <th>Date</th>
+                <th>Status</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for transaction in transactions %}
+                <tr>
+                    <td>{{ forloop.counter }}</td>
+                    <td>{{ transaction.type }}</td>
+                    <td>{{ transaction.coin }}</td>
+                    <td>{{ transaction.currency }}</td>
+                    <td>{{ transaction.quantity }}</td>
+                    <td>{{ transaction.price }}</td>
+                    <td>{{ transaction.total_spent }}</td>
+                    <td>{{ transaction.transaction_fee }}</td>
+                    <td>{{ transaction.notes }}</td>
+                    <td>{{ transaction.datetime }}</td>
+                    <td>{{ transaction.status }}</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

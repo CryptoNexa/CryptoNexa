@@ -1,81 +1,24 @@
-{# <!DOCTYPE html>#}
-{#<html lang="en">#}
-{#<head>#}
-{#    <meta charset="UTF-8">#}
-{#    <meta name="viewport" content="width=device-width, initial-scale=1.0">#}
-{#    <title>News Page</title>#}
-{#</head>#}
-{#<body>#}
-{#    <h1>Latest News</h1>#}
-{##}
-{#    {% for article in news %}#}
-{#        <div class="news-article">#}
-{#            <h2>{{ article.title }}</h2>#}
-{#            <p>{{ article.content }}</p>#}
-{#            <p>Published on: {{ article.pub_date }}</p>#}
-{#        </div>#}
-{#    {% endfor %}#}
-{#</body>#}
-{#</html>#}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Newsletter - Latest News</title>
-    <!-- Bootstrap CSS -->
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-    <style>
-        body {
-            background-color: #fff;
-            color: #000;
-        }
-        .header {
-            background-color: #000;
-            color: #fff;
-            padding: 20px;
-            margin-bottom: 20px;
-        }
-        .news-item {
-            border: 1px solid #000;
-            padding: 20px;
-            margin-bottom: 20px;
-        }
-        .news-item h2 {
-            color: #000;
-        }
-        .news-item p {
-            color: #444;
-        }
-    </style>
-</head>
-<body>
-    <div class="container">
-        <div class="header">
-            <h1>Latest News</h1>
-        </div>
-        <div class="news-container">
-            <ul class="list-unstyled">
-                {% for article in news %}
-                    <li class="news-item">
-                        <h2>{{ article.title }}</h2>
-                        <p>{{ article.content }}</p>
-                        <p><strong>Published Date:</strong> {{ article.pub_date }}</p>
-                    </li>
-                {% endfor %}
-            </ul>
-        </div>
-    </div>
-      <footer style="background-color: #333; color: #fff; padding: 20px; text-align: center;">
-        <a href="/" style="color: #fff; text-decoration: none; margin: 0 10px; transition: color 0.3s ease;">Go to Home Page</a>
-        <a href="subscribe/" style="color: #fff; text-decoration: none; margin: 0 10px; transition: color 0.3s ease;">Subscribe to our newsletter</a>
-    </footer>
+{% extends 'CryptoNexa/base.html' %}
+{% load static %}
+{% block head %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/news_list.css' %}">
 
-    <!-- Bootstrap JS and jQuery (optional but required for some Bootstrap features) -->
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-</body>
-<footer><a href ="/">Go to Home Page</a>
-    <a href ="subscribe/">Subscribe to our news letter</a>
-</footer>
-</html>
+{% endblock %}
+{% block content %}
+    <div class="container my-4">
+        <div class="header">
+            <h2>Latest News</h2>
+        </div>
+
+        <ul class="list-unstyled">
+            {% for article in news %}
+                <li class="news-item">
+                    <h2>{{ article.title }}</h2>
+                    <p>{{ article.content }}</p>
+                    <p><strong>Published Date:</strong> {{ article.pub_date }}</p>
+                </li>
+            {% endfor %}
+        </ul>
+        <a href="{% url 'subscribe' %}">Subscribe to our news letter</a>
+    </div>
+{% endblock %}

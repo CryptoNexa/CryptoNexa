@@ -23,4 +23,5 @@ urlpatterns = [
     path('payment_successful', views.payment_successful, name='payment_successful'),
     path('payment_cancelled', views.payment_cancelled, name='payment_cancelled'),
     path('create-checkout-session', views.CreateCheckoutSession.as_view(), name='create-checkout-session'),
+    path('payment_sell/<int:tran_id>', views.payment_sell, name='payment_sell'),
 ]

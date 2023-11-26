@@ -9,47 +9,52 @@ from core.models import Cryptocurrency, Quote
 
 from .models import User
 
-
 from collections import defaultdict
 
 
-
 def portfolio(request):
-
     current_user = request.user
     user_id = request.user.id
     user_transactions = Transaction.objects.filter(user=current_user)
     user_object = User.objects.get(pk=user_id)
-    total = 0
-    Total1 = 0
-    total_sell = 0
 
+    #Crypto buy
+    balance = 0
+
+    #Crypto sold
+    invested = 0
+
+    row_amount = 0
+
+    current_crypto_price = 'No transactions are there.'
+    data = []
     for transaction in user_transactions:
+        cur_data = {}
+        current_crypto_price = []
+        price = Cryptocurrency.objects.get(name=transaction.coin).price
+        transaction_in_profit_or_loss = price - transaction.total_spent
+
+        row_amount = transaction.total_spent
+
         if transaction.type == 'buy':
+            balance = balance + transaction.total_spent
 
-            total += transaction.quantity * transaction.price
-            Total1 = total
-
-            try:
-                cryptocurrency = Cryptocurrency.objects.get(slug=transaction.coin)
-                c1 = cryptocurrency.quote.data
-                print(c1)
-            except Cryptocurrency.DoesNotExist:
-                cryptocurrency = None
-
-            current_price = 0
-            if cryptocurrency and cryptocurrency.quote:
-                current_price = cryptocurrency.quote.data
-
-            print(Total1)
         elif transaction.type == 'sell':
+            invested = invested + transaction.total_spent
 
-            total_sell += transaction.quantity * transaction.price
-            total -= transaction.quantity * transaction.price
-            Total2 = total
+        cur_data['coin'] = transaction.coin
+        cur_data['quantity'] = transaction.quantity
+        cur_data['currency'] = transaction.currency
+        cur_data['total_spent'] = row_amount
+        cur_data['transaction_type'] = transaction.type
+        cur_data['profit_or_loss_price'] = transaction_in_profit_or_loss
+        data.append(cur_data)
+
     context = {
-        "user_object": user_object, "transaction_obj": user_transactions, "total": total, "buy": Total1,
-        "sell": total_sell, "c_price": current_price,
+        "user_object": user_object, "data": data,
+        "buy": balance,
+        "sell": invested,
+        "c_price": current_crypto_price,
     }
 
     return render(request, 'portfolio/portfolio.html', context)

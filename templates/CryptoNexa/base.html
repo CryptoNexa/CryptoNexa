@@ -10,12 +10,12 @@
     {% csrf_token %}
     <link rel="stylesheet" type="text/css" href="{% static 'css/base.css' %}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link href="{% static 'css/crypto_detail.css' %}" rel="stylesheet">
     <script src="{% static 'js/buysell.js' %}"></script>
     {% block head %}
     {% endblock %}
 </head>
-<body>
-
+<body class="d-flex flex-column min-vh-100">
 <nav class="navbar navbar-expand-sm navbar-light bg-light">
     <div class="container-fluid">
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
@@ -69,6 +69,8 @@
                         <li><a class="dropdown-item" href="#">Settings</a></li>
                         <li><a class="dropdown-item" href="#">Watchlist</a></li>
                         <li><a class="dropdown-item" href="#">Portfolio</a></li>
+                        <li><a class="dropdown-item" href="{% url 'support:list_issues' %}">Support Issues</a></li>
+                        <li><a class="dropdown-item" href="{% url 'core:payment_history' %}">Payment History</a></li>
                         <li><a class="dropdown-item" href="{% url 'core:logout' %}">Logout</a></li>
                     </ul>
                 </div>
@@ -85,17 +87,23 @@
 </nav>
 <div class="top-bar">
     <div class="top-bar-left me-auto mb-2 mb-lg-0">
-        <div class="top-bar-left-hero"><span><a href="{% url 'index' %}" class="text-decoration-none text-dark">CrytoNexa</a></span></div>
+        <div class="top-bar-left-hero"><span><a href="{% url 'index' %}" class="text-decoration-none text-dark">CrytoNexa</a></span>
+        </div>
         <div><span>Cryptocurrencies</span></div>
         <div><span>Exchanges</span></div>
         <div><span>Community</span></div>
         <div><span>Products</span></div>
         <div><span>Learn</span></div>
-        <div><span><a href ="news/">Newsletter</a></span></div>
-        <div><span><a href = "portfolio/">Portfolio</a></span></div>
+        <div><span><a href ="{% url 'news_list' %}" class="text-decoration-none text-dark">Newsletter</a></span></div>
+
+        <div><span><a href ="{% url 'support:issue_creation' %}" class="text-decoration-none text-dark">Support</a></span></div>
+        <div><span><a href="{% url 'portfolio' %}" class="text-decoration-none text-dark">Portfolio</a></span></div>
+
+
     </div>
+
 </div>
-<div id="content">
+<div id="content" class="flex-grow-1">
     {% block content %}
         <!-- Specific page content goes here -->
     {% endblock %}
@@ -103,9 +111,11 @@
     {% endblock %}
     {% block currencypopup %}
     {% endblock %}
+    {% block crypto_filter %}
+    {% endblock %}
 </div>
 
-<footer class="footer bg-light text-dark py-3" style="height: 200px">
+<footer class="footer bg-light text-dark py-3">
     <div class="container">
         <div class="row">
             <div class="col-md-6">
@@ -123,12 +133,12 @@
                         <h6>Support</h6>
                     </div>
                     <div class="col-md-3">
-                        <h6><a href="Contact_us/">Contact Us</a></h6>
-                    </div>
+                        <h6><a href="{% url 'contact-us' %}">Contact Us</a></h6>
                     </div>
                 </div>
             </div>
         </div>
+    </div>
     </div>
 </footer>
 

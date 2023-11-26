@@ -38,5 +38,5 @@ function total_spent_calc() {
     var totalSpent = (qty * price) + tran_fee;
 
     // Round off to 2 decimal points
-    tot_spt.value = totalSpent.toFixed(2);
+    tot_spt.value = totalSpent.toFixed(4);
 }
