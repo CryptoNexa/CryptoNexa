@@ -2,6 +2,8 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import AuthenticationForm
 from django.http import JsonResponse, HttpResponseBadRequest
 from django.shortcuts import get_object_or_404
+from django.http import JsonResponse
+from django.db.models import Q
 
 # Create your views here.
 from django.contrib.auth import login, logout
@@ -185,6 +187,29 @@ def edit_watchlist_name(request, watchlist_id):
 
 def payment_history(request):
     transactions = Transaction.objects.filter(user=request.user)
+
+    # Handle search
+    search_query = request.GET.get('search')
+    if search_query:
+        transactions = transactions.filter(
+            Q(type__icontains=search_query) |
+            Q(coin__icontains=search_query) |
+            Q(currency__icontains=search_query) |
+            Q(quantity__icontains=search_query) |
+            Q(price__icontains=search_query) |
+            Q(total_spent__icontains=search_query) |
+            Q(datetime__icontains=search_query) |
+            Q(transaction_fee__icontains=search_query) |
+            Q(notes__icontains=search_query) |
+            Q(status__icontains=search_query)
+        )
+    # Handle status filter
+    status_filter = request.GET.get('status')
+    if status_filter:
+        transactions = transactions.filter(status=status_filter)
+
+    print("transactions = ", transactions)
+
     return render(request, 'CryptoNexa/payment_history.html', {
         'transactions': transactions
     })

@@ -37,7 +37,7 @@
                                   <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
                                   {% for radio in field %}
                                             {{ radio.tag }}
-                                          <label class="btn btn-outline-dark" for="{{ radio.id_for_label }}">{{ radio.choice_label }}</label>
+                                          <label style="width: 100px; border-radius: 10px" class="btn btn-outline-primary" for="{{ radio.id_for_label }}">{{ radio.choice_label }}</label>
                                   {% endfor %}
                                 </div>
                             </center>

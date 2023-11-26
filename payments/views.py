@@ -42,9 +42,9 @@ def payment_successful(request):
     stripe_id = request.session.get('stripe_id')
     user_object = User.objects.get(pk=user_id)
     transaction_obj = Transaction.objects.get(id=transaction_id)
+    transaction_obj.status = "success"
     user_payment = UserPaymentBuy.objects.create(user=user_object, payment_status=True, transaction_id=transaction_obj,
                                                  stripe_id=stripe_id)
-    transaction_obj.status = Transaction.STATUS_CHOICES[1]
     transaction_obj.save()
     if 'transaction_id' in request.session:
         del request.session['transaction_id']
@@ -83,7 +83,8 @@ def payment_cancelled(request):
         "user_object": user_object,
         "transaction_obj": transaction_obj
     }
-    transaction_obj.status = Transaction.STATUS_CHOICES[2]
+
+    transaction_obj.status = "failed"
     transaction_obj.save()
     return render(request, 'paymentCheckout/payment_cancelled.html', context)
 
@@ -149,7 +150,7 @@ def payment_sell(request, tran_id):
                                                               account_number=account_number,
                                                               transit_number=transit_number,
                                                               routing_number=routing_number, amount=amount)
-                transaction_obj.status = Transaction.STATUS_CHOICES[1]
+                transaction_obj.status = Transaction.STATUS_CHOICES[1][0]
                 transaction_obj.save()
                 if 'transaction_id' in request.session:
                     del request.session['transaction_id']
