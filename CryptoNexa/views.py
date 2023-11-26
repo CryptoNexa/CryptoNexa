@@ -140,6 +140,7 @@ def filter_crypto_data(request):
         context['cryptos'] = cryptos
         context['filters_provided'] = True
         context['session_cur'] = session_cur
+        context['crypto_count'] = len(cryptos)
         return render(request, 'CryptoNexa/index.html', context=context)
 
     else:

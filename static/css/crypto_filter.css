@@ -20,7 +20,6 @@
 .modal:before {
     content: '';
     display: inline-block;
-    height: 100%;
     vertical-align: middle;
     margin-right: -4px;
 }
@@ -29,9 +28,8 @@
     display: inline-block;
     text-align: left;
     vertical-align: middle;
-    max-width: 1000px;
-    width: 1000px;
-    max-height: 100vh;
+    /*max-width: 1000px;*/
+    /*max-height: 100vh;*/
 }
 
 .modal-content {
