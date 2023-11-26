@@ -3,6 +3,7 @@ from django.contrib.auth.forms import AuthenticationForm
 from django.core import serializers
 from django.http import JsonResponse
 from django.shortcuts import render
+from django.db.models import Q
 
 # Create your views here.
 from django.contrib.auth import login, authenticate, logout
@@ -13,7 +14,8 @@ from .forms import CustomUserForm
 from .models import Cryptocurrency, Quote
 from .forms import CustomUserForm, UserProfileForm
 from .models import User
-from BuySell.models import  Transaction
+from BuySell.models import Transaction
+
 
 def register(request):
     if request.method == 'POST':
@@ -75,7 +77,6 @@ def user_profile(request, id):
 #     return render(request, 'CryptoNexa/edit_profile.html', {'user': user})
 
 
-
 @login_required
 def user_edit_profile(request, id):
     user = User.objects.get(id=id)
@@ -90,8 +91,32 @@ def user_edit_profile(request, id):
 
     return render(request, 'CryptoNexa/edit_profile.html', {'form': form})
 
+
 def payment_history(request):
     transactions = Transaction.objects.filter(user=request.user)
+
+    # Handle search
+    search_query = request.GET.get('search')
+    if search_query:
+        transactions = transactions.filter(
+            Q(type__icontains=search_query) |
+            Q(coin__icontains=search_query) |
+            Q(currency__icontains=search_query) |
+            Q(quantity__icontains=search_query) |
+            Q(price__icontains=search_query) |
+            Q(total_spent__icontains=search_query) |
+            Q(datetime__icontains=search_query) |
+            Q(transaction_fee__icontains=search_query) |
+            Q(notes__icontains=search_query) |
+            Q(status__icontains=search_query)
+        )
+    # Handle status filter
+    status_filter = request.GET.get('status')
+    if status_filter:
+        transactions = transactions.filter(status=status_filter)
+
+    print("transactions = ", transactions)
+
     return render(request, 'CryptoNexa/payment_history.html', {
         'transactions': transactions
     })
