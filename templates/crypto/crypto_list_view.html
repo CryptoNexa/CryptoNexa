@@ -1,53 +1,14 @@
 {% block cryptoListView %}
-    <style>
-        body {
-            font-family: 'Roboto', sans-serif; /* Change 'Roboto' to your preferred font family */
-            color: #333333; /* Font color: Dark gray */
-        }
+    {% load static %}
 
-        i {
-            font-weight: normal;
-        }
-
-        .fixed-table {
-            width: 100%;
-            height: 400px;
-            overflow-y: auto;
-        }
-
-        .fixed-table td,
-        .fixed-table th {
-            font-weight: normal;
-            font-style: normal;
-            width: 150px;
-            height: 50px;
-            padding: 10px;
-        }
-
-        .filter-button {
-            float: right;
-            display: inline-block;
-            padding: 8px 20px;
-            font-size: 16px;
-            text-align: center;
-            text-decoration: none;
-            border: 2px solid #007bff;
-            color: #007bff;
-            border-radius: 5px;
-            transition: all 0.3s ease;
-        }
-
-        .btn-outline-primary:hover {
-            background-color: #007bff;
-            color: #fff;
-        }
-    </style>
-
+    <link href="{% static 'css/crypto_table.css' %}" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-
     <div class="container">
+        <br/>
         <a href="{% url 'filter_crypto_data' %}" id="openModal" class="button-link">
-            <button type="button" id="filter-button" class="btn btn-outline-primary">Filter</button>
+            <button style="float: right; width: 7%; height: 25%;" type="button" id="filter-button"
+                    class="btn btn-outline-primary">Filter
+            </button>
         </a>
         {% if error_message %}
             <h1>{{ error_message }}</h1>
@@ -70,7 +31,7 @@
                         <td>{{ forloop.counter }}</td>
                         <td><a href="{% url 'core:crypto_detail' crypto.slug %}">{{ crypto.name }}</a></td>
                         <td>
-                            <div id="price-{{ crypto.id }}"><i class="currency-icon"> {{ crypto.price }}</i></div>
+                            <div id="price-{{ crypto.id }}"><i class="currency-icon"></i><span class="price-class"> {{ crypto.price }}</span></div>
                         </td>
                         <td id="change-1h-{{ crypto.id }}"
                             class="{% if crypto.percent_change_1h < 0 %}text-danger{% elif crypto.percent_change_1h > 0 %}text-success{% else %}text-muted{% endif %}">
@@ -80,8 +41,8 @@
                             class="{% if crypto.percent_change_24h < 0 %}text-danger{% elif crypto.percent_change_24h > 0 %}text-success{% else %}text-muted{% endif %}">
                             {{ crypto.percent_change_24h }}
                         </td>
-                        <td id="market-cap-{{ crypto.id }}"><i class="currency-icon"> {{ crypto.market_cap }}</i></td>
-                        <td id="volume-24h-{{ crypto.id }}"><i class="currency-icon"> {{ crypto.volume_24h }}</i></td>
+                        <td id="market-cap-{{ crypto.id }}"><i class="currency-icon"></i><span class="price-class"> {{ crypto.market_cap }}</span></td>
+                        <td id="volume-24h-{{ crypto.id }}"><i class="currency-icon"></i><span class="price-class"> {{ crypto.volume_24h }}</span></td>
                     </tr>
                 {% endfor %}
                 </tbody>
@@ -124,12 +85,11 @@
                     .then(data => {
                         data.forEach(crypto => {
                             const cryptoId = crypto.id;
-                            {#document.getElementById(`price-${cryptoId}`).innerText = ` ${crypto.price}`;#}
-                            document.getElementById(`price-${cryptoId}`).querySelector('.currency-icon').innerText = ` ${crypto.price}`;
+                            document.getElementById(`price-${cryptoId}`).querySelector('.price-class').innerText = ` ${crypto.price}`;
                             document.getElementById(`change-1h-${cryptoId}`).innerText = crypto.percent_change_1h;
                             document.getElementById(`change-24h-${cryptoId}`).innerText = crypto.percent_change_24h;
-                            document.getElementById(`market-cap-${cryptoId}`).querySelector('.currency-icon').innerText = ` ${crypto.market_cap}`;
-                            document.getElementById(`volume-24h-${cryptoId}`).querySelector('.currency-icon').innerText = ` ${crypto.volume_24h}`;
+                            document.getElementById(`market-cap-${cryptoId}`).querySelector('.price-class').innerText = ` ${crypto.market_cap}`;
+                            document.getElementById(`volume-24h-${cryptoId}`).querySelector('.price-class').innerText = ` ${crypto.volume_24h}`;
                             document.getElementById(`change-1h-${cryptoId}`).classList = calculateChangeClass(crypto.percent_change_1h);
                             document.getElementById(`change-24h-${cryptoId}`).classList = calculateChangeClass(crypto.percent_change_24h);
                         });

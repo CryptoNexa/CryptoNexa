@@ -72,11 +72,11 @@ def payment_cancelled(request):
                                                      stripe_id=stripe_id)
     else:
         user_payment = UserPaymentSell.objects.create(user=user_object, payment_status=True,
-                                                              transaction_id=transaction_obj,
-                                                              account_holder_name=None,
-                                                              account_number=None,
-                                                              transit_number=None,
-                                                              routing_number=None, amount=None)
+                                                      transaction_id=transaction_obj,
+                                                      account_holder_name=None,
+                                                      account_number=None,
+                                                      transit_number=None,
+                                                      routing_number=None, amount=None)
 
     context = {
         "user_payment": user_payment,
@@ -129,13 +129,13 @@ def payment_sell(request, tran_id):
     try:
         user_transaction = get_object_or_404(Transaction, id=tran_id)
         request.session['transaction_id'] = tran_id
-        initial_data = {"amount": user_transaction.total_spent, "account_holder_name": ""}
+        initial_data = {"amount": user_transaction.total_spent}
 
         if request.method == "POST":
             user_id = request.user.id
             payment_sell_form = DirectDepositForm(request.POST)
             if payment_sell_form.is_valid():
-                raise Exception("known issue")
+                # raise Exception("known issue")
                 account_holder_name = payment_sell_form.cleaned_data['account_holder_name']
                 account_number = payment_sell_form.cleaned_data['account_number']
                 transit_number = payment_sell_form.cleaned_data['transit_number']
