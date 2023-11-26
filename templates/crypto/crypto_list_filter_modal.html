@@ -1,70 +1,50 @@
 {% extends 'CryptoNexa/index.html' %}
 {% load static %}
+
 {% block crypto_filter %}
-
-    {#    <link rel="stylesheet" type="text/css" href="{% static 'css/crypto_filter.css' %}">#}
-
-    <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            const myModal = new bootstrap.Modal(document.getElementById("crypto-filter-modal"));
-            myModal.show();
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const myModal = new bootstrap.Modal(document.getElementById("crypto-filter-modal"), {
+            backdrop: 'static',
+            keyboard: false
         });
-    </script>
+        myModal.show();
 
-    <div class="modal fade" id="crypto-filter-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="text-center modal-title" id="modalLabel">Choose your filters</h5>
-{#                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>#}
-                </div>
-                <div class="modal-body">
+        const modalBackdrop = document.querySelector('.modal-backdrop');
+        modalBackdrop.addEventListener('click', function(event) {
+            event.stopPropagation();
+        });
+    });
+</script>
 
-                    <form method="POST" action="{% url 'filter_crypto_data' %}">
-                        {% csrf_token %}
-                        {% if form.errors %}
-                            <div class="alert alert-danger" role="alert">
-                                <strong>Error!</strong> Please correct the following errors:
-                                <ul>
-                                    {% for field in form %}
-                                        {% for error in field.errors %}
-                                            <li>{{ error }}</li>
-                                        {% endfor %}
+<div class="modal fade" id="crypto-filter-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title text-center" id="exampleModalLabel">Choose your filters</h5>
+            </div>
+            <div class="modal-body">
+
+                <form method="POST" action="{% url 'filter_crypto_data' %}">
+                    {% csrf_token %}
+                    {% if form.errors %}
+                        <div class="alert alert-danger" role="alert">
+                            <strong>Error!</strong> Please correct the following errors:
+                            <ul>
+                                {% for field in form %}
+                                    {% for error in field.errors %}
+                                        <li>{{ error }}</li>
                                     {% endfor %}
-                                </ul>
-                            </div>
-                        {% endif %}
-                        {{ form.as_p }}
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    {% endif %}
+                    {{ form.as_p }}
 
-
-                        <button type="submit" class="btn btn-primary">Submit</button>
-                    </form>
-                </div>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </form>
             </div>
         </div>
     </div>
-    {#    <div class="modal fade" id="crypto-filter-modal" tabindex="-1" role="dialog" data-bs-keyboard="false"#}
-    {#         data-bs-backdrop="static">#}
-    {#        <div class="modal-dialog" role="document">#}
-    {#            <div class="modal-content">#}
-    {#                <div class="modal-header">#}
-    {#                    <h5 class="modal-title">Choose your filters</h5>#}
-    {#                </div>#}
-    {#                <div class="modal-body">#}
-    {#                    <div>#}
-    {#                        <form method="POST" action="{% url 'filter_crypto_data' %}">#}
-    {#                            {% csrf_token %}#}
-    {#                            <div class="currency-container">#}
-    {#                                {{ form.as_table }}#}
-    {##}
-    {#                            </div>#}
-    {#                            <button type="submit" class="btn btn-outline-primary">Save</button>#}
-    {#                        </form>#}
-    {#                    </div>#}
-    {#                </div>#}
-    {#            </div>#}
-    {#        </div>#}
-    {#    </div>#}
-
-
+</div>
 {% endblock %}
