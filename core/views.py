@@ -1,18 +1,16 @@
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import AuthenticationForm
-from django.core import serializers
 from django.http import JsonResponse, HttpResponseBadRequest
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import get_object_or_404
 
 # Create your views here.
-from django.contrib.auth import login, authenticate, logout
+from django.contrib.auth import login, logout
 from django.shortcuts import render, redirect
 from CryptoNexa.views import update_crypto_details
 from .apis.coinmarketcap.fetch_data import fetch_data, get_dummy_data, get_dummy_data_2
 from .apis.helper_functions import process_crypto_data
-from .forms import CustomUserForm
-from .models import Cryptocurrency, Quote
-from .forms import CustomUserForm, UserProfileForm
+from .models import Cryptocurrency, Watchlist
+from .forms import CustomUserForm, UserProfileForm, WatchlistForm
 from .models import User
 from BuySell.models import Transaction
 
@@ -104,11 +102,6 @@ def user_profile(request, id):
     return render(request, 'CryptoNexa/profile.html', {'user': user})
 
 
-# def user_edit_profile(request, id):
-#     user = User.objects.get(id=id)
-#     return render(request, 'CryptoNexa/edit_profile.html', {'user': user})
-
-
 @login_required
 def user_edit_profile(request, id):
     user = get_object_or_404(User, id=id)
@@ -129,6 +122,65 @@ def user_edit_profile(request, id):
                      'photo_id': user.photo_id})
 
     return render(request, 'CryptoNexa/edit_profile.html', {'form': form})
+
+
+@login_required
+def watchlist(request, watchlist_id=None):
+    user_watchlists = Watchlist.objects.filter(user=request.user)
+    if request.method == 'POST':
+        form = WatchlistForm(request.POST)
+        if form.is_valid():
+            watchlist = get_object_or_404(Watchlist, id=watchlist_id, user=request.user)
+            watchlist.cryptocurrencies.set(form.cleaned_data['cryptocurrencies'])
+            watchlist.save()
+            return redirect('core:watchlist', watchlist_id=watchlist.id)
+        else:
+            print("Form errors:", form.errors)
+    else:
+        form = WatchlistForm()
+        if watchlist_id:
+            selected_watchlist = get_object_or_404(Watchlist, id=watchlist_id)
+            cryptocurrencies = selected_watchlist.cryptocurrencies.all()
+
+            form.fields['cryptocurrencies'].initial = cryptocurrencies
+
+    if not user_watchlists.exists():
+        default_watchlist = Watchlist.objects.create(user=request.user, name='My Watchlist')
+        form = WatchlistForm(instance=default_watchlist)
+        user_watchlists = Watchlist.objects.filter(user=request.user)
+
+    if watchlist_id:
+        selected_watchlist = get_object_or_404(Watchlist, id=watchlist_id)
+        cryptocurrencies = selected_watchlist.cryptocurrencies.all()
+    else:
+        selected_watchlist = user_watchlists.first()
+        cryptocurrencies = selected_watchlist.cryptocurrencies.all()
+
+    return render(request, 'CryptoNexa/watchlist.html',
+                  {'form': form, 'user_watchlists': user_watchlists, 'selected_watchlist': selected_watchlist,
+                   'cryptocurrencies': cryptocurrencies})
+
+
+@login_required
+def create_watchlist(request):
+    watchlist = Watchlist.objects.create(user=request.user, name='My New Watchlist')
+
+    return redirect('core:watchlist', watchlist_id=watchlist.id)
+
+
+@login_required
+def edit_watchlist_name(request, watchlist_id):
+    if request.method == 'POST':
+        form = WatchlistForm(request.POST)
+        if form.is_valid():
+            watchlist = get_object_or_404(Watchlist, id=watchlist_id, user=request.user)
+            watchlist.name = form.cleaned_data['name']
+            watchlist.save()
+            return redirect('core:watchlist', watchlist_id=watchlist_id)
+        else:
+            print(form.errors)
+
+    return redirect('core:watchlist', watchlist_id=watchlist_id)
 
 
 def payment_history(request):
