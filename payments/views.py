@@ -141,6 +141,7 @@ def payment_sell(request, tran_id):
                 "transaction_obj": transaction_obj
             }
             return render(request, 'paymentCheckout/payment_successful.html', context)
+        return render(request, 'paymentCheckout/payment_cancelled.html')
     else:
         payment_sell_form = DirectDepositForm(initial=initial_data)
     return render(request, "paymentCheckout/payment_sell_form.html", {"user_transaction": user_transaction,

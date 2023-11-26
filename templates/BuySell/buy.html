@@ -80,11 +80,7 @@
                                       {{ field.label }}
                                     <div class="input-group">
                                         <span class="input-group-text" id="basic-addon1">
-                                              {% if currency == "CAD" %}
-                                                    <div class="input-group-addon">$CAD</div>
-                                              {% else %}
-                                                <div class="input-group-addon">$</div>
-                                              {% endif %}
+                                              <div class="input-group-addon currency-icon"></div>
                                         </span>
                                             <input style="background-color: white;" step="0.001" type="number" onchange="total_spent_calc()" value="{{ field.value }}" class="form-control" id="{{ field.id_for_label }}" name="{{ field.name }}" readonly >
                                     </div>

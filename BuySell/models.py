@@ -19,7 +19,7 @@ class Transaction(models.Model):
     total_spent = models.DecimalField(max_digits=10, decimal_places=4, default=0.00)
     datetime = models.DateTimeField()
     transaction_fee = models.DecimalField(max_digits=10, decimal_places=4, default=0.00)
-    notes = models.TextField(help_text="Please add your notes here")
+    notes = models.TextField(help_text="Please add your notes here", blank=True, null=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='initiated')
 
