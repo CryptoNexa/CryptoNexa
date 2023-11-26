@@ -3,6 +3,16 @@ from core.models import User, Cryptocurrency
 from BuySell.models import Transaction
 from django.db.models import Sum
 from django.shortcuts import get_object_or_404
+from CryptoNexa.views import update_crypto_details
+from CryptoNexa.views import update_crypto_details
+from core.models import Cryptocurrency, Quote
+
+from .models import User
+
+
+from collections import defaultdict
+
+
 
 def portfolio(request):
 
@@ -19,6 +29,18 @@ def portfolio(request):
 
             total += transaction.quantity * transaction.price
             Total1 = total
+
+            try:
+                cryptocurrency = Cryptocurrency.objects.get(slug=transaction.coin)
+                c1 = cryptocurrency.quote.data
+                print(c1)
+            except Cryptocurrency.DoesNotExist:
+                cryptocurrency = None
+
+            current_price = 0
+            if cryptocurrency and cryptocurrency.quote:
+                current_price = cryptocurrency.quote.data
+
             print(Total1)
         elif transaction.type == 'sell':
 
@@ -27,7 +49,7 @@ def portfolio(request):
             Total2 = total
     context = {
         "user_object": user_object, "transaction_obj": user_transactions, "total": total, "buy": Total1,
-        "sell": total_sell
+        "sell": total_sell, "c_price": current_price,
     }
 
     return render(request, 'portfolio/portfolio.html', context)

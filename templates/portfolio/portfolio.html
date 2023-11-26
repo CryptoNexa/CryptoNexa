@@ -30,14 +30,15 @@
             <th>Quantity</th>
             <th>Currency</th>
             <th>Total Amount</th>
+            <th>Current Price</th>
         </tr>
         {% for transaction in transaction_obj %}
         <tr>
             <td>{{ transaction.coin }}</td>
             <td>{{ transaction.quantity }}</td>
             <td>{{ transaction.currency }}</td>
-            <td>{{ transaction.total_spent }} ({{ transaction.type }})</td>
-{#            <td>{{ transaction.type }}</td>#}
+            <td>{{ transaction.total_spent }} {{ transaction.type }} </td>
+            <td>{{ c_price }}  </td>
         </tr>
         {% endfor %}
     </table>
