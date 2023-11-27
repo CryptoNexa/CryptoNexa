@@ -237,6 +237,7 @@ def currency_converter(request):
     if request.method == 'POST':
         form = CurrencyConverterForm(request.POST)
         if form.is_valid():
+            print("is valid")
             amount = form.cleaned_data['amount']
             base_currency = form.cleaned_data['base_currency']
             convert_currency = form.cleaned_data['convert_currency']
@@ -249,6 +250,9 @@ def currency_converter(request):
                 else:
                     has_error = True
                     error_msg = result["status"]["error_message"]
+        else:
+            has_error = True
+            error_msg = "Value should be greater than or equal to 1"
     else:
         form = CurrencyConverterForm()
 
