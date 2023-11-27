@@ -32,7 +32,7 @@ def portfolio(request):
         cur_data = {}
         current_crypto_price = []
         price = Cryptocurrency.objects.get(name=transaction.coin).price
-        transaction_in_profit_or_loss = price - transaction.total_spent
+        transaction_in_profit_or_loss = price - transaction.price
 
         row_amount = transaction.total_spent
 
