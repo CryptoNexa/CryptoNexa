@@ -73,10 +73,10 @@ def payment_cancelled(request):
     else:
         user_payment = UserPaymentSell.objects.create(user=user_object, payment_status=True,
                                                       transaction_id=transaction_obj,
-                                                      account_holder_name=None,
-                                                      account_number=None,
-                                                      transit_number=None,
-                                                      routing_number=None, amount=None)
+                                                      account_holder_name="",
+                                                      account_number=0,
+                                                      transit_number=0,
+                                                      routing_number=0, amount=0)
 
     context = {
         "user_payment": user_payment,
