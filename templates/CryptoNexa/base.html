@@ -10,94 +10,74 @@
     {% csrf_token %}
     <link rel="stylesheet" type="text/css" href="{% static 'css/base.css' %}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link href="{% static 'css/crypto_detail.css' %}" rel="stylesheet">
     <script src="{% static 'js/buysell.js' %}"></script>
     {% block head %}
     {% endblock %}
-</head>
-<body>
 
-<nav class="navbar navbar-expand-sm navbar-light bg-light">
-    <div class="container-fluid">
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                <li class="navbar-nav">
-                    <a class="nav-link" href="#">Cryptos:</a>
-                </li>
-                <li class="navbar-nav">
-                    <span class="nav-link">Exchanges:</span>
-                </li>
-                <li class="navbar-nav">
-                    <span class="nav-link">Market Cap:</span>
-                </li>
-                <li class="navbar-nav">
-                    <span class="nav-link">24h Vol:</span>
-                </li>
-                <li class="navbar-nav">
-                    <span class="nav-link">Dominance</span>
-                </li>
-                <li class="navbar-nav">
-                    <span class="nav-link">Eth Gas:</span>
-                </li>
-            </ul>
-            <a href="{% url 'currency_exchange' %}" id="openModal">
-                <button type="button" class="btn btn-outline-primary">{{ request.session.currency }}</button>
-            </a>
-            {% if user.is_authenticated %}
-                <div class="dropdown">
-                    <button class="btn btn-secondary" type="button" id="profileDropdown"
-                            data-bs-toggle="dropdown" aria-expanded="false"
-                            style="background-color: #f8f8f8; border:none">
-                        <img style="width: 30px; height: 30px; border-radius: 50%;"
-                             src="{% static 'images/profile.jpg' %}" alt="Profile image">
-                    </button>
-                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="profileDropdown">
-                        <a href="{% url 'core:profile' user.id %}" style="text-decoration: none; color: #333">
-                            <li style="padding: 10px">
-                                <div class="d-flex align-items-center">
-                                    <img src="{% static 'images/profile.jpg' %}" alt="User Profile Image"
-                                         class="rounded-circle" style="width: 40px; height: 40px;">
-                                    <div class="ms-3">
-                                        <p class="fw-bold mb-0">{{ user.first_name }} {{ user.last_name }}</p>
-                                        <p class="text-muted mb-0">{{ user.email }}</p>
-                                    </div>
-                                </div>
-                            </li>
-                        </a>
-                        <li>
-                            <hr class="dropdown-divider">
-                        </li>
-                        <li><a class="dropdown-item" href="#">Settings</a></li>
-                        <li><a class="dropdown-item" href="#">Watchlist</a></li>
-                        <li><a class="dropdown-item" href="#">Portfolio</a></li>
-                        <li><a class="dropdown-item" href="{% url 'core:logout' %}">Logout</a></li>
-                    </ul>
-                </div>
-            {% else %}
-                <a href="{% url 'core:login' %}" style="margin-right: 10px">
-                    <button type="button" class="btn btn-outline-dark">Log In</button>
-                </a>
-                <a href="{% url 'core:register' %}">
-                    <button type="button" class="btn btn-dark">Sign Up</button>
-                </a>
-            {% endif %}
-        </div>
-    </div>
-</nav>
-<div class="top-bar">
+</head>
+<body class="d-flex flex-column min-vh-100">
+
+<div class="top-bar bg-light">
     <div class="top-bar-left me-auto mb-2 mb-lg-0">
-        <div class="top-bar-left-hero"><span><a href="{% url 'index' %}" class="text-decoration-none text-dark">CrytoNexa</a></span></div>
-        <div><span>Cryptocurrencies</span></div>
-        <div><span>Exchanges</span></div>
-        <div><span>Community</span></div>
-        <div><span>Products</span></div>
-        <div><span>Learn</span></div>
-        <div><span><a href ="news/">Newsletter</a></span></div>
+        <div class="top-bar-left-hero"><span><a href="{% url 'index' %}" class="text-decoration-none text-dark">CrytoNexa</a></span>
+        </div>
+        <div><span><a href="{% url 'core:currency_converter' %}"
+                      class="text-decoration-none text-dark">Converter</a></span></div>
+        <div><span><a href="{% url 'news_list' %}" class="text-decoration-none text-dark">Newsletter</a></span></div>
+        <div><span><a href="{% url 'support:issue_creation' %}"
+                      class="text-decoration-none text-dark">Support</a></span></div>
     </div>
     <div class="top-bar-right">
-        <div><span>Portfolio</span></div>
+        <div style="margin-right: 15px;"><span><a href="{% url 'core:watchlist' %}"
+                                                  style="text-decoration: none; color: inherit;">Watchlist</a></span>
+        </div>
+        <div><span><a href="{% url 'portfolio' %}" class="text-decoration-none text-dark" style="margin-right: 10px">Portfolio</a></span></div>
+        <a href="{% url 'currency_exchange' %}" id="openModal">
+            <button type="button" class="btn btn-outline-primary">{{ request.session.currency }}</button>
+        </a>
+        {% if user.is_authenticated %}
+            <div class="dropdown">
+                <button class="btn btn-secondary" type="button" id="profileDropdown"
+                        data-bs-toggle="dropdown" aria-expanded="false"
+                        style="background-color: #f8f8f8; border:none;">
+                    <img style="width: 30px; height: 30px; border-radius: 50%;"
+                         src="{% static 'images/profile.jpg' %}" alt="Profile image">
+                </button>
+                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="profileDropdown">
+                    <a href="{% url 'core:edit_profile' user.id %}" style="text-decoration: none; color: #333">
+                        <li style="padding: 10px">
+                            <div class="d-flex align-items-center">
+                                <img src="{% static 'images/profile.jpg' %}" alt="User Profile Image"
+                                     class="rounded-circle" style="width: 40px; height: 40px;">
+                                <div class="ms-3">
+                                    <p class="fw-bold mb-0">{{ user.first_name }} {{ user.last_name }}</p>
+                                    <p class="text-muted mb-0">{{ user.email }}</p>
+                                </div>
+                            </div>
+                        </li>
+                    </a>
+                    <li>
+                        <hr class="dropdown-divider">
+                    </li>
+                    <li><a class="dropdown-item" href="{% url 'core:watchlist' %}">Watchlist</a></li>
+                    <li><a class="dropdown-item" href="{% url 'portfolio' %}">Portfolio</a></li>
+                    <li><a class="dropdown-item" href="{% url 'support:list_issues' %}">Your Issue Tickets</a></li>
+                    <li><a class="dropdown-item" href="{% url 'core:payment_history' %}">Payment History</a></li>
+                    <li><a class="dropdown-item" href="{% url 'core:logout' %}">Logout</a></li>
+                </ul>
+            </div>
+        {% else %}
+            <a href="{% url 'core:login' %}">
+                <button type="button" class="btn btn-outline-primary">Log In</button>
+            </a>
+            <a href="{% url 'core:register' %}">
+                <button type="button" class="btn btn-primary">Sign Up</button>
+            </a>
+        {% endif %}
     </div>
 </div>
-<div id="content">
+<div id="content" class="flex-grow-1">
     {% block content %}
         <!-- Specific page content goes here -->
     {% endblock %}
@@ -105,34 +85,12 @@
     {% endblock %}
     {% block currencypopup %}
     {% endblock %}
+    {% block crypto_filter %}
+    {% endblock %}
 </div>
 
-<footer class="footer bg-light text-dark py-3" style="height: 200px">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-6">
-                <p>&copy;2023 CryptoNexa. All rights reserved</p>
-            </div>
-            <div class="col-md-6">
-                <div class="row text-md-right">
-                    <div class="col-md-3">
-                        <h6>Products</h6>
-                    </div>
-                    <div class="col-md-3">
-                        <h6>Company</h6>
-                    </div>
-                    <div class="col-md-3">
-                        <h6>Support</h6>
-                    </div>
-                    <div class="col-md-3">
-                        <h6><a href="Contact_us/">Contact Us</a></h6>
-                    </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</footer>
-
+{% block footer %}
+    {% include 'CryptoNexa/footer.html' with footer_items=footer_items %}
+{% endblock %}
 </body>
 </html>

@@ -1,0 +1,48 @@
+{% extends 'CryptoNexa/base.html' %}
+{% load static %}
+
+{% block head %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/list_support_issues.css' %}">
+{% endblock %}
+
+{% block content %}
+    <div class="container my-4">
+        <h4>Your Support Issue Tickets</h4>
+        {% if user_issues %}
+            <div class="table-responsive-xl">
+                <table class="table table-hover">
+                    <thead class="thead-light">
+                        <tr>
+                            <th scope="col">Issue</th>
+                            <th scope="col">Status</th>
+                            <th scope="col">Description</th>
+                            <th scope="col">Transaction ID</th>
+                            <th scope="col">Files</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for issue in user_issues %}
+                            <tr>
+                                <td>{{ issue.issue_title|title }}</td>
+                                <td class="{% if issue.status == 'open' %}status-open{% elif issue.status == 'closed' %}status-closed{% else %}status-in-progress{% endif %}">
+                                    {{ issue.get_status_display }}
+                                </td>
+                                <td>{{ issue.issue_description|title }}</td>
+                                <td>{{ issue.transaction_id.id|default:'Not Available' }}</td>
+                                <td>
+                                    {% if issue.files %}
+                                        <a href="{{ issue.files.url }}" download style="text-decoration: none">Download Files</a>
+                                    {% else %}
+                                        No files
+                                    {% endif %}
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        {% else %}
+            <p>No support issues found.</p>
+        {% endif %}
+    </div>
+{% endblock %}

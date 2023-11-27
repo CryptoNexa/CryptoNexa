@@ -1,6 +1,16 @@
-{#{% extends base.html %}#}
-
+{% extends 'CryptoNexa/base.html' %}
+{% load static %}
+{% block head %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/success.css' %}">
+{% endblock %}
 {% block content %}
-    <h1>Your message has been sent. Thank you.</h1>
-    <footer><a href="/">Go to home page</a> </footer>
+    <div class="container my-4">
+        <div class="success-message">
+            <h1>Your message has been sent!</h1>
+            <p>Thank you for reaching out. We appreciate your interest.
+                We'll review your message and get back to you shortly.
+            Meanwhile, why not again to explore cryptocurrencies?</p>
+            <button class="btn btn-primary" onclick="window.location.href = '/'">Explore Now</button>
+        </div>
+    </div>
 {% endblock %}

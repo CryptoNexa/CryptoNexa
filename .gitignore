@@ -6,6 +6,10 @@ __pycache__/
 .idea/
 
 db.sqlite3
+/migrations/
+BuySell/migrations/
+ContactUS/migrations/
+Newsletter/migrations/
 
 # C extensions
 *.so
@@ -64,6 +68,7 @@ cover/
 *.log
 local_settings.py
 db.sqlite3
+media/user_photos/*
 
 db.sqlite3-journal
 

@@ -1,0 +1,66 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="">
+<head>
+    {% load bootstrap5 %}
+    {% bootstrap_css %}
+    {% bootstrap_javascript %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/payment_checkout.css' %}">
+</head>
+<body style="background-color: whitesmoke">
+<div class="container">
+    <div class="center-div">
+        <div class="order-header">
+            <h6>Transaction ID: #{{ tran_id }}</h6>
+            <h3>Order Summary</h3>
+            <h6>Here's what you want to Sell. Please add the Account Details.</h6>
+        </div>
+        <center>
+        <div class="crypto-details">
+        <table>
+            <tr>
+                <td>
+                    <div class="textLeft">
+                    <div class="title">You Selling</div>
+                    <div class="total-spent">
+                        <div>{{ user_transaction.quantity }} {{ user_transaction.coin }}</div>
+                    </div>
+                </div>
+                </td>
+                <td>
+                    <div class="textLeft">
+                        <div class="title">You Get</div>
+                        <div class="total-spent">
+                            <div>{{ user_transaction.currency  }} {{ user_transaction.total_spent }}</div>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+
+        </table>
+         <div class="transaction-fee">{{ user_transaction.transaction_fee }} {{ user_transaction.currency }} fees included</div>
+         </div>
+        </center>
+        <form method="POST">
+            {% csrf_token %}
+        <div class="container-sell">
+                {% for field in form %}
+                    {% if field.name == "amount" %}
+                        <div class="form-floating mb-2">
+                        <input class="form-control" name="amount" id="id_amount" value="{{ field.value }}" readonly>
+                            <label for="id_amount">{{ field.label }}</label>
+                        </div>
+                     {% else %}
+                            <div class="form-floating mb-2">
+                                {{ field }}
+                                <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+                            </div>
+                    {% endif %}
+                {% endfor %}
+        </div>
+            <input type="submit" id="checkout-button" class="btn btn-dark" value="Sell">
+        </form>
+    </div>
+</div>
+</body>
+</html>

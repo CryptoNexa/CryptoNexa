@@ -1,0 +1,30 @@
+
+body {
+    background-color: #fff;
+    color: #000;
+}
+
+.header {
+    background-color: darkblue;
+    color: #fff;
+    padding: 10px;
+    border-radius: 10px;
+    margin-bottom: 10px;
+}
+
+.news-item {
+    border: 1px solid #808080;
+    padding: 20px;
+    margin-top: 10px;
+    margin-bottom: 20px;
+    border-radius: 10px;
+
+}
+
+.news-item h2 {
+    color: #000;
+}
+
+.news-item p {
+    color: #444;
+}

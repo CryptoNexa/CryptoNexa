@@ -1,0 +1,69 @@
+{% extends 'CryptoNexa/base.html' %}
+{% load static %}
+
+{% block content %}
+    <div style="display: flex; align-items: center; justify-content: center; flex-direction: column; margin: 0 0 48px;">
+        <div>
+            <h1 style="font-weight: 600; font-size: 25px; margin-top: 24px; margin-bottom: 24px">Cryptocurrency
+                Converter Calculator</h1>
+        </div>
+        <div style="padding: 24px; margin: 20px auto; background: #F8FAFD; width: 50%">
+            <form method="POST" action="{% url 'core:currency_converter' %}"
+                  style="display: flex; flex-direction: column; align-items: center; justify-content: center">
+                {% csrf_token %}
+                <div style="width: calc(50% - 25px);">
+                    <input type="number" name="amount" class="form-control" id="amountToConvert"
+                           placeholder="Enter Amount"
+                           style="width:100% "
+                           value="{% if form_data.amount %}{{ form_data.amount }}{% else %}1{% endif %}">
+                </div>
+
+                <select name="base_currency" class="form-select" aria-label="Base Currency"
+                        style="width: calc(50% - 25px); margin-top: 10px">
+                    <option disabled>Select Base Currency</option>
+                    {% for currency, data in currency_data.items %}
+                        <option value="{{ currency }}"
+                                {% if form_data.base_currency == currency %}selected{% endif %}>
+                            {{ currency }} - {{ data.Currency_Code }}
+                        </option>
+                    {% endfor %}
+                </select>
+
+                <select name="convert_currency" class="form-select" aria-label="Convert To"
+                        style="width: calc(50% - 25px); margin-top: 10px">
+                    <option disabled>Select Convert To Currency</option>
+                    {% for currency, data in currency_data.items %}
+                        <option value="{{ currency }}"
+                                {% if form_data.convert_currency == currency %}selected{% endif %}>
+                            {{ currency }} - {{ data.Currency_Code }}
+                        </option>
+                    {% endfor %}
+                </select>
+
+                <div style="display: flex; justify-content: center; margin-top: 10px">
+                    <button type="submit" class="btn" style="color: #fff; background-color: #0d6efd;">
+                        Convert
+                    </button>
+                </div>
+            </form>
+            <form method="get" action="{% url 'core:currency_converter' %}"
+                  style="width: 100%; display: flex; justify-content: center; margin-top: 10px; ">
+                <button type="submit" class="btn btn-danger">Clear</button>
+            </form>
+            {% if resulted_price %}
+                <div style="display: flex; justify-content: center; margin-top: 10px;">
+                    {{ form_data.amount }} {{ form_data.base_currency }} =
+                    <b>{{ resulted_price }}</b> {{ form_data.convert_currency }}
+                </div>
+            {% else %}
+                {% if hasError %}
+                    <div style="display: flex; justify-content: center; margin-top: 10px;">
+                        <p style="color:red;">Amount should be greater than or equal to 1.</p>
+                    </div>
+                {% else %}
+
+                {% endif %}
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}

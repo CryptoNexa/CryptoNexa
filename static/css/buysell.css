@@ -18,3 +18,11 @@
     border-radius: 10px;
     border: 2px solid grey;
 }
+
+.marginLeft {
+    margin-left: 20px;
+}
+
+i {
+    font-weight: normal;
+}

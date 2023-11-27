@@ -45,7 +45,9 @@ INSTALLED_APPS = [
     'CryptoNexa',
     'currencyExchange',
     'payments',
-    'BuySell'
+    'BuySell',
+    'portfolio',
+    'support',
 ]
 # Application definition
 
@@ -73,6 +75,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'core.context_processors.footer_items'
             ],
         },
     },
@@ -136,3 +139,6 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 AUTH_USER_MODEL = 'core.User'
 
 DATETIME_FORMAT = 'Y-m-d H:i:s'
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')

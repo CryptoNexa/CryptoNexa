@@ -1,0 +1,80 @@
+{% block filtered_crypto_block %}
+    {% load static %}
+    <link href="{% static 'css/crypto_table.css' %}" rel="stylesheet">
+    <div class="container">
+        <br/>
+        <a href="{% url 'filter_crypto_data' %}" id="openModal" class="button-link">
+            <button style="float: right; width: 7%; height: 25%;" type="button" id="filter-button"
+                    class="btn btn-outline-primary">Filter
+            </button>
+        </a>
+        {% if error_message %}
+            <h1>{{ error_message }}</h1>
+        {% else %}
+            <table class="table fixed-table">
+                <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Name</th>
+                    <th><i class="currency-icon"></i> Price {{ session_cur }}</th>
+                    <th>1h%</th>
+                    <th>24h%</th>
+                    <th><i class="currency-icon"></i> MarketCap</th>
+                    <th><i class="currency-icon"></i> Volume (24h)</th>
+                </tr>
+                </thead>
+                <tbody id="crypto-table-body">
+                {% for crypto in cryptos %}
+                    <tr>
+                        <td>{{ forloop.counter }}</td>
+                        <td><a href="{% url 'core:crypto_detail' crypto.slug %}">{{ crypto.name }}</a></td>
+                        <td id="price-{{ crypto.id }}"><i class="currency-icon"></i> {{ crypto.price }}</td>
+                        <td id="change-1h-{{ crypto.id }}"
+                            class="{% if crypto.percent_change_1h < 0 %}text-danger{% elif crypto.percent_change_1h > 0 %}text-success{% else %}text-muted{% endif %}">
+                            {{ crypto.percent_change_1h }}
+                        </td>
+                        <td id="change-24h-{{ crypto.id }}"
+                            class="{% if crypto.percent_change_24h < 0 %}text-danger{% elif crypto.percent_change_24h > 0 %}text-success{% else %}text-muted{% endif %}">
+                            {{ crypto.percent_change_24h }}
+                        </td>
+                        <td id="market-cap-{{ crypto.id }}"><i class="currency-icon"></i> {{ crypto.market_cap }}</td>
+                        <td id="volume-24h-{{ crypto.id }}"><i class="currency-icon"></i> {{ crypto.volume_24h }}</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        {% endif %}
+
+    </div>
+
+    <script>
+        const currencyIcons = {
+            'USD': 'fas fa-dollar-sign',
+            'AUD': 'fas fa-dollar-sign',
+            'CAD': 'fas fa-dollar-sign',
+            'CNY': 'fas fa-yen-sign',
+            'EUR': 'fas fa-euro-sign',
+            'INR': 'fas fa-rupee-sign',
+            'JPY': 'fas fa-yen-sign',
+            'KWD': 'fas fa-money-bill-wave',
+            'NZD': 'fas fa-dollar-sign',
+            'PKR': 'fas fa-rupee-sign',
+            'RUB': 'fas fa-ruble-sign',
+            'AED': 'fas fa-money-bill-wave'
+        };
+
+        function updateCurrencyIcon(currencyCode) {
+            const iconClass = currencyIcons[currencyCode];
+            if (iconClass) {
+                const currencyElements = document.querySelectorAll('.currency-icon');
+                currencyElements.forEach(element => {
+                    element.className = `currency-icon ${iconClass}`;
+                });
+            }
+        }
+
+        updateCurrencyIcon('{{ session_cur }}');
+    </script>
+
+
+{% endblock %}

@@ -1,0 +1,62 @@
+#supportForm {
+    display: none;
+}
+
+.card-link {
+    text-decoration: none;
+    color: inherit; /* Inherit the color from the parent */
+}
+
+.selected-card {
+    border: 2px solid blue; /* Change the border color as desired */
+}
+
+.issue-creation-form-container {
+    background: white;
+    width: 700px;
+    margin: 3% auto auto;
+    padding: 15px 10px 10px 10px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+}
+
+.form-group label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.form-group select,
+.form-group input[type="text"],
+.form-group textarea,
+.form-group input[type="file"] {
+    width: 100%;
+    padding: 6px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+}
+
+.form-group textarea{
+    height: 150px;
+}
+
+.form-group input:focus {
+    border: 1px solid #ccc;
+}
+
+.errorlist {
+    color: red;
+    list-style: none;
+    padding: 0;
+    margin-top: -10px;
+}
+
+.button {
+    width: 100%;
+    text-align: center;
+    margin-top: 10px;
+    border-radius: 10px;
+}

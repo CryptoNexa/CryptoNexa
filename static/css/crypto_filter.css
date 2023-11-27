@@ -1,0 +1,101 @@
+.currency-container {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+}
+
+.currency-item {
+
+    padding: 10px;
+    text-align: center;
+    font-size: 10px;
+    margin-bottom: 15px;
+}
+
+a {
+    text-decoration: none;
+    color: inherit
+}
+
+.modal {
+    text-align: center;
+    padding: 0 !important;
+}
+
+.modal:before {
+    content: '';
+    display: inline-block;
+    vertical-align: middle;
+    margin-right: -4px;
+}
+
+.modal-dialog {
+    display: inline-block;
+    text-align: left;
+    vertical-align: middle;
+    /*max-width: 1000px;*/
+    /*max-height: 100vh;*/
+}
+
+.modal-content {
+    border-radius: 20px;
+    padding: 20px;
+}
+
+.modal-header {
+    margin-bottom: 10px;
+    font-weight: bolder;
+}
+
+.modal-body {
+    padding: 200px;
+}
+
+
+.custom-radio {
+    display: flex;
+
+}
+
+.custom-radio input[type="radio"] {
+    display: none;
+}
+
+.custom-radio label {
+    border: 1px solid #ddd;
+    cursor: pointer;
+    border-radius: 10px;
+    flex: 1;
+}
+
+.custom-radio input[type="radio"]:checked + label {
+    border-color: #007bff;
+}
+
+
+.custom-input {
+    height: 30px;
+    border: 1px solid #ccc;
+
+    width: 200px;
+    padding: 8px;
+    border-radius: 4px;
+    margin-bottom: 10px;
+}
+
+
+.price-range-field {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.price-range-field input[type="number"] {
+    width: 100px;
+    padding: 5px;
+}
+
+.range-separator {
+    font-weight: bold;
+    margin: 0 5px;
+}

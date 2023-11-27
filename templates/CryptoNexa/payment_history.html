@@ -1,0 +1,65 @@
+{% extends 'CryptoNexa/base.html' %}
+{% load static %}
+{% block content %}
+    <div class="container">
+        <div class="row mb-3 mt-3 d-flex justify-content-between">
+            <div class="col-md-3">
+                <form method="GET" action="{% url 'core:payment_history' %}">
+                    <div class="input-group">
+                        <input type="text" class="form-control" placeholder="Search..." name="search"
+                               value="{{ request.GET.search }}">
+                        <button type="submit" class="btn btn-outline-secondary">Search</button>
+                    </div>
+                </form>
+            </div>
+            <div class="col-md-3">
+                <form method="GET" action="{% url 'core:payment_history' %}" class="d-flex">
+                    <select class="form-select" name="status">
+                        <option value="" {% if not request.GET.status %}selected{% endif %}>All Status</option>
+                        <option value="initiated" {% if request.GET.status == 'initiated' %}selected{% endif %}>
+                            Initiated
+                        </option>
+                        <option value="success" {% if request.GET.status == 'success' %}selected{% endif %}>Success
+                        </option>
+                        <option value="failed" {% if request.GET.status == 'failed' %}selected{% endif %}>Failed
+                        </option>
+                    </select>
+                    <button type="submit" class="btn btn-outline-secondary">Filter</button>
+                </form>
+            </div>
+        </div>
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>#</th>
+                <th>Type</th>
+                <th>Coin</th>
+                <th>Currency</th>
+                <th>Quantity</th>
+                <th>Price</th>
+                <th>Transaction Fee</th>
+                <th>Total Spent</th>
+                <th>Notes</th>
+                <th>Date</th>
+                <th>Status</th>
+            </tr>
+            <tbody>
+            {% for transaction in transactions %}
+                <tr>
+                    <td>{{ forloop.counter }}</td>
+                            <td>{{ transaction.type }}</td>
+                    <td>{{ transaction.coin }}</td>
+                    <td>{{ transaction.currency }}</td>
+                    <td>{{ transaction.quantity }}</td>
+                    <td>{{ transaction.price }}</td>
+                    <td>{{ transaction.transaction_fee }}</td>
+                    <td>{{ transaction.total_spent }}</td>
+                    <td>{{ transaction.notes }}</td>
+                    <td>{{ transaction.datetime }}</td>
+                    <td>{{ transaction.status }}</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

@@ -40,6 +40,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=True)
     date_joined = models.DateTimeField(auto_now_add=True)
+    photo_id = models.ImageField(upload_to='user_photos/', blank=True, null=True)
 
     objects = CustomUserManager()
 
@@ -71,6 +72,22 @@ class Cryptocurrency(models.Model):
     last_updated = models.DateTimeField(null=True)
     date_added = models.DateTimeField(null=True)
     quote = models.ForeignKey(Quote, on_delete=models.CASCADE)
+    price = models.DecimalField(max_digits=18, decimal_places=2, default=0.0)
 
     def __str__(self):
         return self.name
+
+class Watchlist(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    name = models.CharField(max_length=255, default="My Watchlist")
+    cryptocurrencies = models.ManyToManyField(Cryptocurrency, blank=True)
+
+    def __str__(self):
+        return f"{self.user}'s {self.name} Watchlist"
+
+class FooterList(models.Model):
+    category = models.CharField(max_length=50)
+    name = models.CharField(max_length=100)
+    link = models.TextField(max_length=512, null=True, blank=True)
+    def __str__(self):
+        return f"{self.category} - {self.name} - {self.link}"
