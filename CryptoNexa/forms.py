@@ -40,24 +40,3 @@ class CryptoFilterForm(forms.Form):
             raise forms.ValidationError('Min Price cannot be greater than Max Price.')
 
         return cleaned_data
-
-    # price_gt_or_lt = forms.ChoiceField(required=False, label='Price Greater Than or Less Than', choices=GT_LT_CHOICES,
-    #                                    widget=forms.RadioSelect(attrs={'class': 'custom-input-radio'}))
-    # percent_change_1h = forms.DecimalField(required=False, label='Percent Change (1h)', max_digits=20, decimal_places=2,
-    #                                        widget=forms.NumberInput(attrs={'class': 'custom-input'}))
-    # percent_change_1h_gt_or_lt = forms.ChoiceField(required=False, label='Percent Change (1h) Greater Than or Less Than',
-    #                                                choices=GT_LT_CHOICES,
-    #                                                widget=forms.RadioSelect(attrs={'class': 'custom-input-radio'}))
-    # percent_change_24h = forms.DecimalField(required=False, label='Percent Change (24h)', max_digits=20, decimal_places=2,
-    #                                         widget=forms.NumberInput(attrs={'class': 'custom-input'}))
-    # percent_change_24h_gt_or_lt = forms.ChoiceField(required=False, label='Percent Change (24h) Greater Than or Less Than',
-    #                                                 choices=GT_LT_CHOICES,
-    #                                                 widget=forms.RadioSelect(attrs={'class': 'custom-input-radio'}))
-    # market_cap = forms.DecimalField(required=False, label='Market Cap', max_digits=20, decimal_places=2,
-    #                                 widget=forms.NumberInput(attrs={'class': 'custom-input'}))
-    # market_cap_gt_or_lt = forms.ChoiceField(required=False, label='Market Cap Greater Than or Less Than', choices=GT_LT_CHOICES,
-    #                                         widget=forms.RadioSelect(attrs={'class': 'custom-input-radio'}))
-    # volume_24h = forms.DecimalField(required=False, label='Volume (24h)', max_digits=20, decimal_places=2,
-    #                                 widget=forms.NumberInput(attrs={'class': 'custom-input'}))
-    # volume_24h_gt_or_lt = forms.ChoiceField(required=False, label='Volume (24h) Greater Than or Less Than', choices=GT_LT_CHOICES,
-    #                                         widget=forms.RadioSelect(attrs={'class': 'custom-input-radio'}))
