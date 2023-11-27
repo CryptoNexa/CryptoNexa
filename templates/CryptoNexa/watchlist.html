@@ -48,17 +48,18 @@
                     </button>
                 </div>
             </div>
-            {% if cryptocurrencies.all %}
+
+            {% if cryptocurrencies %}
                 <table class="table table-striped">
                     <thead>
                     <tr>
                         <th>#</th>
                         <th>Name</th>
-                        <th>Price USD</th>
+                        <th><i class="currency-icon"></i> Price</th>
                         <th>1h%</th>
                         <th>24h%</th>
-                        <th>MarketCap</th>
-                        <th>Volume (24h)</th>
+                        <th><i class="currency-icon"></i> MarketCap</th>
+                        <th><i class="currency-icon"></i> Volume (24h)</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -66,15 +67,15 @@
                         <tr>
                             <td>{{ forloop.counter }}</td>
                             <td><a href="{% url 'core:crypto_detail' crypto.slug %}">{{ crypto.name }}</a></td>
-                            <td>${{ crypto.quote.data.USD.price }}</td>
-                            <td class="{% if crypto.quote.data.USD.percent_change_1h < 0 %}text-danger{% elif crypto.quote.data.USD.percent_change_1h > 0 %}text-success{% else %}text-muted{% endif %}">
-                                {{ crypto.quote.data.USD.percent_change_1h }}
+                            <td><i class="currency-icon"></i><span class="price-class"> {{ crypto.price }}</span></td>
+                            <td class="{% if crypto.percent_change_1h < 0 %}text-danger{% elif crypto.percent_change_1h > 0 %}text-success{% else %}text-muted{% endif %}">
+                                {{ crypto.percent_change_1h }}
                             </td>
-                            <td class="{% if crypto.quote.data.USD.percent_change_24h < 0 %}text-danger{% elif crypto.quote.data.USD.percent_change_24h > 0 %}text-success{% else %}text-muted{% endif %}">
-                                {{ crypto.quote.data.USD.percent_change_24h }}
+                            <td class="{% if crypto.percent_change_24h < 0 %}text-danger{% elif crypto.percent_change_24h > 0 %}text-success{% else %}text-muted{% endif %}">
+                                {{ crypto.percent_change_24h }}
                             </td>
-                            <td>${{ crypto.quote.data.USD.market_cap }}</td>
-                            <td>${{ crypto.quote.data.USD.volume_24h }}</td>
+                            <td><i class="currency-icon"></i> {{ crypto.market_cap }}</td>
+                            <td><i class="currency-icon"></i> {{ crypto.volume_24h }}</td>
                         </tr>
                     {% endfor %}
                     </tbody>
@@ -106,6 +107,11 @@
                     </div>
                     <div class="modal-body" style="max-height: 400px; overflow-y: auto;">
                         <form method="POST" action="
+
+
+
+
+
 
 
 
@@ -161,6 +167,11 @@
                     </div>
                     <div class="modal-body" style="max-height: 400px; overflow-y: auto;">
                         <form method="POST" action="
+
+
+
+
+
 
 
 
@@ -227,5 +238,33 @@
                 editNameModal.show();
             })
         });
+
+        const currencyIcons = {
+            'USD': 'fas fa-dollar-sign',
+            'AUD': 'fas fa-dollar-sign',
+            'CAD': 'fas fa-dollar-sign',
+            'CNY': 'fas fa-yen-sign',
+            'EUR': 'fas fa-euro-sign',
+            'INR': 'fas fa-rupee-sign',
+            'JPY': 'fas fa-yen-sign',
+            'KWD': 'fas fa-money-bill-wave',
+            'NZD': 'fas fa-dollar-sign',
+            'PKR': 'fas fa-rupee-sign',
+            'RUB': 'fas fa-ruble-sign',
+            'AED': 'fas fa-money-bill-wave'
+        };
+
+        function updateCurrencyIcon(currencyCode) {
+            const iconClass = currencyIcons[currencyCode];
+            if (iconClass) {
+                const currencyElements = document.querySelectorAll('.currency-icon');
+                currencyElements.forEach(element => {
+                    element.className = `currency-icon ${iconClass}`;
+                });
+            }
+        }
+
+        updateCurrencyIcon('{{ session_cur }}');
+
     </script>
 {% endblock %}

@@ -141,6 +141,7 @@ def user_edit_profile(request, id):
 
 @login_required
 def watchlist(request, watchlist_id=None):
+    session_currency = request.session.get('currency')
     user_watchlists = Watchlist.objects.filter(user=request.user)
     if request.method == 'POST':
         form = WatchlistForm(request.POST)
@@ -171,9 +172,11 @@ def watchlist(request, watchlist_id=None):
         selected_watchlist = user_watchlists.first()
         cryptocurrencies = selected_watchlist.cryptocurrencies.all()
 
+    data = process_crypto_data(cryptocurrencies, session_currency, many=True)
+    print(data)
     return render(request, 'CryptoNexa/watchlist.html',
                   {'form': form, 'user_watchlists': user_watchlists, 'selected_watchlist': selected_watchlist,
-                   'cryptocurrencies': cryptocurrencies})
+                   'cryptocurrencies': data, 'session_cur': session_currency})
 
 
 @login_required
