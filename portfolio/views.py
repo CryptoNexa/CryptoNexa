@@ -1,3 +1,4 @@
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
 from core.models import User, Cryptocurrency
 from BuySell.models import Transaction
@@ -12,16 +13,17 @@ from .models import User
 from collections import defaultdict
 
 
+@login_required(login_url='/login/')
 def portfolio(request):
     current_user = request.user
     user_id = request.user.id
     user_transactions = Transaction.objects.filter(user=current_user)
     user_object = User.objects.get(pk=user_id)
 
-    #Crypto buy
+    # Crypto buy
     balance = 0
 
-    #Crypto sold
+    # Crypto sold
     invested = 0
 
     row_amount = 0
@@ -32,7 +34,7 @@ def portfolio(request):
         cur_data = {}
         current_crypto_price = []
         price = Cryptocurrency.objects.get(name=transaction.coin).price
-        transaction_in_profit_or_loss = price - transaction.total_spent
+        transaction_in_profit_or_loss = price - transaction.price
 
         row_amount = transaction.total_spent
 

@@ -1,7 +1,6 @@
 from django.shortcuts import render, redirect
 
 from .forms import SelectionForm
-# from .forms import SelectionForm
 from .models import Currency
 
 

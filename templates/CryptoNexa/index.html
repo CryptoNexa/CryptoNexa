@@ -9,6 +9,11 @@
                 {% include 'crypto/filtered_crypto_data.html' %}
             {% endblock %}
         {% else %}
+            <a href="{% url 'filter_crypto_data' %}" id="openModal" class="button-link">
+                <button style="float: right; width: 7%; height: 25%; margin-right: 150px" type="button" id="filter-button"
+                        class="btn btn-outline-primary">Filter
+                </button>
+            </a>
             <br/>
             <br/>
             <br/>
