@@ -1,8 +1,31 @@
 {% extends 'CryptoNexa/base.html' %}
 
 {% block content %}
-    {% block cryptoListView %}
-         {% include 'crypto/crypto_list_view.html' %}
-    {% endblock %}
+    {% include 'crypto/highlights.html' %}
+
+    {% if filters_provided %}
+        {% if crypto_count != 0 %}
+            {% block filtered_crypto_block %}
+                {% include 'crypto/filtered_crypto_data.html' %}
+            {% endblock %}
+        {% else %}
+            <a href="{% url 'filter_crypto_data' %}" id="openModal" class="button-link">
+                <button style="float: right; width: 7%; height: 25%; margin-right: 150px" type="button" id="filter-button"
+                        class="btn btn-outline-primary">Filter
+                </button>
+            </a>
+            <br/>
+            <br/>
+            <br/>
+            <h2 class="text-center">No data available for the provided filters.</h2>
+            <br/>
+            <br/>
+            <br/>
+        {% endif %}
+    {% else %}
+        {% block cryptoListView %}
+            {% include 'crypto/crypto_list_view.html' %}
+        {% endblock %}
+    {% endif %}
     <p></p>
 {% endblock %}

@@ -1,0 +1,28 @@
+body {
+    font-family: 'Roboto', sans-serif;
+    color: #333333;
+}
+
+i {
+    font-weight: normal;
+}
+
+.fixed-table {
+    width: 100%;
+    height: 400px;
+    overflow-y: auto;
+}
+
+a {
+    text-decoration: none;
+    color: inherit
+}
+
+.fixed-table td,
+.fixed-table th {
+    font-weight: normal;
+    font-style: normal;
+    width: 150px;
+    height: 50px;
+    padding: 10px;
+}

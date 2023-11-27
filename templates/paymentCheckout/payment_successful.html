@@ -1,12 +1,28 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Payment Successful</title>
-</head>
-<body>
-<div class="">
-    <h1>Thanks for your order {{ user_object.first_name }}!</h1>
-</div>
-</body>
-</html>
+{% extends 'CryptoNexa/base.html' %}
+
+{% block title %}Payment Successful{% endblock %}
+
+{% block content %}
+    <div class="container">
+    <div class="card success-card mt-5">
+        <div class="card-body">
+            <h2 class="card-title">Order Details</h2>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item">Type: {{ transaction_obj.type }}</li>
+                <li class="list-group-item">Coin: {{ transaction_obj.coin }}</li>
+                <li class="list-group-item">Transaction ID: {{ transaction_obj.id }}</li>
+                <li class="list-group-item">Payment ID: {{ user_payment.id }}</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="card thank-you-card mt-3">
+        <div class="card-body">
+            <h3 class="card-title">Thank you for choosing us, {{ user_object.first_name }}!</h3>
+            <p class="card-text">Click here to return to the homepage </p>
+            <a class="btn btn-primary" style="font-size: 15px; width: 15%" href="{% url 'index' %}">Back to homepage</a>
+        </div>
+    </div>
+    <br><br>
+    </div>
+{% endblock %}

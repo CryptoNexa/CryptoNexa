@@ -1,0 +1,186 @@
+<style>
+    .my-footer {
+        position: relative;
+        bottom: 0;
+        width: 100%;
+
+    }
+
+    .footer-ul {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+    }
+
+    li {
+        line-height: 35px;
+        position: relative;
+        color: #0D1421;
+        font-size: 15px;
+        box-sizing: border-box;
+    }
+
+    li:hover {
+        color: #0C5ED7;
+        cursor: pointer;
+    }
+
+</style>
+{% block footer %}
+    <footer class="my-footer footer bg-light text-dark py-3">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6" style="display: flex; justify-content: space-between; flex-direction: column">
+                    <svg viewBox="0 0 350.00000000000006 98" height="98" width="350.00000000000006"
+                         style="width: 13rem; height: 98px; z-index: 0; cursor: pointer; overflow: visible;">
+                        <defs id="SvgjsDefs1866"></defs>
+                        <g id="SvgjsG1867" featurekey="rootContainer" transform="matrix(1,0,0,1,0,0)" fill="#111111">
+                            <rect y="0" height="1" width="1" opacity="0"></rect>
+                            <rect y="93" width="350" height="5"></rect>
+                        </g>
+                        <g id="SvgjsG1868" featurekey="nameFeature-0"
+                           transform="matrix(1.6388437754823468,0,0,1.6388437754823468,-2.8155342814615016,-0.6609046688999882)"
+                           fill="#111111">
+                            <path d="M16.152 40.39063 c-8.3008 0 -14.434 -5.6445 -14.434 -14.512 s6.1328 -14.492 14.434 -14.492 c6.2891 0 11.328 3.2227 13.34 8.5742 l-5.4688 1.9922 c-1.25 -3.2813 -4.2383 -5.1758 -7.8711 -5.1758 c-4.8633 0 -8.5938 3.3984 -8.5938 9.1016 s3.7305 9.1211 8.5938 9.1211 c3.6328 0 6.6211 -1.9141 7.8711 -5.1953 l5.4688 1.9922 c-2.0117 5.3516 -7.0508 8.5938 -13.34 8.5938 z M37.021503125 23.105 c1.0156 -1.7773 3.6523 -3.418 6.5625 -3.418 l0 5.0195 c-4.2578 0 -6.2891 1.25 -6.2891 5.5078 l0 9.7852 l-5.6641 0 l0 -20.078 l5.3906 0 l0 3.1836 z M58.10578125 19.922 l5.7617 0 l-12.383 29.531 l-5.7031 0 l4.5898 -10.273 l-8.2617 -19.258 l6.1328 0 l4.7852 13.203 z M76.689953125 19.531 c5.293 0 9.668 3.8867 9.668 10.469 s-4.375 10.469 -9.668 10.469 c-2.6172 0 -4.9609 -1.0156 -6.1523 -2.8516 l0 12.148 l-5.625 0 l0 -29.844 l5.332 0 l0.15625 2.6953 c1.1133 -1.9922 3.5547 -3.0859 6.2891 -3.0859 z M75.419953125 35.8008 c2.9492 0 5.3125 -2.1484 5.3125 -5.8008 s-2.3633 -5.8008 -5.3125 -5.8008 c-3.0078 0 -5.3516 2.2852 -5.3516 5.8008 s2.3438 5.8008 5.3516 5.8008 z M96.15271875 40 c-3.9063 0 -6.1328 -2.2656 -6.1328 -6.2695 l0 -9.4922 l-3.9453 0 l0 -4.3164 l1.2695 0 c2.1289 0 3.3008 -0.82031 3.3008 -3.8281 l0 -2.6563 l5.0781 0 l0 6.4844 l4.1406 0 l0 4.3164 l-4.1406 0 l0 8.8867 c0 1.7969 0.87891 2.5977 2.3242 2.5977 l1.8164 0 l0 4.2773 l-3.7109 0 z M111.650765625 40.39063 c-6.3867 0 -10.996 -3.8867 -10.996 -10.449 c0 -6.5234 4.5703 -10.41 10.996 -10.41 c6.4648 0 11.016 3.8867 11.016 10.41 c0 6.5625 -4.5703 10.449 -11.016 10.449 z M111.591765625 35.918 c3.2617 0 5.4883 -2.3828 5.4883 -5.9766 s-2.2266 -5.9766 -5.4883 -5.9766 c-3.1445 0 -5.3516 2.3828 -5.3516 5.9766 s2.207 5.9766 5.3516 5.9766 z M144.94171875 11.777000000000001 l5.8398 0 l0 28.223 l-6.7773 0 l-12.5 -20.176 l0 20.176 l-5.8398 0 l0 -28.223 l6.6992 0 l12.578 20.059 l0 -20.059 z M174.306765625 29.668 l-0.058594 1.3477 l-14.883 0 c0.23438 3.3398 2.4609 4.9414 5.1367 4.9414 c2.0117 0 3.5742 -0.9375 4.3359 -2.7148 l5.1563 0.76172 c-1.3281 4.0625 -4.9414 6.3867 -9.4531 6.3867 c-6.4844 0 -10.723 -3.8281 -10.723 -10.43 s4.3555 -10.469 10.547 -10.469 c5.6836 0 9.9219 3.1445 9.9414 10.176 z M164.404765625 23.477 c-2.5586 0 -4.3359 1.1914 -4.8828 3.8672 l9.2188 0 c-0.29297 -2.5586 -2.0313 -3.8672 -4.3359 -3.8672 z M173.90625 40 l8.2422 -10.059 l-8.2422 -10.02 l7.0313 0 l4.6094 6.3281 l4.6484 -6.3281 l6.9727 0 l-8.2617 10.039 l8.2617 10.039 l-6.9727 0 l-4.6094 -6.2891 l-4.6289 6.2891 l-7.0508 0 z M214.794921875 34.5508 c0 2.4609 0.23438 4.0234 0.48828 4.9023 l0 0.54688 l-5.2539 0 l-0.44922 -2.1875 c-1.5039 1.8164 -4.1016 2.5781 -6.4453 2.5781 c-3.1641 0 -6.25 -1.4063 -6.25 -5.5859 c0 -4.1602 3.1055 -5.5664 7.3047 -6.4844 l3.3008 -0.74219 c1.4258 -0.33203 1.9336 -0.82031 1.9336 -1.6406 c0 -1.9727 -1.7969 -2.5195 -3.3789 -2.5195 c-2.0313 0 -3.5742 0.80078 -3.9258 3.0664 l-4.9805 -0.89844 c0.83984 -4.1602 3.8867 -6.0547 9.2188 -6.0547 c4.0234 0 8.4375 1.1914 8.4375 7.2461 l0 7.7734 z M204.892621875 36.582 c2.6758 0 4.8242 -1.7773 4.8242 -5.7617 l-4.7656 1.3477 c-1.5625 0.37109 -2.6953 0.91797 -2.6953 2.2656 c0 1.4453 1.1914 2.1484 2.6367 2.1484 z"></path>
+                        </g>
+                    </svg>
+                    <p>&copy;2023 CryptoNexa. All rights reserved</p>
+                </div>
+                <div class="col-md-6">
+                    <div class="row text-md-right footer-column">
+                        {% if footer_items %}
+                            {% regroup footer_items by category as category_list %}
+
+                            {% for category in category_list %}
+                                <div class="col-md-3">
+                                    <h6>{{ category.grouper }}</h6>
+                                    <ul class="footer-ul">
+                                        {% for item in category.list %}
+                                            {% if item.link %}
+                                                <li><a style="text-decoration: none; color: inherit" href="
+                                                        {% url item.link %}">{{ item.name }}</a>
+                                                </li>
+                                            {% else %}
+                                                <li>{{ item.name }}</li>
+                                            {% endif %}
+                                        {% endfor %}
+                                    </ul>
+                                </div>
+                            {% endfor %}
+                        {% else %}
+
+                            <div class="col-md-3">
+                                <h6>Products</h6>
+                                <div>
+                                    <ul class="footer-ul">
+                                        <li>
+                                            ChatGPT Plugin
+                                        </li>
+                                        <li>
+                                            Blockchain Explorer
+                                        </li>
+                                        <li>
+                                            Crypto API
+                                        </li>
+                                        <li>
+                                            Crypto Indices
+                                        </li>
+                                        <li>
+                                            Doodles
+                                        </li>
+                                        <li>
+                                            Sitemap
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <h6>Company</h6>
+                                <div>
+                                    <ul class="footer-ul">
+                                        <li>
+                                            About Us
+                                        </li>
+                                        <li>
+                                            Terms of Use
+                                        </li>
+                                        <li>
+                                            Privacy Policy
+                                        </li>
+                                        <li>
+                                            Cookie Preferences
+                                        </li>
+                                        <li>
+                                            Community Rules
+                                        </li>
+                                        <li>
+                                            Disclaimer
+                                        </li>
+                                        <li>
+                                            Methodology
+                                        </li>
+                                        <li>
+                                            Careers
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                              <a style="text-decoration: none; color: inherit" href="{% url 'support:issue_creation' %}"
+                                 class="text-decoration-none text-dark">  <h6>Support</h6></a>
+                                <div>
+                                    <ul class="footer-ul">
+{#                                        <li>#}
+{#                                            <a href="{% url 'support:issue_creation' %}"#}
+{#                                               class="text-decoration-none text-dark">Support</a>#}
+{#                                        </li>#}
+                                        <li>
+                                            Request Form
+                                        </li>
+                                        <li>
+                                            <a href="{% url 'contact-us' %}"
+                                               style="text-decoration: none; color: inherit">Contact
+                                                Us</a>
+                                        </li>
+                                        <li>
+                                            FAQ
+                                        </li>
+                                        <li>
+                                            Glossary
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <h6>Socials</h6>
+                                <div>
+                                    <ul class="footer-ul">
+                                        <li>
+                                            Twitter
+                                        </li>
+                                        <li>
+                                            Community
+                                        </li>
+                                        <li>
+                                            Telegram
+                                        </li>
+                                        <li>
+                                            Instagram
+                                        </li>
+                                        <li>
+                                            Facebook
+                                        </li>
+                                        <li>
+                                            LinkedIn
+                                        </li>
+
+                                    </ul>
+                                </div>
+                            </div>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+{% endblock %}

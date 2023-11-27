@@ -1,0 +1,43 @@
+{% extends 'CryptoNexa/base.html' %}
+{% load static %}
+{% block head %}
+       <link rel="stylesheet" type="text/css" href="{% static 'css/portfolio.css' %}">
+{% endblock %}
+{% block content %}
+    <div class="container my-4">
+        <h4>Your Transactions</h4>
+        {% if data %}
+            <div class="table-responsive-xl">
+                <table class="table table-hover">
+                    <thead class="thead-light">
+                    <tr>
+                        <th scope="col">Index</th>
+                        <th scope="col">Coin</th>
+                        <th scope="col">Quantity</th>
+                        <th scope="col">Type</th>
+                        <th scope="col">Currency</th>
+                        <th scope="col">Total Amount</th>
+                        <th scope="col">Your Per Coin Profit</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for transaction in data %}
+                        <tr>
+                            <td>{{ forloop.counter }} </td>
+                            <td>{{ transaction.coin }}</td>
+                            <td>{{ transaction.quantity }}</td>
+                            <td>{{ transaction.transaction_type }}</td>
+                            <td>{{ transaction.currency }}</td>
+                            <td>{{ transaction.total_spent }}</td>
+                            <td>{{ transaction.profit_or_loss_price }}  </td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        {% else %}
+            <p>No Transactions</p>
+        {% endif %}
+
+    </div>
+{% endblock %}

@@ -1,6 +1,12 @@
-{#{% extends base.html %}#}
+{% extends 'CryptoNexa/base.html' %}
+{% load static %}
+{% block head %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/news_list.css' %}">
 
+{% endblock %}
 {% block content %}
-    <h1>Successfully Subscribed!</h1>
-    <a href ="/">Go to Home Page</a>
+    <div class="container my-4">
+        <h1>Successfully Subscribed!</h1>
+        <button class="btn btn-primary" onclick="window.location.href = '/'">Back to Home Page</button>
+    </div>
 {% endblock %}

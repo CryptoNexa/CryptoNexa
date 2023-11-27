@@ -28,5 +28,8 @@ urlpatterns = [
   path('currencyExchange/', include('currencyExchange.urls')),
   path('', include('payments.urls')),
   path('', include('BuySell.urls')),
+  path('', include('portfolio.urls')),
   path('', include('support.urls')),
+  path('filter_crypto_data', views.filter_crypto_data, name='filter_crypto_data'),
+
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

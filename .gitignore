@@ -6,6 +6,10 @@ __pycache__/
 .idea/
 
 db.sqlite3
+/migrations/
+BuySell/migrations/
+ContactUS/migrations/
+Newsletter/migrations/
 
 # C extensions
 *.so

@@ -1,0 +1,137 @@
+<head>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const switchElement = document.getElementById('highlightSwitch');
+            const highlightsDiv = document.getElementById('highlightsDiv');
+            switchElement.addEventListener('change', function () {
+                highlightsDiv.style.display = switchElement.checked ? 'block' : 'none';
+            });
+        });
+    </script>
+</head>
+<div style="display: flex; margin-left: 100px; margin-right: 100px;">
+    <div style="display: flex; flex-direction: column; padding: 24px 0px; width: 80%;">
+        <h1 style="font-size: 24px; font-weight: 700">Today's Cryptocurrency Prices by Market Cap</h1>
+        <p style="font-size: 14px">The global crypto market cap is $1.44T, a <span
+                style="color: #16c784">0.57% </span>increase over the last day.</p>
+    </div>
+    <div style="display: flex; align-items: center; padding: 24px 0px; width: 20%;">
+        <div class="form-check form-switch" style="width: 100%; position: relative; align-items: center">
+            <label class="form-check-label" for="highlightSwitch"
+                   style="font-size: 18px; color: #58667e; position: absolute; margin-right: 68px; right: 0">Highlights </label>
+            <input class="form-check-input" type="checkbox" role="switch" id="highlightSwitch"
+                   style="position:absolute; right: 0; width: 48px; height: 24px;" unchecked>
+        </div>
+    </div>
+</div>
+<div id="highlightsDiv"
+     style="display: none; margin-top: 10px; height: 200px;  padding: 10px; box-sizing: border-box; margin-left: 100px; margin-right: 100px;">
+
+    <!-- Sub divs within the highlights div -->
+    <div style="height: 100%; width: calc(33.33% - 10px); background-color: white; float: left; margin-right: 10px; padding: 16px; box-shadow: rgba(88, 102, 126, 0.08) 0px 4px 24px, rgba(88, 102, 126, 0.12) 0px 1px 2px; border-radius: 8px; overflow: hidden;">
+        <div style="display: flex; align-items: center; height: 26px; margin-bottom: 6px; white-space: nowrap; overflow: hidden;}">
+            <img src="/static/images/TrendingIcon.png" style="width: 20px; height: 20px"/>
+            <h3 style="margin-left:10px; font-weight: bold; font-size: 16px; overflow: hidden; text-overflow: ellipsis; }">
+                Trending</h3>
+        </div>
+        <div style="display: flex; -webkit-box-pack: justify; justify-content: space-between; -webkit-box-align: center; align-items: center; height: 40px; cursor: pointer; white-space: nowrap; padding-left: 9px; gap: 10px;}">
+            <div style="display: flex; align-items: center;">
+                <span style="font-size: 12px; line-height: 18px; color: #808a9d; font-family: sans-serif; }">1</span>
+                <div style="margin-left:16px; ">
+                    <img src="/static/images/creditcoin.png" style="height: 24px; width: 24px">
+                    <span style="margin-left: 8px; font-size: 12px; font-weight: 600;">CreditCoin</span>
+                </div>
+                <span style="margin-left: 8px; color: #808a9d; font-size: 12px">CTC</span>
+            </div>
+            <div>
+                <span style="font-size: 12px; font-weight: 500; color: #16c784">5.81%</span>
+            </div>
+        </div>
+        <div style="display: flex; -webkit-box-pack: justify; justify-content: space-between; -webkit-box-align: center; align-items: center; height: 40px; cursor: pointer; white-space: nowrap; padding-left: 9px; gap: 10px;}">
+            <div style="display: flex; align-items: center;">
+                <span style="font-size: 12px; line-height: 18px; color: #808a9d; font-family: sans-serif; }">2</span>
+                <div style="margin-left:16px; ">
+                    <img src="/static/images/selo.png" style="height: 24px; width: 24px">
+                    <span style="margin-left: 8px; font-size: 12px; font-weight: 600;">SELO+</span>
+                </div>
+                <span style="margin-left: 8px; color: #808a9d; font-size: 12px">SELO</span>
+            </div>
+            <div>
+                <span style="font-size: 12px; font-weight: 500; color: #16c784">18.90%</span>
+            </div>
+        </div>
+        <div style="display: flex; -webkit-box-pack: justify; justify-content: space-between; -webkit-box-align: center; align-items: center; height: 40px; cursor: pointer; white-space: nowrap; padding-left: 9px; gap: 10px;}">
+            <div style="display: flex; align-items: center;">
+                <span style="font-size: 12px; line-height: 18px; color: #808a9d; font-family: sans-serif; }">3</span>
+                <div style="margin-left:16px; ">
+                    <img src="/static/images/alphadex.png" style="height: 24px; width: 24px">
+                    <span style="margin-left: 8px; font-size: 12px; font-weight: 600;">AlphaDEX</span>
+                </div>
+                <span style="margin-left: 8px; color: #808a9d; font-size: 12px">ROAR</span>
+            </div>
+            <div>
+                <span style="font-size: 12px; font-weight: 500; color: #ea3943">23.91%</span>
+            </div>
+        </div>
+
+    </div>
+    <div style="height: 100%; width: calc(33.33% - 10px); background-color: white; float: left; margin-right: 10px; padding: 16px; box-shadow: rgba(88, 102, 126, 0.08) 0px 4px 24px, rgba(88, 102, 126, 0.12) 0px 1px 2px; border-radius: 8px; overflow: hidden;">
+        <div style="display: flex; align-items: center; height: 26px; margin-bottom: 6px; white-space: nowrap; overflow: hidden;}">
+            <img src="/static/images/RecentlyAddedIcon.png" style="width: 20px; height: 20px"/>
+            <h3 style="margin-left:10px; font-weight: bold; font-size: 16px; overflow: hidden; text-overflow: ellipsis; }">
+                Recently Added</h3>
+        </div>
+        <div style="display: flex; -webkit-box-pack: justify; justify-content: space-between; -webkit-box-align: center; align-items: center; height: 40px; cursor: pointer; white-space: nowrap; padding-left: 9px; gap: 10px;}">
+            <div style="display: flex; align-items: center;">
+                <span style="font-size: 12px; line-height: 18px; color: #808a9d; font-family: sans-serif; }">1</span>
+                <div style="margin-left:16px; ">
+                    <img src="/static/images/jeff.png" style="height: 24px; width: 24px">
+                    <span style="margin-left: 8px; font-size: 12px; font-weight: 600;">Jeff World</span>
+                </div>
+                <span style="margin-left: 8px; color: #808a9d; font-size: 12px">JEFF</span>
+            </div>
+            <div>
+                <span style="font-size: 12px; font-weight: 500; color: #000">$0.07398</span>
+            </div>
+        </div>
+        <div style="display: flex; -webkit-box-pack: justify; justify-content: space-between; -webkit-box-align: center; align-items: center; height: 40px; cursor: pointer; white-space: nowrap; padding-left: 9px; gap: 10px;}">
+            <div style="display: flex; align-items: center;">
+                <span style="font-size: 12px; line-height: 18px; color: #808a9d; font-family: sans-serif; }">2</span>
+                <div style="margin-left:16px; ">
+                    <img src="/static/images/javelin.png" style="height: 24px; width: 24px">
+                    <span style="margin-left: 8px; font-size: 12px; font-weight: 600;">Javelin</span>
+                </div>
+                <span style="margin-left: 8px; color: #808a9d; font-size: 12px">JVL</span>
+            </div>
+            <div>
+                <span style="font-size: 12px; font-weight: 500; color: #000">$0.0006033</span>
+            </div>
+        </div>
+        <div style="display: flex; -webkit-box-pack: justify; justify-content: space-between; -webkit-box-align: center; align-items: center; height: 40px; cursor: pointer; white-space: nowrap; padding-left: 9px; gap: 10px;}">
+            <div style="display: flex; align-items: center;">
+                <span style="font-size: 12px; line-height: 18px; color: #808a9d; font-family: sans-serif; }">3</span>
+                <div style="margin-left:16px; ">
+                    <img src="/static/images/mmx.png" style="height: 24px; width: 24px">
+                    <span style="margin-left: 8px; font-size: 12px; font-weight: 600;">MMX</span>
+                </div>
+                <span style="margin-left: 8px; color: #808a9d; font-size: 12px">MMX</span>
+            </div>
+            <div>
+                <span style="font-size: 12px; font-weight: 500; color: #000">$3.2692</span>
+            </div>
+        </div>
+
+    </div>
+    <div style="height: 100%; width: calc(33.33% - 10px); background-color: white; float: left; padding: 16px; box-shadow: rgba(88, 102, 126, 0.08) 0px 4px 24px, rgba(88, 102, 126, 0.12) 0px 1px 2px; border-radius: 8px; overflow: hidden;">
+        <div style="display: flex; align-items: center; height: 26px; margin-bottom: 6px; white-space: nowrap; overflow: hidden;}">
+            <h3 style="margin-left:10px; font-weight: bold; font-size: 16px; overflow: hidden; text-overflow: ellipsis; }">
+                Fear & Greed Index </h3>
+        </div>
+        <div style="display: flex; align-items: center; justify-content: center; position: relative">
+            <img src="/static/images/fearGreed.jpg" style="width: 200px; height: 170px"/>
+        </div>
+    </div>
+
+    <div style="clear: both;"></div> <!-- Clear the float -->
+
+</div>

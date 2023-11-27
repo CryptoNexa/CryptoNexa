@@ -9,6 +9,14 @@
     width: 100%;
 }
 
+.container-sell {
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    flex-direction: column;
+    font-family: "Helvetica Neue", serif;
+}
+
 .center-div {
     width: 40%;
     text-align: center;
@@ -19,6 +27,7 @@
 }
 
 .order-header {
+    padding-top: 50px;
     text-align: center;
 }
 
@@ -60,7 +69,7 @@
 }
 
 .transaction-fee {
-    font-size: 10px;
+    font-size: 15px;
 }
 
 .crypto-details {
@@ -69,4 +78,9 @@
     align-items: center;
     justify-content: center;
     width: 100%;
+}
+
+#checkout-button {
+    padding-left:20px;
+    padding-right: 20px;
 }

@@ -4,13 +4,16 @@
 <head>
     <meta charset="UTF-8">
     <title>Welcome to CryptoNexa!</title>
+    {% load bootstrap5 %}
+    {% bootstrap_css %}
+    {% bootstrap_javascript %}
     {% csrf_token %}
     <link rel="stylesheet" type="text/css" href="{% static 'css/login.css' %}">
 </head>
 <body>
 <div class="form-container">
-    <h2>Login</h2>
-    <form method="post">
+    <h3 style="text-align: center; padding-top: 10px;">Login</h3>
+    <form class="login-form" method="post">
         {% csrf_token %}
         <div class="form-group">
             <label for="{{ form.username.id_for_label }}">Email:</label>
@@ -42,7 +45,7 @@
             {% endif %}
         {% endif %}
 
-        <button type="submit" style="background-color: black">Login</button>
+        <button type="submit" class="btn btn-primary button">Login</button>
         <input type="hidden" name="next" value="{{ next }}">
     </form>
     <p class="register-link">Don't have an account? <a href="{% url 'core:register' %}">Register</a></p>

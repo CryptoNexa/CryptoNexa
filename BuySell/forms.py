@@ -5,7 +5,6 @@ from datetime import datetime
 
 
 class TransactionForm(forms.ModelForm):
-
     TRANSACTION_TYPES = [
         ('buy', 'Buy'),
         ('sell', 'Sell'),
@@ -16,7 +15,8 @@ class TransactionForm(forms.ModelForm):
     ]
     default_format = '%b. %d, %Y, %I:%M %p'
 
-    type = forms.ChoiceField(choices=TRANSACTION_TYPES, widget=forms.RadioSelect(attrs={'class': 'btn-check'}), initial="buy")
+    type = forms.ChoiceField(choices=TRANSACTION_TYPES, widget=forms.RadioSelect(attrs={'class': 'btn-check'}),
+                             initial="buy")
     coin = forms.CharField(label="Coin")
     price = forms.DecimalField()
     datetime = forms.DateTimeField(
@@ -24,6 +24,7 @@ class TransactionForm(forms.ModelForm):
         widget=forms.TextInput(attrs={'id': 'id_datetime'}),  # Use the same ID as in your example
         initial=datetime.now().strftime(default_format)
     )
+
     class Meta:
         model = Transaction
         fields = ['type', 'coin', 'quantity', 'price', 'datetime', 'transaction_fee', 'notes', 'total_spent']

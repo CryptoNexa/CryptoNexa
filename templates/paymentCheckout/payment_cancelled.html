@@ -1,12 +1,13 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Payment Cancelled</title>
-</head>
-<body>
- <div class="">
-    <h1>Your payment didn't go through :(</h1>
-  </div>
-</body>
-</html>
+{% extends 'CryptoNexa/base.html' %}
+
+{% block title %}Payment Unsuccessful{% endblock %}
+
+{% block content %}
+    <div class="card error-card mt-5">
+        <div class="card-body">
+            <h1 class="card-title">Payment Unsuccessful</h1>
+            <p class="card-text">We're sorry, but there was an issue processing your payment.</p>
+            <a class="btn btn-danger" style="font-size: 15px; width: 15%;" href="{% url 'index' %}">Back to homepage</a>
+        </div>
+    </div>
+{% endblock %}
