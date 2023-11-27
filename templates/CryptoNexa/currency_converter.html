@@ -43,7 +43,6 @@
                 <div style="display: flex; justify-content: center; margin-top: 10px">
                     <button type="submit" class="btn" style="color: #fff; background-color: #0d6efd;">
                         Convert
-                        {#                        <img src="{% static 'svg/arrows.svg' %}" style="height: 20px; width: 20px" alt="Your Icon">#}
                     </button>
                 </div>
             </form>
@@ -56,6 +55,14 @@
                     {{ form_data.amount }} {{ form_data.base_currency }} =
                     <b>{{ resulted_price }}</b> {{ form_data.convert_currency }}
                 </div>
+            {% else %}
+                {% if hasError %}
+                    <div style="display: flex; justify-content: center; margin-top: 10px;">
+                        <p style="color:red;">Amount should be greater than or equal to 1.</p>
+                    </div>
+                {% else %}
+
+                {% endif %}
             {% endif %}
         </div>
     </div>

@@ -249,6 +249,9 @@ def currency_converter(request):
                 else:
                     has_error = True
                     error_msg = result["status"]["error_message"]
+        else:
+            has_error = True
+            error_msg = "Value should be greater than or equal to 1"
     else:
         form = CurrencyConverterForm()
 
