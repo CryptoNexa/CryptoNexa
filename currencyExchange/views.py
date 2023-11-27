@@ -19,7 +19,7 @@ def currency_exchange(request):
 
     context = {
         "currencies": currencies,
-        # "form": form
+        "form": form
     }
     return render(request, 'currencyExchange/currency_exchange_view.html', context)
 

@@ -237,7 +237,6 @@ def currency_converter(request):
     if request.method == 'POST':
         form = CurrencyConverterForm(request.POST)
         if form.is_valid():
-            print("is valid")
             amount = form.cleaned_data['amount']
             base_currency = form.cleaned_data['base_currency']
             convert_currency = form.cleaned_data['convert_currency']
