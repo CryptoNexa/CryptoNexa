@@ -20,11 +20,6 @@
         box-sizing: border-box;
     }
 
-    a {
-        text-decoration: none;
-        color: inherit;
-    }
-
     li:hover {
         color: #0C5ED7;
         cursor: pointer;
@@ -62,7 +57,7 @@
                                     <ul class="footer-ul">
                                         {% for item in category.list %}
                                             {% if item.link %}
-                                                <li><a href="
+                                                <li><a style="text-decoration: none; color: inherit" href="
                                                         {% url item.link %}">{{ item.name }}</a>
                                                 </li>
                                             {% else %}
@@ -131,7 +126,7 @@
                                 </div>
                             </div>
                             <div class="col-md-3">
-                              <a href="{% url 'support:issue_creation' %}"
+                              <a style="text-decoration: none; color: inherit" href="{% url 'support:issue_creation' %}"
                                  class="text-decoration-none text-dark">  <h6>Support</h6></a>
                                 <div>
                                     <ul class="footer-ul">

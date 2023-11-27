@@ -12,6 +12,11 @@
     margin-bottom: 15px;
 }
 
+a {
+    text-decoration: none;
+    color: inherit
+}
+
 .modal {
     text-align: center;
     padding: 0 !important;
@@ -42,7 +47,7 @@
     font-weight: bolder;
 }
 
-.modal-body{
+.modal-body {
     padding: 200px;
 }
 

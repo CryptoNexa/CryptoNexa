@@ -9,7 +9,6 @@
 }
 
 .a-tag {
-    text-decoration: none;
     color: #4ac1f7;
 }
 
@@ -33,12 +32,14 @@
 .top-bar {
     display: flex;
     justify-content: space-between;
-    padding: 2%;
+    padding: 1%;
+    align-items: baseline;
     width: 100%;
     border-bottom: 0.5px solid #bbccdd;
     color: #0D1421;
     letter-spacing: 0.5px;
     font-weight: normal;
+
 }
 
 .top-bar-left {
@@ -87,9 +88,10 @@
     background-color: red;
 }
 
-.dropdown:focus{
+.dropdown:focus {
     outline: none;
 }
+
 .footer-ul {
     list-style-type: none;
     margin: 0;

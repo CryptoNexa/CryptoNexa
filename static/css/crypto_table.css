@@ -13,6 +13,11 @@ i {
     overflow-y: auto;
 }
 
+a {
+    text-decoration: none;
+    color: inherit
+}
+
 .fixed-table td,
 .fixed-table th {
     font-weight: normal;
