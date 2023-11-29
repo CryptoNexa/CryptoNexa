@@ -47,7 +47,7 @@
                               <div class="row align-items-center marginLeft">
                                   <div class="col-md-11">
                                          {{ field.label }}
-                                        <input  step="0.0001" onchange="total_spent_calc()" value="{{ field.value }}" type="number" class="form-control" id="{{ field.id_for_label }}" name="{{ field.name }}" >
+                                        <input min="0" step="0.0001" onchange="total_spent_calc()" value="{{ field.value }}" type="number" class="form-control" id="{{ field.id_for_label }}" name="{{ field.name }}" >
                                   </div>
                               </div>
                           {% elif field.label == "Price" %}
@@ -60,7 +60,7 @@
                                     <span class="input-group-text" id="basic-addon1">
                                             <div class="input-group-addon currency-icon"></div>
                                     </span>
-                                       <input step="0.0001" onchange="total_spent_calc()" type="number" class="form-control" id="{{ field.id_for_label }}" name="{{ field.name }}" value="{{ field.value }}" aria-describedby="basic-addon1">
+                                       <input readonly style="background-color: white" step="0.0001" onchange="total_spent_calc()" type="number" class="form-control" id="{{ field.id_for_label }}" name="{{ field.name }}" value="{{ field.value }}" aria-describedby="basic-addon1">
                                   </div>
                             </div>
                             </div>
@@ -105,7 +105,7 @@
                                                         <span class="input-group-text display-6">
                                                             <div class="input-group-addon currency-icon"></div>
                                                         </span>
-                                                        <input step="0.0001" type="number" class="form-control" name="{{ field.name }}" id="{{ field.id_for_label }}" style="font-size: 30px; font-weight: bold;" value="{{ field.value }}" >
+                                                        <input readonly step="0.0001" type="number" class="form-control" name="{{ field.name }}" id="{{ field.id_for_label }}" style="font-size: 30px; font-weight: bold;background-color: white" value="{{ field.value }}" >
                                                     </div>
                                             </div>
                                        </div>
