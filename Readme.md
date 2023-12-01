@@ -1,6 +1,18 @@
 # CryptoNexa
 
-CryptoNexa is an ongoing Django-based project focused on providing a comprehensive cryptocurrency market data platform. This guide will help you set up the project on your local machine.
+CryptoNexa is a Django-based project focused on providing a comprehensive cryptocurrency market data platform. This website has the following features:
+•	Currency Exchange & Converter
+•	Secure User Login Interfaces
+•	Highlights and Trends Analysis
+•	Seamless Payment Gateway Integration
+•	Payment History Tracking
+•	Newsletter Services
+•	Portfolio Management
+•	Watchlist Functionality
+•	Support Services
+•	Valid Photo Identification Implementation
+
+This guide will help you set up the project on your local machine.
 
 ## Getting Started
 
