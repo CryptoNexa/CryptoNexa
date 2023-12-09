@@ -73,7 +73,7 @@ def update_crypto_details(crypto_data, session_cur, filters=None):
             filtered_crypto.filter(slug=filters.get('name').lower())
 
         if filters.get('num_market_pairs') is not None:
-            filtered_crypto.filter(slug=filters.get('num_market_pairs'))
+            filtered_crypto.filter(num_market_pairs=filters.get('num_market_pairs'))
 
         if filters.get('circulating_supply') is not None:
             filtered_crypto.filter(circulating_supply=filters.get('circulating_supply'))

@@ -1,3 +1,4 @@
+from django.core.exceptions import ValidationError
 from django.db import models
 
 from datetime import datetime
@@ -26,3 +27,9 @@ class Transaction(models.Model):
     def __str__(self):
         # return f'{self.id}'
         return f'{self.id} - {self.type} - {self.coin} - {self.user}'
+
+    def clean(self):
+        super().clean()
+
+        if self.quantity <= 0:
+            raise ValidationError({'quantity': 'Quantity must be greater than 0.'})

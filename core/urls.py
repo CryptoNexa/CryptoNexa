@@ -18,7 +18,6 @@ urlpatterns = [
     path('create_watchlist/', csrf_exempt(views.create_watchlist), name='create_watchlist'),
     path('edit_watchlist_name/<int:watchlist_id>/', csrf_exempt(views.edit_watchlist_name), name='edit_watchlist_name'),
     path('payment_history/', csrf_exempt(views.payment_history), name='payment_history'),
-    path('payment_history/',csrf_exempt(views.payment_history),name='payment_history'),
     path('currency_converter/',csrf_exempt(views.currency_converter), name='currency_converter')
 
     # Add other URL patterns as needed for your application

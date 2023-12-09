@@ -179,14 +179,14 @@ def watchlist(request, watchlist_id=None):
                    'cryptocurrencies': data, 'session_cur': session_currency})
 
 
-@login_required
+@login_required(login_url="login/")
 def create_watchlist(request):
     watchlist = Watchlist.objects.create(user=request.user, name='My New Watchlist')
 
     return redirect('core:watchlist', watchlist_id=watchlist.id)
 
 
-@login_required
+@login_required(login_url="login/")
 def edit_watchlist_name(request, watchlist_id):
     if request.method == 'POST':
         form = WatchlistForm(request.POST)
@@ -201,6 +201,7 @@ def edit_watchlist_name(request, watchlist_id):
     return redirect('core:watchlist', watchlist_id=watchlist_id)
 
 
+@login_required(login_url="login/")
 def payment_history(request):
     transactions = Transaction.objects.filter(user=request.user)
 
@@ -224,7 +225,7 @@ def payment_history(request):
     if status_filter:
         transactions = transactions.filter(status=status_filter)
 
-    print("transactions = ", transactions)
+    # print("transactions = ", transactions)
 
     return render(request, 'CryptoNexa/payment_history.html', {
         'transactions': transactions

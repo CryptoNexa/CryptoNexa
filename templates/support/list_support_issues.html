@@ -17,7 +17,7 @@
                             <th scope="col">Status</th>
                             <th scope="col">Description</th>
                             <th scope="col">Transaction ID</th>
-                            <th scope="col">Files</th>
+                            <th scope="col">File</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -31,7 +31,7 @@
                                 <td>{{ issue.transaction_id.id|default:'Not Available' }}</td>
                                 <td>
                                     {% if issue.files %}
-                                        <a href="{{ issue.files.url }}" download style="text-decoration: none">Download Files</a>
+                                        <a href="{{ issue.files.url }}" download style="text-decoration: none">Download</a>
                                     {% else %}
                                         No files
                                     {% endif %}
