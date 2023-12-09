@@ -225,7 +225,7 @@ def payment_history(request):
     if status_filter:
         transactions = transactions.filter(status=status_filter)
 
-    print("transactions = ", transactions)
+    # print("transactions = ", transactions)
 
     return render(request, 'CryptoNexa/payment_history.html', {
         'transactions': transactions

@@ -58,7 +58,7 @@
             {% else %}
                 {% if hasError %}
                     <div style="display: flex; justify-content: center; margin-top: 10px;">
-                        <p style="color:red;">Amount should be greater than or equal to 1.</p>
+                        <p style="color:red;">{{ error_msg }}</p>
                     </div>
                 {% else %}
 
